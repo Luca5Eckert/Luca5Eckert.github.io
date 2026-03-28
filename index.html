@@ -469,7 +469,8 @@
       font-style: italic;
       margin-top: 0.1rem;
       overflow: hidden;
-      max-height: 1.5em;
+      max-height: 4em;
+      white-space: normal;
       opacity: 1;
       transition: max-height 250ms var(--ease-out), opacity 180ms;
     }
@@ -1296,10 +1297,12 @@
 
     function toggleProj(idx) {
       const items = document.querySelectorAll('.proj-item');
+      const scrollY = window.scrollY;
 
       if (activeProj === idx) {
         items[idx].classList.remove('open');
         activeProj = -1;
+        window.scrollTo({ top: scrollY, behavior: 'instant' });
         return;
       }
 
@@ -1307,6 +1310,11 @@
 
       items[idx].classList.add('open');
       activeProj = idx;
+
+      // Restore scroll position after layout reflow to prevent jump
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: scrollY, behavior: 'instant' });
+      });
 
       if (idx === 0 && !metricsAnimated) {
         setTimeout(() => animateVellum(), 200);

@@ -101,6 +101,15 @@
 
     .status-file { color: var(--text-2); }
     .status-lang { color: var(--green); }
+    .status-breadcrumb {
+      color: var(--text-4);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .status-breadcrumb-project {
+      color: var(--amber);
+    }
 
     /* ── Layout ── */
     main {
@@ -112,7 +121,6 @@
     /* ── Hero ── */
     #hero {
       padding-bottom: 3.5rem;
-      margin-bottom: 0;
     }
 
     .hero-comment {
@@ -120,7 +128,7 @@
       font-size: 12px;
       margin-bottom: 1.8rem;
       opacity: 0;
-      animation: rise 600ms var(--ease-out) forwards 100ms;
+      animation: fade-in 700ms var(--ease-out) forwards 100ms;
     }
 
     .hero-name {
@@ -131,9 +139,9 @@
       color: var(--text);
       letter-spacing: -0.03em;
       line-height: 0.95;
-      margin-bottom: 2rem;
+      margin-bottom: 1.6rem;
       opacity: 0;
-      animation: rise 700ms var(--ease-out) forwards 180ms;
+      animation: fade-in 800ms var(--ease-out) forwards 200ms;
     }
 
     .hero-name em {
@@ -141,14 +149,31 @@
       color: var(--green);
     }
 
-    /* Typed descriptor */
+    /* Metadata line */
+    .hero-meta {
+      font-size: 11px;
+      color: var(--text-3);
+      letter-spacing: 0.04em;
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      animation: fade-in 600ms var(--ease-out) forwards 380ms;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-sep { color: var(--text-4); }
+    .hero-meta-comment { color: var(--text-4); }
+
+    /* Bio descriptor */
     .hero-descriptor {
       display: flex;
       align-items: flex-start;
       gap: 0.6rem;
       margin-bottom: 2.5rem;
       opacity: 0;
-      animation: rise 500ms var(--ease-out) forwards 350ms;
+      animation: fade-in 600ms var(--ease-out) forwards 500ms;
     }
 
     .descriptor-prefix {
@@ -169,13 +194,13 @@
       font-weight: 500;
     }
 
-    /* What I'm doing now block */
+    /* Now block */
     .now-block {
       border-left: 2px solid var(--border2);
       padding: 0.8rem 1.2rem;
       margin-bottom: 2.5rem;
       opacity: 0;
-      animation: rise 500ms var(--ease-out) forwards 500ms;
+      animation: fade-in 600ms var(--ease-out) forwards 650ms;
     }
 
     .now-row {
@@ -198,7 +223,7 @@
     .now-val a { color: var(--text-2); text-decoration: none; transition: color 150ms; }
     .now-val a:hover { color: var(--green); }
 
-    /* Links */
+    /* Hero links */
     .hero-links {
       display: flex;
       flex-wrap: wrap;
@@ -206,7 +231,7 @@
       align-items: center;
       font-size: 12px;
       opacity: 0;
-      animation: rise 500ms var(--ease-out) forwards 650ms;
+      animation: fade-in 600ms var(--ease-out) forwards 800ms;
     }
 
     .hero-links a {
@@ -229,13 +254,6 @@
     }
     .hero-links a:hover::after { width: 100%; }
     .lsep { color: var(--text-4); margin: 0 0.8rem; }
-
-    /* ── Divider ── */
-    .hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
 
     /* ── Section ── */
     .section {
@@ -262,53 +280,76 @@
       letter-spacing: 0.08em;
     }
 
-    /* ── About / interests ── */
-    .about-block {
+    /* ── Interest tiles ── */
+    .interests-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0 3rem;
+      gap: 1rem 2.5rem;
     }
 
-    .about-col-label {
+    .interest-tile {
+      border-left: 2px solid var(--border2);
+      padding: 0.7rem 0.9rem;
+      transition: border-color 200ms;
+    }
+
+    .interest-tile:hover { border-color: var(--border3); }
+
+    .interest-tile[data-color="green"]  { border-color: var(--green-dim); }
+    .interest-tile[data-color="amber"]  { border-color: var(--amber-dim); }
+    .interest-tile[data-color="cyan"]   { border-color: #2A6668; }
+    .interest-tile[data-color="muted"]  { border-color: var(--border3); }
+
+    .interest-tile[data-color="green"]:hover  { border-color: var(--green); }
+    .interest-tile[data-color="amber"]:hover  { border-color: var(--amber); }
+    .interest-tile[data-color="cyan"]:hover   { border-color: var(--cyan); }
+    .interest-tile[data-color="muted"]:hover  { border-color: var(--text-3); }
+
+    .interest-icon {
+      font-size: 13px;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .interest-tile[data-color="green"]  .interest-icon { color: var(--green); }
+    .interest-tile[data-color="amber"]  .interest-icon { color: var(--amber); }
+    .interest-tile[data-color="cyan"]   .interest-icon { color: var(--cyan); }
+    .interest-tile[data-color="muted"]  .interest-icon { color: var(--text-3); }
+
+    .interest-title {
+      font-size: 12.5px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .interest-sub {
+      font-size: 11px;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+
+    /* Stack table */
+    .stack-section {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stack-label {
       font-size: 10.5px;
       color: var(--text-4);
       letter-spacing: 0.07em;
       margin-bottom: 0.8rem;
     }
 
-    .about-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .about-list li {
-      font-size: 12.5px;
-      color: var(--text-2);
-      line-height: 1.55;
-      display: flex;
-      gap: 0.6rem;
-    }
-
-    .about-list li::before {
-      content: '→';
-      color: var(--text-4);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    /* Stack table */
     .stack-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
     }
 
-    .stack-table tr {
-      border-bottom: 1px solid var(--border);
-    }
-
+    .stack-table tr { border-bottom: 1px solid var(--border); }
     .stack-table tr:last-child { border-bottom: none; }
 
     .stack-table td {
@@ -323,16 +364,11 @@
       white-space: nowrap;
     }
 
-    .stack-table td:last-child {
-      color: var(--text-2);
-    }
+    .stack-table td:last-child { color: var(--text-2); }
 
-    .tag {
-      display: inline;
-      color: var(--cyan);
-    }
+    .tag { color: var(--cyan); }
 
-    /* ── Projects — expandable ── */
+    /* ── Projects ── */
     .projects-stack {
       display: flex;
       flex-direction: column;
@@ -346,7 +382,7 @@
 
     .proj-item:first-child { border-top: none; }
 
-    /* Collapsed state — trigger */
+    /* Trigger */
     .proj-trigger {
       display: flex;
       align-items: center;
@@ -355,14 +391,24 @@
       cursor: pointer;
       user-select: none;
       gap: 1rem;
-      transition: opacity 200ms;
+      border-left: 2px solid transparent;
+      padding-left: 0;
+      transition: border-color 220ms, padding-left 220ms;
     }
 
-    .proj-trigger:hover { opacity: 0.75; }
+    .proj-trigger:hover {
+      border-color: var(--green-dim);
+      padding-left: 0.7rem;
+    }
+
+    .proj-item.open .proj-trigger {
+      border-color: var(--green);
+      padding-left: 0.7rem;
+    }
 
     .proj-trigger-left {
       display: flex;
-      align-items: baseline;
+      align-items: flex-start;
       gap: 1rem;
       flex: 1;
       min-width: 0;
@@ -373,6 +419,7 @@
       color: var(--text-4);
       width: 18px;
       flex-shrink: 0;
+      padding-top: 3px;
     }
 
     .proj-title-wrap {
@@ -389,7 +436,6 @@
     }
 
     .proj-name {
-      font-family: var(--font-mono);
       font-size: 14px;
       font-weight: 500;
       color: var(--text);
@@ -414,6 +460,23 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    /* The central question — visible only when collapsed */
+    .proj-question {
+      font-size: 11px;
+      color: var(--text-4);
+      font-style: italic;
+      margin-top: 0.1rem;
+      overflow: hidden;
+      max-height: 1.5em;
+      opacity: 1;
+      transition: max-height 250ms var(--ease-out), opacity 180ms;
+    }
+
+    .proj-item.open .proj-question {
+      max-height: 0;
+      opacity: 0;
     }
 
     .proj-item.open .proj-oneliner {
@@ -451,19 +514,12 @@
       transition: grid-template-rows 420ms var(--ease-out);
     }
 
-    .proj-item.open .proj-body {
-      grid-template-rows: 1fr;
-    }
+    .proj-item.open .proj-body { grid-template-rows: 1fr; }
 
-    .proj-body-inner {
-      overflow: hidden;
-    }
+    .proj-body-inner { overflow: hidden; }
 
-    .proj-content {
-      padding: 0 0 2rem 1.8rem;
-    }
+    .proj-content { padding: 0 0 2rem 1.8rem; }
 
-    /* Tagline inside expanded */
     .proj-tagline {
       font-size: 13px;
       color: var(--text-2);
@@ -474,7 +530,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* Metrics (VellumHub only) */
+    /* Metrics */
     .proj-metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -514,9 +570,7 @@
     }
 
     /* Latency viz */
-    .proj-latency {
-      margin-bottom: 1.5rem;
-    }
+    .proj-latency { margin-bottom: 1.5rem; }
 
     .proj-lat-label {
       font-size: 9.5px;
@@ -567,7 +621,7 @@
 
     .proj-lat-ms.g { color: var(--green); }
 
-    /* Arch diagram */
+    /* Arch diagram container */
     .proj-arch {
       background: var(--bg2);
       border: 1px solid var(--border);
@@ -582,11 +636,7 @@
       margin-bottom: 0.75rem;
     }
 
-    .proj-arch svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .proj-arch svg { width: 100%; height: auto; display: block; }
 
     /* Bullets */
     .proj-bullets {
@@ -621,10 +671,7 @@
       padding: 1px 4px;
     }
 
-    .proj-bullets strong {
-      color: var(--text);
-      font-weight: 500;
-    }
+    .proj-bullets strong { color: var(--text); font-weight: 500; }
 
     .proj-footer-tags {
       font-size: 10px;
@@ -649,7 +696,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
     }
 
     .exp-company {
@@ -662,6 +709,13 @@
       font-size: 11px;
       color: var(--text-3);
       margin-top: 0.15rem;
+    }
+
+    .exp-context {
+      font-size: 10.5px;
+      color: var(--text-4);
+      margin-top: 0.1rem;
+      font-style: italic;
     }
 
     .exp-date {
@@ -677,6 +731,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
+      margin-top: 0.8rem;
     }
 
     .exp-list li {
@@ -708,13 +763,22 @@
       padding: 0 2rem;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       gap: 1rem;
     }
+
+    .footer-left {}
 
     .footer-name {
       font-size: 11px;
       color: var(--text-4);
+    }
+
+    .footer-updated {
+      font-size: 10px;
+      color: var(--text-4);
+      margin-top: 0.3rem;
+      opacity: 0.6;
     }
 
     .footer-links {
@@ -732,11 +796,6 @@
     .footer-links a:hover { color: var(--green); }
 
     /* ── Animations ── */
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes fade-in {
       from { opacity: 0; }
       to   { opacity: 1; }
@@ -756,18 +815,12 @@
     /* ── Responsive ── */
     @media (max-width: 580px) {
       main { padding: 4.5rem 1.2rem 3rem; }
-
-      .about-block { grid-template-columns: 1fr; gap: 2rem; }
-
+      .interests-grid { grid-template-columns: 1fr; }
       .proj-metrics { grid-template-columns: 1fr 1fr; }
       .proj-metrics .proj-metric:nth-child(3) { grid-column: span 2; }
-
       .proj-tags-collapsed { display: none; }
-
       .footer-inner { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-
       #status-bar { display: none; }
-
       main { padding-top: 3rem; }
     }
   </style>
@@ -780,6 +833,11 @@
     <div class="status-left">
       <span><span class="status-dot"></span><span class="status-lang">JAVA</span></span>
       <span class="status-file">~/lucas-eckert/README.md</span>
+      <span class="status-breadcrumb">
+        <span style="color:var(--text-4)">›</span>
+        <span>building</span>
+        <span class="status-breadcrumb-project">VellumHub</span>
+      </span>
     </div>
     <div class="status-right">
       <span id="status-loc">Jaraguá do Sul, BR</span>
@@ -800,13 +858,26 @@
 
       <h1 class="hero-name">Lucas<br><em>Eckert</em></h1>
 
+      <div class="hero-meta">
+        <span class="hero-meta-comment">//</span>
+        <span>Jaraguá do Sul, BR</span>
+        <span class="hero-meta-sep">·</span>
+        <span>Java</span>
+        <span class="hero-meta-sep">·</span>
+        <span>Kafka</span>
+        <span class="hero-meta-sep">·</span>
+        <span>pgvector</span>
+        <span class="hero-meta-sep">·</span>
+        <span>WEG S.A.</span>
+      </div>
+
       <div class="hero-descriptor">
         <span class="descriptor-prefix">const bio =</span>
         <p class="descriptor-text">
-          I build <strong>event-driven systems</strong> and <strong>reactive backends</strong> on the JVM.
-          Right now I'm deep in distributed systems design and neural network fundamentals —
-          not because I need them for a job, but because I find them genuinely interesting.
-          <span style="color:var(--text-4)">// currently studying DDIA</span>
+          Backend at WEG S.A., building <strong>event-driven microservices</strong> on the JVM.
+          Currently working through DDIA — the chapter on replication lag and read-your-writes consistency
+          is reshaping how I think about the read models in VellumHub.
+          <span style="color:var(--text-4)">// implementing backprop from scratch on weekends</span>
         </p>
       </div>
 
@@ -817,7 +888,7 @@
         </div>
         <div class="now-row">
           <span class="now-key">building</span>
-          <span class="now-val">VellumHub — microservices + pgvector recommendation engine</span>
+          <span class="now-val">VellumHub — embedding pipeline + reactive gateway</span>
         </div>
         <div class="now-row">
           <span class="now-key">reading</span>
@@ -825,7 +896,7 @@
         </div>
         <div class="now-row">
           <span class="now-key">exploring</span>
-          <span class="now-val">neural network fundamentals, not frameworks</span>
+          <span class="now-val">backpropagation — implementing from scratch, no autograd</span>
         </div>
       </div>
 
@@ -838,44 +909,56 @@
       </nav>
     </section>
 
-    <!-- ── ABOUT ── -->
+    <!-- ── INTERESTS ── -->
     <section class="section reveal">
       <div class="sec-head">
         <span class="sec-marker">##</span>
         <span class="sec-title">INTERESTS</span>
       </div>
 
-      <div class="about-block">
-        <div>
-          <p class="about-col-label">// what pulls me in</p>
-          <ul class="about-list">
-            <li>Distributed systems — consistency models, event-driven architecture, data-intensive design</li>
-            <li>Neural networks and deep learning — fundamentals, not frameworks</li>
-            <li>ML/backend intersection — embeddings, vector search, recommendations on the JVM</li>
-            <li>Algorithms and data structures</li>
-          </ul>
+      <div class="interests-grid">
+        <div class="interest-tile" data-color="green">
+          <span class="interest-icon">→</span>
+          <div class="interest-title">Distributed systems</div>
+          <div class="interest-sub">consistency models, replication lag, event-driven architecture</div>
         </div>
-        <div>
-          <p class="about-col-label">// stack</p>
-          <table class="stack-table">
-            <tr>
-              <td>languages</td>
-              <td><span class="tag">Java</span> · TypeScript · C · Python · SQL</td>
-            </tr>
-            <tr>
-              <td>backend</td>
-              <td>Spring Boot · WebFlux · Kafka · Node.js</td>
-            </tr>
-            <tr>
-              <td>data</td>
-              <td>PostgreSQL · pgvector · Neo4j · Redis</td>
-            </tr>
-            <tr>
-              <td>infra</td>
-              <td>Docker · GitHub Actions</td>
-            </tr>
-          </table>
+        <div class="interest-tile" data-color="amber">
+          <span class="interest-icon">≈</span>
+          <div class="interest-title">Neural networks</div>
+          <div class="interest-sub">backpropagation, gradient flow, architecture from first principles</div>
         </div>
+        <div class="interest-tile" data-color="cyan">
+          <span class="interest-icon">∩</span>
+          <div class="interest-title">ML/backend intersection</div>
+          <div class="interest-sub">vector search, embeddings, recommendations on the JVM</div>
+        </div>
+        <div class="interest-tile" data-color="muted">
+          <span class="interest-icon">Σ</span>
+          <div class="interest-title">Algorithms & data structures</div>
+          <div class="interest-sub">HNSW indexing, graph traversal, ANN retrieval</div>
+        </div>
+      </div>
+
+      <div class="stack-section">
+        <p class="stack-label">// stack</p>
+        <table class="stack-table">
+          <tr>
+            <td>languages</td>
+            <td><span class="tag">Java</span> · TypeScript · C · Python · SQL</td>
+          </tr>
+          <tr>
+            <td>backend</td>
+            <td>Spring Boot · WebFlux · Kafka · Node.js</td>
+          </tr>
+          <tr>
+            <td>data</td>
+            <td>PostgreSQL · pgvector · Neo4j · Redis</td>
+          </tr>
+          <tr>
+            <td>infra</td>
+            <td>Docker · GitHub Actions</td>
+          </tr>
+        </table>
       </div>
     </section>
 
@@ -888,7 +971,7 @@
 
       <div class="projects-stack">
 
-        <!-- ── VellumHub ── -->
+        <!-- VellumHub -->
         <div class="proj-item open" id="proj-0">
           <div class="proj-trigger" onclick="toggleProj(0)">
             <div class="proj-trigger-left">
@@ -898,7 +981,8 @@
                   <span class="proj-name">VellumHub</span>
                   <span class="proj-badge">FEATURED</span>
                 </div>
-                <span class="proj-oneliner">Production-grade book recommendation platform on the JVM</span>
+                <span class="proj-oneliner">Book recommendation platform on the JVM</span>
+                <span class="proj-question">como servir recomendações sem acoplamento síncrono?</span>
               </div>
             </div>
             <span class="proj-tags-collapsed">Java 21 · Kafka · pgvector</span>
@@ -911,14 +995,13 @@
             <div class="proj-body-inner">
               <div class="proj-content">
                 <p class="proj-tagline">
-                  Production-grade microservices platform. Reactive API gateway, event-driven read models
-                  via Kafka ECST, and vector-native recommendations using pgvector + LangChain4j embeddings.
-                  Designed around <strong>the question of how to serve personalized results
-                  without synchronous coupling</strong> between services.
+                  Microservices platform built around one constraint: the recommendation service must answer
+                  every query with <strong>zero synchronous calls</strong> to other services.
+                  Reactive API gateway, event-driven read models via Kafka ECST,
+                  and pgvector similarity search with LangChain4j 384-dim embeddings.
                 </p>
 
-                <!-- Metrics -->
-                <div class="proj-metrics" id="vellum-metrics">
+                <div class="proj-metrics">
                   <div class="proj-metric">
                     <div class="proj-metric-label">LATENCY CUT</div>
                     <div class="proj-metric-val g" id="m-latency">—</div>
@@ -936,7 +1019,6 @@
                   </div>
                 </div>
 
-                <!-- Latency evolution -->
                 <div class="proj-latency">
                   <div class="proj-lat-label">// latency evolution (recommendation path)</div>
                   <div class="proj-lat-row">
@@ -956,83 +1038,82 @@
                   </div>
                 </div>
 
-                <!-- Architecture -->
+                <!-- Architecture SVG — using system CSS variables -->
                 <div class="proj-arch">
                   <div class="proj-arch-label">// system architecture</div>
                   <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
                       <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#525A3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--border3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                       <marker id="ahg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#7CB87E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--green-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                       <marker id="aha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#6A5A28" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--amber-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                     </defs>
 
                     <!-- client -->
-                    <rect x="10" y="84" width="62" height="30" rx="2" fill="#0E1009" stroke="#343A22" stroke-width="0.7"/>
-                    <text x="41" y="101" text-anchor="middle" fill="#525A3C" font-size="9.5">client</text>
+                    <rect x="10" y="84" width="62" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.7"/>
+                    <text x="41" y="101" text-anchor="middle" fill="var(--text-3)" font-size="9.5">client</text>
 
-                    <line x1="72" y1="99" x2="100" y2="99" stroke="#343A22" stroke-width="0.8" marker-end="url(#ah)"/>
+                    <line x1="72" y1="99" x2="100" y2="99" stroke="var(--border2)" stroke-width="0.8" marker-end="url(#ah)"/>
 
                     <!-- gateway -->
-                    <rect x="102" y="70" width="100" height="58" rx="2" fill="#131A0E" stroke="#C4A85A" stroke-width="0.8"/>
-                    <text x="152" y="90" text-anchor="middle" fill="#C4A85A" font-size="10" font-weight="500">api-gateway</text>
-                    <text x="152" y="104" text-anchor="middle" fill="#6A5A28" font-size="8.5">WebFlux + Redis</text>
-                    <text x="152" y="118" text-anchor="middle" fill="#525A3C" font-size="8">JWT · rate-limit</text>
+                    <rect x="102" y="70" width="100" height="58" rx="2" fill="var(--surface)" stroke="var(--amber)" stroke-width="0.8"/>
+                    <text x="152" y="90" text-anchor="middle" fill="var(--amber)" font-size="10" font-weight="500">api-gateway</text>
+                    <text x="152" y="104" text-anchor="middle" fill="var(--amber-dim)" font-size="8.5">WebFlux + Redis</text>
+                    <text x="152" y="118" text-anchor="middle" fill="var(--text-3)" font-size="8">JWT · rate-limit</text>
 
                     <!-- arrows to services -->
-                    <line x1="202" y1="86" x2="252" y2="58" stroke="#343A22" stroke-width="0.7" marker-end="url(#ah)"/>
-                    <line x1="202" y1="96" x2="252" y2="96" stroke="#343A22" stroke-width="0.7" marker-end="url(#ah)"/>
-                    <line x1="202" y1="108" x2="252" y2="130" stroke="#343A22" stroke-width="0.7" marker-end="url(#ah)"/>
+                    <line x1="202" y1="86" x2="252" y2="58" stroke="var(--border2)" stroke-width="0.7" marker-end="url(#ah)"/>
+                    <line x1="202" y1="96" x2="252" y2="96" stroke="var(--border2)" stroke-width="0.7" marker-end="url(#ah)"/>
+                    <line x1="202" y1="108" x2="252" y2="130" stroke="var(--border2)" stroke-width="0.7" marker-end="url(#ah)"/>
 
                     <!-- services -->
-                    <rect x="254" y="42" width="86" height="28" rx="2" fill="#0E1009" stroke="#343A22" stroke-width="0.6"/>
-                    <text x="297" y="59" text-anchor="middle" fill="#525A3C" font-size="9">user-service</text>
+                    <rect x="254" y="42" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width="0.6"/>
+                    <text x="297" y="59" text-anchor="middle" fill="var(--text-3)" font-size="9">user-service</text>
 
-                    <rect x="254" y="82" width="86" height="28" rx="2" fill="#0E1009" stroke="#343A22" stroke-width="0.6"/>
-                    <text x="297" y="99" text-anchor="middle" fill="#525A3C" font-size="9">catalog-service</text>
+                    <rect x="254" y="82" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width="0.6"/>
+                    <text x="297" y="99" text-anchor="middle" fill="var(--text-3)" font-size="9">catalog-service</text>
 
-                    <rect x="254" y="122" width="86" height="28" rx="2" fill="#0E1009" stroke="#343A22" stroke-width="0.6"/>
-                    <text x="297" y="139" text-anchor="middle" fill="#525A3C" font-size="9">engagement</text>
+                    <rect x="254" y="122" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width="0.6"/>
+                    <text x="297" y="139" text-anchor="middle" fill="var(--text-3)" font-size="9">engagement</text>
 
                     <!-- kafka -->
-                    <rect x="372" y="74" width="74" height="72" rx="2" fill="#110D06" stroke="#6A5A28" stroke-width="0.7" stroke-dasharray="3 2"/>
-                    <text x="409" y="102" text-anchor="middle" fill="#C4A85A" font-size="10" font-weight="500">kafka</text>
-                    <text x="409" y="116" text-anchor="middle" fill="#6A5A28" font-size="8.5">ECST</text>
-                    <text x="409" y="130" text-anchor="middle" fill="#525A3C" font-size="8">4 topics</text>
+                    <rect x="372" y="74" width="74" height="72" rx="2" fill="var(--surface)" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="3 2"/>
+                    <text x="409" y="102" text-anchor="middle" fill="var(--amber)" font-size="10" font-weight="500">kafka</text>
+                    <text x="409" y="116" text-anchor="middle" fill="var(--amber-dim)" font-size="8.5">ECST</text>
+                    <text x="409" y="130" text-anchor="middle" fill="var(--text-3)" font-size="8">4 topics</text>
 
                     <!-- catalog → kafka -->
-                    <line x1="340" y1="96" x2="370" y2="104" stroke="#6A5A28" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
+                    <line x1="340" y1="96" x2="370" y2="104" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
                     <!-- engagement → kafka -->
-                    <line x1="340" y1="136" x2="370" y2="136" stroke="#6A5A28" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
+                    <line x1="340" y1="136" x2="370" y2="136" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
 
                     <!-- kafka → recommendation -->
-                    <line x1="446" y1="110" x2="486" y2="110" stroke="#3D6040" stroke-width="0.9" marker-end="url(#ahg)"/>
+                    <line x1="446" y1="110" x2="486" y2="110" stroke="var(--green-dim)" stroke-width="0.9" marker-end="url(#ahg)"/>
 
                     <!-- recommendation service -->
-                    <rect x="488" y="78" width="116" height="68" rx="2" fill="#09130A" stroke="#7CB87E" stroke-width="0.8"/>
-                    <text x="546" y="97" text-anchor="middle" fill="#7CB87E" font-size="9.5" font-weight="500">recommendation</text>
-                    <text x="546" y="110" text-anchor="middle" fill="#3D6040" font-size="8.5">pgvector HNSW</text>
-                    <text x="546" y="122" text-anchor="middle" fill="#3D6040" font-size="8.5">384-dim embeddings</text>
-                    <text x="546" y="134" text-anchor="middle" fill="#2D4A30" font-size="8">L2-normalized cosine</text>
+                    <rect x="488" y="78" width="116" height="68" rx="2" fill="var(--green-bg)" stroke="var(--green)" stroke-width="0.8"/>
+                    <text x="546" y="97" text-anchor="middle" fill="var(--green)" font-size="9.5" font-weight="500">recommendation</text>
+                    <text x="546" y="110" text-anchor="middle" fill="var(--green-dim)" font-size="8.5">pgvector HNSW</text>
+                    <text x="546" y="122" text-anchor="middle" fill="var(--green-dim)" font-size="8.5">384-dim embeddings</text>
+                    <text x="546" y="134" text-anchor="middle" fill="var(--text-4)" font-size="8">L2-normalized cosine</text>
 
                     <!-- gateway direct query path -->
-                    <path d="M202 112 Q 340 185 484 128" fill="none" stroke="#3D6040" stroke-width="0.7" stroke-dasharray="2 2.5" marker-end="url(#ahg)" opacity="0.55"/>
+                    <path d="M202 112 Q 340 185 484 128" fill="none" stroke="var(--green-dim)" stroke-width="0.7" stroke-dasharray="2 2.5" marker-end="url(#ahg)" opacity="0.55"/>
 
                     <!-- labels -->
-                    <text x="220" y="73" fill="#2D3020" font-size="7.5" letter-spacing="0.04em">route</text>
-                    <text x="350" y="70" fill="#2D3020" font-size="7.5" letter-spacing="0.04em">events</text>
-                    <text x="310" y="195" fill="#2D3020" font-size="7.5" letter-spacing="0.03em">query path — zero cross-service calls at read time</text>
+                    <text x="220" y="73" fill="var(--text-4)" font-size="7.5" letter-spacing="0.04em">route</text>
+                    <text x="350" y="70" fill="var(--text-4)" font-size="7.5" letter-spacing="0.04em">events</text>
+                    <text x="310" y="195" fill="var(--text-4)" font-size="7.5" letter-spacing="0.03em">query path — zero cross-service calls at read time</text>
                   </svg>
                 </div>
 
-                <!-- Bullets -->
                 <ul class="proj-bullets">
-                  <li><strong>Event-driven read model</strong> — Recommendation Service consumes <code>created-book</code>, <code>updated-book</code>, <code>deleted-book</code>, <code>created-rating</code> via Kafka ECST and serves every query with zero synchronous calls to other services</li>
+                  <li><strong>Event-driven read model</strong> — Recommendation Service consumes <code>created-book</code>, <code>updated-book</code>, <code>deleted-book</code>, <code>created-rating</code> via Kafka ECST; every query answered with zero synchronous calls to other services</li>
                   <li><strong>Embedding pipeline</strong> — replaced 13-dim genre vectors with LangChain4j AllMiniLmL6V2 384-dim embeddings + L2 normalization; ANN retrieval via HNSW index, re-ranked with 70/30 semantic/popularity blend</li>
                   <li><strong>Reactive gateway</strong> — WebFlux entry point centralizing JWT validation and Redis-backed rate limiting per route; built custom over Spring Cloud Gateway for direct pipeline control</li>
                   <li><strong>Architecture evolution</strong> — v1 (external Python ML, ~400ms) → v2 (in-JVM pgvector + ECST, ~100ms) → v3 (384-dim semantic embeddings, L2 normalization, API gateway layer)</li>
@@ -1047,7 +1128,7 @@
           </div>
         </div>
 
-        <!-- ── Vinculo ── -->
+        <!-- Vinculo -->
         <div class="proj-item" id="proj-1">
           <div class="proj-trigger" onclick="toggleProj(1)">
             <div class="proj-trigger-left">
@@ -1056,7 +1137,8 @@
                 <div class="proj-name-line">
                   <span class="proj-name">Vinculo</span>
                 </div>
-                <span class="proj-oneliner">Graph-native social network — Neo4j as the primary data model</span>
+                <span class="proj-oneliner">Graph-native social network — Neo4j as primary data model</span>
+                <span class="proj-question">o que muda quando você para de fingir que um grafo social é dado relacional?</span>
               </div>
             </div>
             <span class="proj-tags-collapsed">Java 21 · Neo4j</span>
@@ -1069,9 +1151,8 @@
             <div class="proj-body-inner">
               <div class="proj-content">
                 <p class="proj-tagline">
-                  Social network where the graph isn't a performance trick — it's the domain model.
-                  The question was: <strong>what does a social graph look like when you stop pretending
-                  it's relational data?</strong>
+                  Social network where the graph is the domain model, not a performance optimization.
+                  The design question: <strong>what does the data layer look like when relationships are first-class?</strong>
                 </p>
 
                 <ul class="proj-bullets">
@@ -1089,7 +1170,7 @@
           </div>
         </div>
 
-        <!-- ── OpenIT ── -->
+        <!-- OpenIT -->
         <div class="proj-item" id="proj-2">
           <div class="proj-trigger" onclick="toggleProj(2)">
             <div class="proj-trigger-left">
@@ -1098,7 +1179,8 @@
                 <div class="proj-name-line">
                   <span class="proj-name">OpenIT</span>
                 </div>
-                <span class="proj-oneliner">IoT access control &amp; payment — ESP32, MQTT, reactive backend, SSE</span>
+                <span class="proj-oneliner">IoT access control &amp; payment — ESP32, MQTT, reactive backend</span>
+                <span class="proj-question">o que significa construir um sistema do hardware à interface, do zero?</span>
               </div>
             </div>
             <span class="proj-tags-collapsed">WebFlux · MQTT · ESP32</span>
@@ -1111,15 +1193,13 @@
             <div class="proj-body-inner">
               <div class="proj-content">
                 <p class="proj-tagline">
-                  Full-stack IoT system with physical hardware: ESP32 devices communicating over MQTT,
-                  real-time access events pushed to a React frontend via SSE, and payment
-                  integration through Mercado Pago webhooks.
-                  <strong>Built end-to-end — hardware to frontend.</strong>
+                  Full-stack IoT system: ESP32 devices over MQTT, real-time access events pushed to React via SSE,
+                  payment via Mercado Pago webhooks. <strong>Built end-to-end — hardware to frontend.</strong>
                 </p>
 
                 <ul class="proj-bullets">
                   <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (ESP32/MQTT, door state, access log) and <code>payment</code> (Mercado Pago Checkout Pro, webhook handling) — domain concerns cleanly isolated</li>
-                  <li>Chose WebFlux for non-blocking I/O on event-heavy hardware streams; SSE stream to React/TypeScript frontend for real-time access monitoring without polling</li>
+                  <li>WebFlux for non-blocking I/O on event-heavy hardware streams; SSE stream to React/TypeScript frontend for real-time access monitoring without polling</li>
                 </ul>
 
                 <div class="proj-footer-tags">
@@ -1145,6 +1225,7 @@
         <div>
           <p class="exp-company">WEG S.A.</p>
           <p class="exp-role">Backend Developer — Industrial Learning Program · CentroWEG / SENAI</p>
+          <p class="exp-context">Industrial technical school integrated with WEG, one of the largest electric motor manufacturers in the world</p>
         </div>
         <div class="exp-date">Aug 2024 – Jul 2026<br>Jaraguá do Sul, BR</div>
       </div>
@@ -1160,7 +1241,10 @@
 
   <footer>
     <div class="footer-inner">
-      <span class="footer-name">Lucas Ismael Eckert · Jaraguá do Sul, SC, Brazil</span>
+      <div class="footer-left">
+        <div class="footer-name">Lucas Ismael Eckert · Jaraguá do Sul, SC, Brazil</div>
+        <div class="footer-updated" id="footer-updated"></div>
+      </div>
       <div class="footer-links">
         <a href="https://github.com/Luca5Eckert" target="_blank" rel="noopener">github</a>
         <a href="https://linkedin.com/in/lucas-ismael-eckert-92a7bb399" target="_blank" rel="noopener">linkedin</a>
@@ -1184,6 +1268,15 @@
       setInterval(tick, 1000);
     })();
 
+    /* ── Footer last updated ── */
+    (function () {
+      const el = document.getElementById('footer-updated');
+      if (el) {
+        const d = new Date();
+        el.textContent = '// updated ' + d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+    })();
+
     /* ── Scroll reveals ── */
     (function () {
       const obs = new IntersectionObserver((entries) => {
@@ -1205,20 +1298,16 @@
       const items = document.querySelectorAll('.proj-item');
 
       if (activeProj === idx) {
-        // close
         items[idx].classList.remove('open');
         activeProj = -1;
         return;
       }
 
-      // close current
       if (activeProj >= 0) items[activeProj].classList.remove('open');
 
-      // open new
       items[idx].classList.add('open');
       activeProj = idx;
 
-      // trigger metrics animation for VellumHub
       if (idx === 0 && !metricsAnimated) {
         setTimeout(() => animateVellum(), 200);
         metricsAnimated = true;
@@ -1254,7 +1343,7 @@
       }, 100);
     }
 
-    /* ── Trigger metrics when VellumHub is already open on load ── */
+    /* ── Trigger metrics on load if VellumHub already open ── */
     window.addEventListener('load', () => {
       const vellum = document.getElementById('proj-0');
       if (vellum && vellum.classList.contains('open') && !metricsAnimated) {

@@ -982,7 +982,7 @@
                   <span class="proj-badge">FEATURED</span>
                 </div>
                 <span class="proj-oneliner">Book recommendation platform on the JVM</span>
-                <span class="proj-question">como servir recomendações sem acoplamento síncrono?</span>
+                <span class="proj-question">how do you serve recommendations without synchronous coupling?</span>
               </div>
             </div>
             <span class="proj-tags-collapsed">Java 21 · Kafka · pgvector</span>
@@ -1128,17 +1128,58 @@
           </div>
         </div>
 
-        <!-- Vinculo -->
+        <!-- OpenIT (was 03, now 02) -->
         <div class="proj-item" id="proj-1">
           <div class="proj-trigger" onclick="toggleProj(1)">
             <div class="proj-trigger-left">
               <span class="proj-num">02</span>
               <div class="proj-title-wrap">
                 <div class="proj-name-line">
+                  <span class="proj-name">OpenIT</span>
+                </div>
+                <span class="proj-oneliner">IoT access control &amp; payment — ESP32, MQTT, reactive backend</span>
+                <span class="proj-question">what does it mean to build a system from hardware to interface, from scratch?</span>
+              </div>
+            </div>
+            <span class="proj-tags-collapsed">WebFlux · MQTT · ESP32</span>
+            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 6l4 4 4-4"/>
+            </svg>
+          </div>
+
+          <div class="proj-body">
+            <div class="proj-body-inner">
+              <div class="proj-content">
+                <p class="proj-tagline">
+                  Full-stack IoT system: ESP32 devices over MQTT, real-time access events pushed to React via SSE,
+                  payment via Mercado Pago webhooks. <strong>Built end-to-end — hardware to frontend.</strong>
+                </p>
+
+                <ul class="proj-bullets">
+                  <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (ESP32/MQTT, door state, access log) and <code>payment</code> (Mercado Pago Checkout Pro, webhook handling) — domain concerns cleanly isolated</li>
+                  <li>WebFlux for non-blocking I/O on event-heavy hardware streams; SSE stream to React/TypeScript frontend for real-time access monitoring without polling</li>
+                </ul>
+
+                <div class="proj-footer-tags">
+                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/OpenIt" target="_blank" rel="noopener">github ↗</a>
+                  Java 21 · Spring Boot 3.5 · WebFlux · MQTT · SSE · React 19 · TypeScript · MySQL · ESP32
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vinculo (was 02, now 03) -->
+        <div class="proj-item" id="proj-2">
+          <div class="proj-trigger" onclick="toggleProj(2)">
+            <div class="proj-trigger-left">
+              <span class="proj-num">03</span>
+              <div class="proj-title-wrap">
+                <div class="proj-name-line">
                   <span class="proj-name">Vinculo</span>
                 </div>
                 <span class="proj-oneliner">Graph-native social network — Neo4j as primary data model</span>
-                <span class="proj-question">o que muda quando você para de fingir que um grafo social é dado relacional?</span>
+                <span class="proj-question">what changes when you stop pretending a social graph is relational data?</span>
               </div>
             </div>
             <span class="proj-tags-collapsed">Java 21 · Neo4j</span>
@@ -1164,47 +1205,6 @@
                 <div class="proj-footer-tags">
                   <a class="proj-github-link" href="https://github.com/Luca5Eckert/Vinculo" target="_blank" rel="noopener">github ↗</a>
                   Java 21 · Neo4j 5 · Spring Boot 4 · Hexagonal Architecture · JUnit 5 · Testcontainers
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- OpenIT -->
-        <div class="proj-item" id="proj-2">
-          <div class="proj-trigger" onclick="toggleProj(2)">
-            <div class="proj-trigger-left">
-              <span class="proj-num">03</span>
-              <div class="proj-title-wrap">
-                <div class="proj-name-line">
-                  <span class="proj-name">OpenIT</span>
-                </div>
-                <span class="proj-oneliner">IoT access control &amp; payment — ESP32, MQTT, reactive backend</span>
-                <span class="proj-question">o que significa construir um sistema do hardware à interface, do zero?</span>
-              </div>
-            </div>
-            <span class="proj-tags-collapsed">WebFlux · MQTT · ESP32</span>
-            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 6l4 4 4-4"/>
-            </svg>
-          </div>
-
-          <div class="proj-body">
-            <div class="proj-body-inner">
-              <div class="proj-content">
-                <p class="proj-tagline">
-                  Full-stack IoT system: ESP32 devices over MQTT, real-time access events pushed to React via SSE,
-                  payment via Mercado Pago webhooks. <strong>Built end-to-end — hardware to frontend.</strong>
-                </p>
-
-                <ul class="proj-bullets">
-                  <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (ESP32/MQTT, door state, access log) and <code>payment</code> (Mercado Pago Checkout Pro, webhook handling) — domain concerns cleanly isolated</li>
-                  <li>WebFlux for non-blocking I/O on event-heavy hardware streams; SSE stream to React/TypeScript frontend for real-time access monitoring without polling</li>
-                </ul>
-
-                <div class="proj-footer-tags">
-                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/OpenIt" target="_blank" rel="noopener">github ↗</a>
-                  Java 21 · Spring Boot 3.5 · WebFlux · MQTT · SSE · React 19 · TypeScript · MySQL · ESP32
                 </div>
               </div>
             </div>

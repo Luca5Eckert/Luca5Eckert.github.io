@@ -1193,99 +1193,145 @@
             <div class="proj-body-inner">
               <div class="proj-content">
                 <p class="proj-tagline">
-                  Full-stack IoT system built end-to-end — ESP32 hardware to React frontend. The central constraint: <strong>every layer had to be built from scratch</strong>, from MQTT device communication to Mercado Pago webhooks to SSE streams.
+                  Automated parking management system — ESP32 detects vehicle entry, Node-RED bridges MQTT to the backend, Spring WebFlux handles the reactive pipeline, Mercado Pago Checkout Pro processes payment, and the gate opens only after the webhook confirms. <strong>Six phases, zero human intervention.</strong>
                 </p>
 
                 <!-- Metrics -->
                 <div class="proj-metrics">
                   <div class="proj-metric">
-                    <div class="proj-metric-label">DDD CONTEXTS</div>
-                    <div class="proj-metric-val g">2</div>
-                    <div class="proj-metric-sub">access · payment<br>cleanly isolated</div>
+                    <div class="proj-metric-label">FLOW PHASES</div>
+                    <div class="proj-metric-val g">6</div>
+                    <div class="proj-metric-sub">entry → parking →<br>payment → confirm → SSE → gate</div>
                   </div>
                   <div class="proj-metric">
-                    <div class="proj-metric-label">LAYERS</div>
-                    <div class="proj-metric-val a">5</div>
-                    <div class="proj-metric-sub">hardware · MQTT<br>backend · SSE · React</div>
+                    <div class="proj-metric-label">DDD CONTEXTS</div>
+                    <div class="proj-metric-val a">2</div>
+                    <div class="proj-metric-sub">access · payment<br>4-layer clean arch each</div>
                   </div>
                   <div class="proj-metric">
                     <div class="proj-metric-label">REAL-TIME</div>
                     <div class="proj-metric-val c">SSE</div>
-                    <div class="proj-metric-sub">non-blocking stream<br>no polling</div>
+                    <div class="proj-metric-sub">WebFlux stream<br>payment status · no polling</div>
                   </div>
                 </div>
 
-                <!-- Architecture SVG -->
+                <!-- Architecture SVG — full 6-component flow including Node-RED -->
                 <div class="proj-arch">
-                  <div class="proj-arch-label">// system architecture</div>
-                  <svg viewBox="0 0 620 160" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
+                  <div class="proj-arch-label">// full system flow — entry to gate release</div>
+                  <svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
                       <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                         <path d="M2 1L8 5L2 9" fill="none" stroke="var(--border3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="ahc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                      <marker id="ahc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                         <path d="M2 1L8 5L2 9" fill="none" stroke="#2A6668" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                       <marker id="aha2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                         <path d="M2 1L8 5L2 9" fill="none" stroke="var(--amber-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
+                      <marker id="ahg2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--green-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </marker>
                     </defs>
 
+                    <!-- Phase labels row -->
+                    <text x="30" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">ENTRY</text>
+                    <text x="148" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">ORCHESTRATION</text>
+                    <text x="308" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">BACKEND</text>
+                    <text x="508" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">PAYMENT</text>
+                    <text x="618" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">FRONTEND</text>
+
                     <!-- ESP32 -->
-                    <rect x="10" y="60" width="80" height="40" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.7"/>
-                    <text x="50" y="77" text-anchor="middle" fill="var(--text-3)" font-size="9">ESP32</text>
-                    <text x="50" y="91" text-anchor="middle" fill="var(--text-4)" font-size="8">hardware</text>
+                    <rect x="8" y="80" width="76" height="50" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.7"/>
+                    <text x="46" y="101" text-anchor="middle" fill="var(--text-3)" font-size="9" font-weight="500">ESP32</text>
+                    <text x="46" y="113" text-anchor="middle" fill="var(--text-4)" font-size="7.5">sensor detects</text>
+                    <text x="46" y="123" text-anchor="middle" fill="var(--text-4)" font-size="7.5">unique code</text>
 
-                    <!-- MQTT arrow -->
-                    <line x1="90" y1="80" x2="130" y2="80" stroke="var(--border2)" stroke-width="0.8" marker-end="url(#ah2)"/>
-                    <text x="110" y="73" text-anchor="middle" fill="var(--text-4)" font-size="7.5">MQTT</text>
+                    <!-- MQTT broker -->
+                    <rect x="104" y="88" width="68" height="34" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.6" stroke-dasharray="3 2"/>
+                    <text x="138" y="107" text-anchor="middle" fill="var(--text-3)" font-size="8.5">MQTT broker</text>
+                    <text x="138" y="117" text-anchor="middle" fill="var(--text-4)" font-size="7">public</text>
 
-                    <!-- Backend (two bounded contexts) -->
-                    <rect x="132" y="30" width="130" height="100" rx="2" fill="var(--surface)" stroke="var(--border2)" stroke-width="0.7" stroke-dasharray="3 2"/>
-                    <text x="197" y="48" text-anchor="middle" fill="var(--text-4)" font-size="8" letter-spacing="0.05em">WebFlux backend</text>
+                    <!-- Node-RED -->
+                    <rect x="104" y="140" width="68" height="40" rx="2" fill="var(--surface)" stroke="var(--amber)" stroke-width="0.7"/>
+                    <text x="138" y="157" text-anchor="middle" fill="var(--amber)" font-size="9" font-weight="500">Node-RED</text>
+                    <text x="138" y="169" text-anchor="middle" fill="var(--amber-dim)" font-size="7.5">IoT orchestrator</text>
+                    <text x="138" y="178" text-anchor="middle" fill="var(--text-4)" font-size="7">MQTT → HTTP</text>
+
+                    <!-- ESP32 → MQTT -->
+                    <line x1="84" y1="100" x2="102" y2="100" stroke="var(--border2)" stroke-width="0.8" marker-end="url(#ah2)"/>
+                    <text x="93" y="94" text-anchor="middle" fill="var(--text-4)" font-size="7">pub</text>
+
+                    <!-- MQTT → Node-RED -->
+                    <line x1="138" y1="122" x2="138" y2="138" stroke="var(--border2)" stroke-width="0.7" marker-end="url(#ah2)"/>
+
+                    <!-- Backend box (two bounded contexts) -->
+                    <rect x="192" y="60" width="150" height="140" rx="2" fill="var(--surface)" stroke="var(--border2)" stroke-width="0.6" stroke-dasharray="3 2"/>
+                    <text x="267" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5" letter-spacing="0.05em">Spring Boot · WebFlux</text>
 
                     <!-- access context -->
-                    <rect x="142" y="54" width="110" height="30" rx="2" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="0.6"/>
-                    <text x="197" y="67" text-anchor="middle" fill="var(--cyan)" font-size="9" font-weight="500">access context</text>
-                    <text x="197" y="78" text-anchor="middle" fill="var(--text-4)" font-size="7.5">door state · access log</text>
+                    <rect x="202" y="84" width="130" height="42" rx="2" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="0.6"/>
+                    <text x="267" y="100" text-anchor="middle" fill="var(--cyan)" font-size="8.5" font-weight="500">access context</text>
+                    <text x="267" y="112" text-anchor="middle" fill="var(--text-4)" font-size="7">entry log · gate command · exit</text>
+                    <text x="267" y="121" text-anchor="middle" fill="var(--text-4)" font-size="7">presentation · app · domain · infra</text>
 
                     <!-- payment context -->
-                    <rect x="142" y="92" width="110" height="30" rx="2" fill="var(--bg2)" stroke="var(--amber)" stroke-width="0.6"/>
-                    <text x="197" y="105" text-anchor="middle" fill="var(--amber)" font-size="9" font-weight="500">payment context</text>
-                    <text x="197" y="116" text-anchor="middle" fill="var(--text-4)" font-size="7.5">Mercado Pago webhooks</text>
+                    <rect x="202" y="136" width="130" height="42" rx="2" fill="var(--bg2)" stroke="var(--amber)" stroke-width="0.6"/>
+                    <text x="267" y="152" text-anchor="middle" fill="var(--amber)" font-size="8.5" font-weight="500">payment context</text>
+                    <text x="267" y="164" text-anchor="middle" fill="var(--text-4)" font-size="7">preference · webhook · SSE stream</text>
+                    <text x="267" y="173" text-anchor="middle" fill="var(--text-4)" font-size="7">presentation · app · domain · infra</text>
 
-                    <!-- SSE arrow -->
-                    <line x1="262" y1="69" x2="320" y2="69" stroke="#2A6668" stroke-width="0.8" marker-end="url(#ahc)"/>
-                    <text x="291" y="63" text-anchor="middle" fill="var(--text-4)" font-size="7.5">SSE</text>
-
-                    <!-- Webhook arrow -->
-                    <line x1="262" y1="107" x2="360" y2="140" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
-                    <text x="300" y="135" text-anchor="middle" fill="var(--text-4)" font-size="7.5">webhook</text>
-
-                    <!-- React frontend -->
-                    <rect x="322" y="44" width="100" height="50" rx="2" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="0.7"/>
-                    <text x="372" y="65" text-anchor="middle" fill="var(--cyan)" font-size="9.5" font-weight="500">React / TS</text>
-                    <text x="372" y="79" text-anchor="middle" fill="var(--text-3)" font-size="8">real-time monitor</text>
-                    <text x="372" y="89" text-anchor="middle" fill="var(--text-4)" font-size="7.5">no polling</text>
+                    <!-- Node-RED → access context (entry) -->
+                    <line x1="172" y1="160" x2="190" y2="115" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
+                    <text x="175" y="133" fill="var(--text-4)" font-size="7">HTTP</text>
 
                     <!-- Mercado Pago -->
-                    <rect x="362" y="126" width="110" height="28" rx="2" fill="var(--bg2)" stroke="var(--amber-dim)" stroke-width="0.6"/>
-                    <text x="417" y="143" text-anchor="middle" fill="var(--amber)" font-size="8.5">Mercado Pago</text>
+                    <rect x="466" y="88" width="110" height="50" rx="2" fill="var(--bg2)" stroke="var(--amber)" stroke-width="0.7"/>
+                    <text x="521" y="107" text-anchor="middle" fill="var(--amber)" font-size="9" font-weight="500">Mercado Pago</text>
+                    <text x="521" y="119" text-anchor="middle" fill="var(--amber-dim)" font-size="7.5">Checkout Pro</text>
+                    <text x="521" y="129" text-anchor="middle" fill="var(--text-4)" font-size="7">PIX · card · boleto</text>
 
-                    <!-- Mercado pago → backend -->
-                    <line x1="362" y1="140" x2="262" y2="112" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
+                    <!-- payment context → Mercado Pago (create preference) -->
+                    <line x1="332" y1="152" x2="464" y2="112" stroke="var(--amber-dim)" stroke-width="0.7" marker-end="url(#aha2)"/>
+                    <text x="392" y="122" text-anchor="middle" fill="var(--text-4)" font-size="7">preference</text>
+
+                    <!-- Mercado Pago → payment context (webhook) -->
+                    <line x1="466" y1="128" x2="334" y2="162" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
+                    <text x="392" y="155" text-anchor="middle" fill="var(--text-4)" font-size="7">webhook</text>
+
+                    <!-- React frontend -->
+                    <rect x="604" y="70" width="106" height="80" rx="2" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="0.7"/>
+                    <text x="657" y="92" text-anchor="middle" fill="var(--cyan)" font-size="9" font-weight="500">React / TS</text>
+                    <text x="657" y="105" text-anchor="middle" fill="var(--text-3)" font-size="7.5">payment terminal</text>
+                    <text x="657" y="117" text-anchor="middle" fill="var(--text-4)" font-size="7">SSE: poll payment</text>
+                    <text x="657" y="127" text-anchor="middle" fill="var(--text-4)" font-size="7">status in real-time</text>
+                    <text x="657" y="139" text-anchor="middle" fill="var(--text-4)" font-size="7">request gate open</text>
+
+                    <!-- payment context SSE → frontend -->
+                    <line x1="332" y1="145" x2="602" y2="108" stroke="#2A6668" stroke-width="0.8" marker-end="url(#ahc2)"/>
+                    <text x="468" y="118" text-anchor="middle" fill="var(--text-4)" font-size="7">SSE stream</text>
+
+                    <!-- frontend → access context (gate release) -->
+                    <path d="M657 150 Q 657 210 267 205 Q 210 205 210 182" fill="none" stroke="var(--green-dim)" stroke-width="0.7" stroke-dasharray="2 2.5" marker-end="url(#ahg2)"/>
+                    <text x="440" y="218" text-anchor="middle" fill="var(--text-4)" font-size="7">gate release — validated payment → Node-RED → MQTT → ESP32</text>
+
+                    <!-- MySQL -->
+                    <rect x="266" y="28" width="80" height="24" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.6"/>
+                    <text x="306" y="43" text-anchor="middle" fill="var(--text-3)" font-size="8">MySQL</text>
+                    <line x1="267" y1="84" x2="295" y2="52" stroke="var(--border2)" stroke-width="0.5" stroke-dasharray="2 2"/>
                   </svg>
                 </div>
 
                 <ul class="proj-bullets">
-                  <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (ESP32/MQTT, door state, access log) and <code>payment</code> (Mercado Pago Checkout Pro, webhook handling) — domain concerns cleanly isolated at the model boundary</li>
-                  <li>WebFlux chosen for non-blocking I/O on event-heavy hardware streams; SSE stream to React/TypeScript frontend delivers real-time access events without polling or WebSocket overhead</li>
-                  <li><strong>Built end-to-end in a team of 3</strong> — full software layer responsibility: hardware integration, reactive backend, payment flow, and frontend</li>
+                  <li><strong>Node-RED as IoT orchestrator</strong> — bridges the MQTT broker to the Spring backend; on entry, subscribes to device events and calls <code>POST /access/entry</code> to persist the record; on gate release, receives <code>POST /open-gate</code> from the backend and publishes the open command back to the ESP32 via MQTT</li>
+                  <li><strong>Two DDD bounded contexts with Clean Architecture</strong> — <code>access</code> (entry/exit lifecycle, gate coordination) and <code>payment</code> (Mercado Pago Checkout Pro preference creation, webhook confirmation, SSE stream); each context structured across presentation → application → domain → infrastructure layers</li>
+                  <li><strong>WebFlux SSE for payment polling</strong> — instead of the frontend polling REST every N seconds, the backend holds a reactive SSE connection per payment ID and pushes <code>paid: true</code> the moment the Mercado Pago webhook lands — chosen over WebSocket because the stream is unidirectional and stateless from the server side</li>
+                  <li><strong>End-to-end in a team of 3</strong> — full software responsibility: ESP32 firmware, MQTT topology, Node-RED flows, reactive backend, payment integration, and React/TypeScript terminal</li>
                 </ul>
 
                 <div class="proj-footer-tags">
                   <a class="proj-github-link" href="https://github.com/Luca5Eckert/OpenIt" target="_blank" rel="noopener">github ↗</a>
-                  Java 21 · Spring Boot 3.5 · WebFlux · MQTT · SSE · React 19 · TypeScript · MySQL · ESP32
+                  Java 21 · Spring Boot 3.5 · WebFlux · Node-RED · MQTT · SSE · Mercado Pago SDK · React 19 · TypeScript · MySQL · ESP32 · Docker Compose
                 </div>
               </div>
             </div>

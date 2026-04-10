@@ -32,6 +32,9 @@
       --red:       #B06060;
       --blue:      #6A9AB8;
       --cyan:      #5AACB0;
+      --violet:    #8B7EC8;
+      --violet-dim:#4A4478;
+      --violet-bg: #0D0C1A;
 
       --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
       --font-disp: 'Fraunces', Georgia, serif;
@@ -65,9 +68,7 @@
     /* ── Status bar ── */
     #status-bar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       background: var(--bg);
       border-bottom: 1px solid var(--border);
@@ -80,36 +81,18 @@
       color: var(--text-3);
       letter-spacing: 0.04em;
     }
-
     .status-left { display: flex; align-items: center; gap: 1.2rem; }
     .status-right { display: flex; align-items: center; gap: 1.2rem; }
-
     .status-dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      margin-right: 6px;
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); margin-right: 6px;
       animation: pulse-dot 2.5s ease-in-out infinite;
     }
-
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .status-file { color: var(--text-2); }
     .status-lang { color: var(--green); }
-    .status-breadcrumb {
-      color: var(--text-4);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+    .status-breadcrumb { color: var(--text-4); display: flex; align-items: center; gap: 0.4rem; }
     .status-breadcrumb-project { color: var(--amber); }
-
-    /* Mobile status bar — compact single line */
     @media (max-width: 580px) {
       #status-bar { padding: 0 1rem; }
       .status-breadcrumb { display: none; }
@@ -119,811 +102,304 @@
     }
 
     /* ── Layout ── */
-    main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 5.5rem 2rem 4rem;
-    }
+    main { max-width: 780px; margin: 0 auto; padding: 5.5rem 2rem 4rem; }
 
     /* ── Hero ── */
-    #hero {
-      padding-bottom: 3.5rem;
-    }
-
-    /* [CHANGE 1] Hero anchor line — above the name */
+    #hero { padding-bottom: 3.5rem; }
     .hero-anchor {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1.4rem;
-      opacity: 0;
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1.4rem; opacity: 0;
       animation: fade-in 600ms var(--ease-out) forwards 0ms;
     }
-
-    .hero-anchor-prefix {
-      color: var(--text-4);
-      font-size: 11px;
-    }
-
-    .hero-anchor-text {
-      font-size: 11px;
-      color: var(--green);
-      letter-spacing: 0.03em;
-    }
-
+    .hero-anchor-prefix { color: var(--text-4); font-size: 11px; }
+    .hero-anchor-text { font-size: 11px; color: var(--green); letter-spacing: 0.03em; }
     .hero-anchor-cursor {
-      display: inline-block;
-      width: 7px;
-      height: 13px;
-      background: var(--green);
-      opacity: 0.7;
-      margin-left: 2px;
-      animation: blink-cursor 1.1s step-end infinite;
-      vertical-align: middle;
+      display: inline-block; width: 7px; height: 13px;
+      background: var(--green); opacity: 0.7; margin-left: 2px;
+      animation: blink-cursor 1.1s step-end infinite; vertical-align: middle;
     }
-
-    @keyframes blink-cursor {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 0; }
-    }
-
+    @keyframes blink-cursor { 0%,100%{opacity:0.7} 50%{opacity:0} }
     .hero-comment {
-      color: var(--text-3);
-      font-size: 12px;
-      margin-bottom: 1.8rem;
-      opacity: 0;
-      animation: fade-in 700ms var(--ease-out) forwards 100ms;
+      color: var(--text-3); font-size: 12px; margin-bottom: 1.8rem;
+      opacity: 0; animation: fade-in 700ms var(--ease-out) forwards 100ms;
     }
-
     .hero-name {
       font-family: var(--font-disp);
       font-size: clamp(52px, 8vw, 80px);
-      font-weight: 600;
-      font-style: italic;
-      color: var(--text);
-      letter-spacing: -0.03em;
-      line-height: 0.95;
-      margin-bottom: 1.6rem;
-      opacity: 0;
-      animation: fade-in 800ms var(--ease-out) forwards 200ms;
+      font-weight: 600; font-style: italic;
+      color: var(--text); letter-spacing: -0.03em;
+      line-height: 0.95; margin-bottom: 1.6rem;
+      opacity: 0; animation: fade-in 800ms var(--ease-out) forwards 200ms;
     }
-
-    .hero-name em {
-      font-style: normal;
-      color: var(--green);
-    }
-
+    .hero-name em { font-style: normal; color: var(--green); }
     .hero-meta {
-      font-size: 11px;
-      color: var(--text-3);
-      letter-spacing: 0.04em;
-      margin-bottom: 2.2rem;
-      opacity: 0;
+      font-size: 11px; color: var(--text-3); letter-spacing: 0.04em;
+      margin-bottom: 2.2rem; opacity: 0;
       animation: fade-in 600ms var(--ease-out) forwards 380ms;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
+      display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
     }
-
     .hero-meta-sep { color: var(--text-4); }
-    .hero-meta-comment { color: var(--text-4); }
-
     .hero-descriptor {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-      margin-bottom: 2.5rem;
-      opacity: 0;
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      margin-bottom: 2.5rem; opacity: 0;
       animation: fade-in 600ms var(--ease-out) forwards 500ms;
     }
-
-    .descriptor-prefix {
-      color: var(--amber);
-      font-size: 12px;
-      padding-top: 1px;
-      flex-shrink: 0;
-    }
-
-    .descriptor-text {
-      font-size: 12.5px;
-      color: var(--text-2);
-      line-height: 1.65;
-    }
-
-    .descriptor-text strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    /* [CHANGE 6] Now block — stronger visual hierarchy */
+    .descriptor-prefix { color: var(--amber); font-size: 12px; padding-top: 1px; flex-shrink: 0; }
+    .descriptor-text { font-size: 12.5px; color: var(--text-2); line-height: 1.65; }
+    .descriptor-text strong { color: var(--text); font-weight: 500; }
     .now-block {
-      border: 1px solid var(--border2);
-      border-left: 3px solid var(--green-dim);
+      border: 1px solid var(--border2); border-left: 3px solid var(--green-dim);
       background: linear-gradient(to right, rgba(12,26,12,0.5), transparent);
-      padding: 1rem 1.2rem;
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fade-in 600ms var(--ease-out) forwards 650ms;
+      padding: 1rem 1.2rem; margin-bottom: 2.5rem;
+      opacity: 0; animation: fade-in 600ms var(--ease-out) forwards 650ms;
     }
-
     .now-block-label {
-      font-size: 9.5px;
-      color: var(--green);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.65rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 9.5px; color: var(--green); letter-spacing: 0.1em;
+      margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.5rem;
     }
-
     .now-block-label::after {
-      content: '';
-      display: block;
-      flex: 1;
-      height: 1px;
-      background: var(--border2);
+      content:''; display:block; flex:1; height:1px; background:var(--border2);
     }
-
     .now-row {
-      display: flex;
-      gap: 0.8rem;
-      font-size: 12px;
-      color: var(--text-3);
-      margin-bottom: 0.3rem;
+      display: flex; gap: 0.8rem; font-size: 12px;
+      color: var(--text-3); margin-bottom: 0.3rem;
     }
-
     .now-row:last-child { margin-bottom: 0; }
-
-    .now-key {
-      color: var(--green-dim);
-      min-width: 60px;
-      flex-shrink: 0;
-      font-size: 11px;
-    }
-
+    .now-key { color: var(--green-dim); min-width: 60px; flex-shrink: 0; font-size: 11px; }
     .now-val { color: var(--text-2); }
     .now-val a { color: var(--text-2); text-decoration: none; transition: color 150ms; }
     .now-val a:hover { color: var(--green); }
-
-    /* Hero links */
     .hero-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      align-items: center;
-      font-size: 12px;
-      opacity: 0;
+      display: flex; flex-wrap: wrap; gap: 0; align-items: center;
+      font-size: 12px; opacity: 0;
       animation: fade-in 600ms var(--ease-out) forwards 800ms;
     }
-
     .hero-links a {
-      color: var(--text-3);
-      text-decoration: none;
-      position: relative;
-      transition: color 150ms;
+      color: var(--text-3); text-decoration: none; position: relative; transition: color 150ms;
     }
-
     .hero-links a:hover { color: var(--green); }
     .hero-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--green);
-      transition: width 160ms;
+      content:''; position:absolute; bottom:-1px; left:0; width:0; height:1px;
+      background:var(--green); transition:width 160ms;
     }
-    .hero-links a:hover::after { width: 100%; }
+    .hero-links a:hover::after { width:100%; }
     .lsep { color: var(--text-4); margin: 0 0.8rem; }
 
     /* ── Section ── */
-    .section {
-      padding: 3rem 0;
-      border-top: 1px solid var(--border);
-    }
+    .section { padding: 3rem 0; border-top: 1px solid var(--border); }
+    .sec-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; }
+    .sec-marker { font-size: 11px; color: var(--text-4); letter-spacing: 0.06em; }
+    .sec-title { font-size: 11px; color: var(--green); letter-spacing: 0.08em; }
 
-    .sec-head {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 2rem;
-    }
-
-    .sec-marker {
-      font-size: 11px;
-      color: var(--text-4);
-      letter-spacing: 0.06em;
-    }
-
-    .sec-title {
-      font-size: 11px;
-      color: var(--green);
-      letter-spacing: 0.08em;
-    }
-
-    /* ── Interest tiles ── */
-    .interests-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem 2.5rem;
-    }
-
+    /* ── Interests ── */
+    .interests-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2.5rem; }
     .interest-tile {
-      border-left: 2px solid var(--border2);
-      padding: 0.7rem 0.9rem;
+      border-left: 2px solid var(--border2); padding: 0.7rem 0.9rem;
       transition: border-color 200ms;
     }
-
-    .interest-tile:hover { border-color: var(--border3); }
-
     .interest-tile[data-color="green"]  { border-color: var(--green-dim); }
     .interest-tile[data-color="amber"]  { border-color: var(--amber-dim); }
     .interest-tile[data-color="cyan"]   { border-color: #2A6668; }
     .interest-tile[data-color="muted"]  { border-color: var(--border3); }
-
     .interest-tile[data-color="green"]:hover  { border-color: var(--green); }
     .interest-tile[data-color="amber"]:hover  { border-color: var(--amber); }
     .interest-tile[data-color="cyan"]:hover   { border-color: var(--cyan); }
     .interest-tile[data-color="muted"]:hover  { border-color: var(--text-3); }
-
-    .interest-icon {
-      font-size: 13px;
-      margin-bottom: 0.3rem;
-      display: block;
-    }
-
-    .interest-tile[data-color="green"]  .interest-icon { color: var(--green); }
-    .interest-tile[data-color="amber"]  .interest-icon { color: var(--amber); }
-    .interest-tile[data-color="cyan"]   .interest-icon { color: var(--cyan); }
-    .interest-tile[data-color="muted"]  .interest-icon { color: var(--text-3); }
-
-    .interest-title {
-      font-size: 12.5px;
-      color: var(--text);
-      font-weight: 500;
-      margin-bottom: 0.2rem;
-    }
-
-    .interest-sub {
-      font-size: 11px;
-      color: var(--text-3);
-      line-height: 1.5;
-    }
-
-    /* Stack table */
-    .stack-section {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .stack-label {
-      font-size: 10.5px;
-      color: var(--text-4);
-      letter-spacing: 0.07em;
-      margin-bottom: 0.8rem;
-    }
-
-    .stack-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-
+    .interest-icon { font-size: 13px; margin-bottom: 0.3rem; display: block; }
+    .interest-tile[data-color="green"] .interest-icon { color: var(--green); }
+    .interest-tile[data-color="amber"] .interest-icon { color: var(--amber); }
+    .interest-tile[data-color="cyan"]  .interest-icon { color: var(--cyan); }
+    .interest-tile[data-color="muted"] .interest-icon { color: var(--text-3); }
+    .interest-title { font-size: 12.5px; color: var(--text); font-weight: 500; margin-bottom: 0.2rem; }
+    .interest-sub { font-size: 11px; color: var(--text-3); line-height: 1.5; }
+    .stack-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .stack-label { font-size: 10.5px; color: var(--text-4); letter-spacing: 0.07em; margin-bottom: 0.8rem; }
+    .stack-table { width: 100%; border-collapse: collapse; font-size: 12px; }
     .stack-table tr { border-bottom: 1px solid var(--border); }
     .stack-table tr:last-child { border-bottom: none; }
-
-    .stack-table td {
-      padding: 0.55rem 0;
-      vertical-align: top;
-    }
-
-    .stack-table td:first-child {
-      color: var(--text-3);
-      width: 120px;
-      padding-right: 1.5rem;
-      white-space: nowrap;
-    }
-
+    .stack-table td { padding: 0.55rem 0; vertical-align: top; }
+    .stack-table td:first-child { color: var(--text-3); width: 120px; padding-right: 1.5rem; white-space: nowrap; }
     .stack-table td:last-child { color: var(--text-2); }
-
     .tag { color: var(--cyan); }
 
     /* ── Projects ── */
-    .projects-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .proj-item {
-      border-top: 1px solid var(--border);
-      overflow: hidden;
-    }
-
+    .projects-stack { display: flex; flex-direction: column; gap: 0; }
+    .proj-item { border-top: 1px solid var(--border); overflow: hidden; }
     .proj-item:first-child { border-top: none; }
-
     .proj-trigger {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.1rem 0;
-      cursor: pointer;
-      user-select: none;
-      gap: 1rem;
-      border-left: 2px solid transparent;
-      padding-left: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 0; cursor: pointer; user-select: none; gap: 1rem;
+      border-left: 2px solid transparent; padding-left: 0;
       transition: border-color 220ms, padding-left 220ms;
     }
+    .proj-trigger:hover { border-color: var(--green-dim); padding-left: 0.7rem; }
+    .proj-item.open .proj-trigger { border-color: var(--green); padding-left: 0.7rem; }
 
-    .proj-trigger:hover {
-      border-color: var(--green-dim);
-      padding-left: 0.7rem;
-    }
+    /* Kairos violet accent on trigger hover/open */
+    .proj-item[data-accent="violet"] .proj-trigger:hover { border-color: var(--violet-dim); }
+    .proj-item[data-accent="violet"].open .proj-trigger  { border-color: var(--violet); }
 
-    .proj-item.open .proj-trigger {
-      border-color: var(--green);
-      padding-left: 0.7rem;
-    }
-
-    .proj-trigger-left {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .proj-num {
-      font-size: 10px;
-      color: var(--text-4);
-      width: 18px;
-      flex-shrink: 0;
-      padding-top: 3px;
-    }
-
-    .proj-title-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      min-width: 0;
-    }
-
-    .proj-name-line {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .proj-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text);
-      transition: color 180ms;
-    }
-
+    .proj-trigger-left { display: flex; align-items: flex-start; gap: 1rem; flex: 1; min-width: 0; }
+    .proj-num { font-size: 10px; color: var(--text-4); width: 18px; flex-shrink: 0; padding-top: 3px; }
+    .proj-title-wrap { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+    .proj-name-line { display: flex; align-items: center; gap: 0.7rem; }
+    .proj-name { font-size: 14px; font-weight: 500; color: var(--text); transition: color 180ms; }
     .proj-item.open .proj-name { color: var(--green); }
-
+    .proj-item[data-accent="violet"].open .proj-name { color: var(--violet); }
     .proj-badge {
-      font-size: 9px;
-      color: var(--green);
-      border: 1px solid var(--green-dim);
-      padding: 1px 5px;
-      letter-spacing: 0.06em;
-      background: var(--green-bg);
-      flex-shrink: 0;
+      font-size: 9px; color: var(--green); border: 1px solid var(--green-dim);
+      padding: 1px 5px; letter-spacing: 0.06em; background: var(--green-bg); flex-shrink: 0;
     }
-
-    .proj-oneliner {
-      font-size: 11.5px;
-      color: var(--text-3);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .proj-badge-violet {
+      font-size: 9px; color: var(--violet); border: 1px solid var(--violet-dim);
+      padding: 1px 5px; letter-spacing: 0.06em; background: var(--violet-bg); flex-shrink: 0;
     }
-
+    .proj-oneliner { font-size: 11.5px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .proj-question {
-      font-size: 11px;
-      color: var(--text-4);
-      font-style: italic;
-      margin-top: 0.1rem;
-      overflow: hidden;
-      max-height: 4em;
-      white-space: normal;
-      opacity: 1;
+      font-size: 11px; color: var(--text-4); font-style: italic; margin-top: 0.1rem;
+      overflow: hidden; max-height: 4em; white-space: normal; opacity: 1;
       transition: max-height 250ms var(--ease-out), opacity 180ms;
     }
-
-    .proj-item.open .proj-question {
-      max-height: 0;
-      opacity: 0;
-    }
-
-    .proj-item.open .proj-oneliner {
-      opacity: 0;
-      transition: opacity 100ms;
-    }
-
-    .proj-tags-collapsed {
-      font-size: 10px;
-      color: var(--text-4);
-      flex-shrink: 0;
-      transition: opacity 200ms;
-      text-align: right;
-    }
-
+    .proj-item.open .proj-question { max-height: 0; opacity: 0; }
+    .proj-item.open .proj-oneliner { opacity: 0; transition: opacity 100ms; }
+    .proj-tags-collapsed { font-size: 10px; color: var(--text-4); flex-shrink: 0; transition: opacity 200ms; text-align: right; }
     .proj-item.open .proj-tags-collapsed { opacity: 0; }
-
     .proj-chevron {
-      flex-shrink: 0;
-      width: 16px;
-      height: 16px;
-      color: var(--text-4);
+      flex-shrink: 0; width: 16px; height: 16px; color: var(--text-4);
       transition: transform 350ms var(--ease-out), color 200ms;
     }
-
-    .proj-item.open .proj-chevron {
-      transform: rotate(180deg);
-      color: var(--green);
-    }
-
-    .proj-body {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 420ms var(--ease-out);
-    }
-
+    .proj-item.open .proj-chevron { transform: rotate(180deg); color: var(--green); }
+    .proj-item[data-accent="violet"].open .proj-chevron { color: var(--violet); }
+    .proj-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 420ms var(--ease-out); }
     .proj-item.open .proj-body { grid-template-rows: 1fr; }
-
     .proj-body-inner { overflow: hidden; }
-
     .proj-content { padding: 0 0 2rem 1.8rem; }
-
     .proj-tagline {
-      font-size: 13px;
-      color: var(--text-2);
-      font-style: italic;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-      padding-bottom: 1.2rem;
+      font-size: 13px; color: var(--text-2); font-style: italic;
+      margin-bottom: 1.5rem; line-height: 1.6; padding-bottom: 1.2rem;
       border-bottom: 1px solid var(--border);
     }
 
     /* Metrics */
     .proj-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
       margin-bottom: 1.5rem;
     }
-
-    .proj-metric {
-      background: var(--bg2);
-      padding: 0.75rem 0.9rem;
-    }
-
-    .proj-metric-label {
-      font-size: 9.5px;
-      color: var(--text-4);
-      letter-spacing: 0.07em;
-      margin-bottom: 0.3rem;
-    }
-
-    .proj-metric-val {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1;
-      color: var(--text);
-      margin-bottom: 0.2rem;
-    }
-
+    .proj-metric { background: var(--bg2); padding: 0.75rem 0.9rem; }
+    .proj-metric-label { font-size: 9.5px; color: var(--text-4); letter-spacing: 0.07em; margin-bottom: 0.3rem; }
+    .proj-metric-val { font-size: 20px; font-weight: 700; line-height: 1; color: var(--text); margin-bottom: 0.2rem; }
     .proj-metric-val.g { color: var(--green); }
     .proj-metric-val.a { color: var(--amber); }
     .proj-metric-val.b { color: var(--blue); }
     .proj-metric-val.c { color: var(--cyan); }
-
-    .proj-metric-sub {
-      font-size: 9px;
-      color: var(--text-3);
-      line-height: 1.4;
-    }
+    .proj-metric-val.v { color: var(--violet); }
+    .proj-metric-sub { font-size: 9px; color: var(--text-3); line-height: 1.4; }
 
     /* Latency viz */
     .proj-latency { margin-bottom: 1.5rem; }
-
-    .proj-lat-label {
-      font-size: 9.5px;
-      color: var(--text-4);
-      letter-spacing: 0.07em;
-      margin-bottom: 0.7rem;
-    }
-
-    .proj-lat-row {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .proj-lat-v {
-      font-size: 9.5px;
-      color: var(--text-3);
-      width: 16px;
-      flex-shrink: 0;
-    }
-
-    .proj-lat-track {
-      flex: 1;
-      height: 14px;
-      background: var(--surface);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .proj-lat-fill {
-      height: 100%;
-      width: 0;
-      transition: width 900ms var(--ease-out);
-    }
-
+    .proj-lat-label { font-size: 9.5px; color: var(--text-4); letter-spacing: 0.07em; margin-bottom: 0.7rem; }
+    .proj-lat-row { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.4rem; }
+    .proj-lat-v { font-size: 9.5px; color: var(--text-3); width: 16px; flex-shrink: 0; }
+    .proj-lat-track { flex: 1; height: 14px; background: var(--surface); position: relative; overflow: hidden; }
+    .proj-lat-fill { height: 100%; width: 0; transition: width 900ms var(--ease-out); }
     .proj-lat-fill.r { background: var(--red); opacity: 0.7; }
     .proj-lat-fill.a { background: var(--amber); opacity: 0.75; }
     .proj-lat-fill.g { background: var(--green); opacity: 0.8; }
-
-    .proj-lat-ms {
-      font-size: 9.5px;
-      color: var(--text-3);
-      width: 68px;
-      flex-shrink: 0;
-      text-align: right;
-    }
-
+    .proj-lat-ms { font-size: 9.5px; color: var(--text-3); width: 68px; flex-shrink: 0; text-align: right; }
     .proj-lat-ms.g { color: var(--green); }
 
+    /* Pipeline viz */
+    .proj-pipeline { margin-bottom: 1.5rem; }
+    .proj-pipeline-label { font-size: 9.5px; color: var(--text-4); letter-spacing: 0.07em; margin-bottom: 0.7rem; }
+    .pipeline-track {
+      display: flex; align-items: stretch; gap: 0;
+      border: 1px solid var(--border); overflow: hidden; margin-bottom: 0.5rem;
+    }
+    .pipeline-step {
+      flex: 1; padding: 0.6rem 0.7rem; background: var(--bg2);
+      font-size: 9px; color: var(--text-3); position: relative;
+      border-right: 1px solid var(--border); transition: background 200ms, color 200ms;
+    }
+    .pipeline-step:last-child { border-right: none; }
+    .pipeline-step:hover { background: var(--surface); color: var(--text-2); }
+    .pipeline-step-name { color: var(--text-2); font-size: 9.5px; font-weight: 500; margin-bottom: 0.2rem; display: block; }
+    .pipeline-step.violet .pipeline-step-name { color: var(--violet); }
+    .pipeline-step.green .pipeline-step-name { color: var(--green); }
+    .pipeline-step.amber .pipeline-step-name { color: var(--amber); }
+    .pipeline-step.cyan .pipeline-step-name { color: var(--cyan); }
+    .pipeline-arrow {
+      display: flex; align-items: center; padding: 0 0px;
+      color: var(--text-4); font-size: 9px; flex-shrink: 0;
+      background: var(--bg2); border-right: 1px solid var(--border);
+      padding: 0 4px;
+    }
+
     /* Arch diagram container */
-    .proj-arch {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .proj-arch-label {
-      font-size: 9.5px;
-      color: var(--text-4);
-      letter-spacing: 0.07em;
-      margin-bottom: 0.75rem;
-    }
-
+    .proj-arch { background: var(--bg2); border: 1px solid var(--border); padding: 1rem; margin-bottom: 1.5rem; }
+    .proj-arch-label { font-size: 9.5px; color: var(--text-4); letter-spacing: 0.07em; margin-bottom: 0.75rem; }
     .proj-arch svg { width: 100%; height: auto; display: block; }
 
+    /* Retrieval comparison */
+    .retrieval-compare { margin-bottom: 1.5rem; }
+    .retrieval-compare-label { font-size: 9.5px; color: var(--text-4); letter-spacing: 0.07em; margin-bottom: 0.7rem; }
+    .retrieval-row { display: grid; grid-template-columns: 90px 1fr 70px; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem; }
+    .retrieval-name { font-size: 9.5px; color: var(--text-3); }
+    .retrieval-bar-track { height: 12px; background: var(--surface); }
+    .retrieval-bar-fill { height: 100%; width: 0; transition: width 1000ms var(--ease-out); }
+    .retrieval-bar-fill.dim { background: var(--border3); }
+    .retrieval-bar-fill.mid { background: var(--blue); opacity: 0.6; }
+    .retrieval-bar-fill.top { background: var(--violet); opacity: 0.85; }
+    .retrieval-pct { font-size: 9.5px; color: var(--text-3); text-align: right; }
+    .retrieval-pct.top { color: var(--violet); }
+
     /* Bullets */
-    .proj-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-      margin-bottom: 1.2rem;
-    }
-
+    .proj-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.2rem; }
     .proj-bullets li {
-      font-size: 12.5px;
-      color: var(--text-2);
-      line-height: 1.65;
-      padding-left: 1.2rem;
-      position: relative;
+      font-size: 12.5px; color: var(--text-2); line-height: 1.65;
+      padding-left: 1.2rem; position: relative;
     }
-
-    .proj-bullets li::before {
-      content: '//';
-      position: absolute;
-      left: 0;
-      color: var(--text-4);
-      font-size: 10px;
-      top: 3px;
-    }
-
-    .proj-bullets code {
-      color: var(--amber);
-      font-size: 0.9em;
-      background: rgba(196,168,90,0.08);
-      padding: 1px 4px;
-    }
-
+    .proj-bullets li::before { content: '//'; position: absolute; left: 0; color: var(--text-4); font-size: 10px; top: 3px; }
+    .proj-bullets code { color: var(--amber); font-size: 0.9em; background: rgba(196,168,90,0.08); padding: 1px 4px; }
     .proj-bullets strong { color: var(--text); font-weight: 500; }
-
-    .proj-footer-tags {
-      font-size: 10px;
-      color: var(--text-4);
-      padding-top: 0.8rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .proj-github-link {
-      float: right;
-      color: var(--text-3);
-      font-size: 10px;
-      text-decoration: none;
-      transition: color 150ms;
-    }
-
+    .proj-footer-tags { font-size: 10px; color: var(--text-4); padding-top: 0.8rem; border-top: 1px solid var(--border); }
+    .proj-github-link { float: right; color: var(--text-3); font-size: 10px; text-decoration: none; transition: color 150ms; }
     .proj-github-link:hover { color: var(--green); }
 
     /* ── Experience ── */
-    .exp-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 0.6rem;
-    }
+    .exp-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.6rem; }
+    .exp-company { font-size: 13.5px; color: var(--text); font-weight: 500; }
+    .exp-role { font-size: 11px; color: var(--text-3); margin-top: 0.15rem; }
+    .exp-context { font-size: 10.5px; color: var(--text-4); margin-top: 0.1rem; font-style: italic; }
+    .exp-date { font-size: 10.5px; color: var(--text-4); white-space: nowrap; flex-shrink: 0; text-align: right; }
+    .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.8rem; }
+    .exp-list li { font-size: 12.5px; color: var(--text-2); line-height: 1.6; padding-left: 1.2rem; position: relative; }
+    .exp-list li::before { content: '//'; position: absolute; left: 0; color: var(--text-4); font-size: 10px; top: 3px; }
 
-    .exp-company {
-      font-size: 13.5px;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .exp-role {
-      font-size: 11px;
-      color: var(--text-3);
-      margin-top: 0.15rem;
-    }
-
-    .exp-context {
-      font-size: 10.5px;
-      color: var(--text-4);
-      margin-top: 0.1rem;
-      font-style: italic;
-    }
-
-    .exp-date {
-      font-size: 10.5px;
-      color: var(--text-4);
-      white-space: nowrap;
-      flex-shrink: 0;
-      text-align: right;
-    }
-
-    .exp-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      margin-top: 0.8rem;
-    }
-
-    .exp-list li {
-      font-size: 12.5px;
-      color: var(--text-2);
-      line-height: 1.6;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .exp-list li::before {
-      content: '//';
-      position: absolute;
-      left: 0;
-      color: var(--text-4);
-      font-size: 10px;
-      top: 3px;
-    }
-
-    /* ── [CHANGE 4] Contact section ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-bottom: 0;
-    }
-
-    .contact-item {
-      background: var(--bg2);
-      padding: 1rem 1.1rem;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      transition: background 160ms;
-    }
-
+    /* ── Contact ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .contact-item { background: var(--bg2); padding: 1rem 1.1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.3rem; transition: background 160ms; }
     .contact-item:hover { background: var(--surface); }
-
-    .contact-item-label {
-      font-size: 9.5px;
-      color: var(--text-4);
-      letter-spacing: 0.07em;
-    }
-
-    .contact-item-val {
-      font-size: 12px;
-      color: var(--text-2);
-      transition: color 160ms;
-    }
-
+    .contact-item-label { font-size: 9.5px; color: var(--text-4); letter-spacing: 0.07em; }
+    .contact-item-val { font-size: 12px; color: var(--text-2); transition: color 160ms; }
     .contact-item:hover .contact-item-val { color: var(--green); }
-
-    .contact-item-arrow {
-      font-size: 10px;
-      color: var(--text-4);
-      margin-top: auto;
-      padding-top: 0.4rem;
-      transition: color 160ms;
-    }
-
+    .contact-item-arrow { font-size: 10px; color: var(--text-4); margin-top: auto; padding-top: 0.4rem; transition: color 160ms; }
     .contact-item:hover .contact-item-arrow { color: var(--green); }
-
-    @media (max-width: 580px) {
-      .contact-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 580px) { .contact-grid { grid-template-columns: 1fr; } }
 
     /* ── Footer ── */
-    footer {
-      padding: 2.5rem 0 5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-inner {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 1rem;
-    }
-
-    .footer-left {}
-
-    .footer-name {
-      font-size: 11px;
-      color: var(--text-4);
-    }
-
-    .footer-updated {
-      font-size: 10px;
-      color: var(--text-4);
-      margin-top: 0.3rem;
-      opacity: 0.6;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.2rem;
-      font-size: 11px;
-    }
-
-    .footer-links a {
-      color: var(--text-4);
-      text-decoration: none;
-      transition: color 150ms;
-    }
-
+    footer { padding: 2.5rem 0 5rem; border-top: 1px solid var(--border); }
+    .footer-inner { max-width: 780px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; }
+    .footer-name { font-size: 11px; color: var(--text-4); }
+    .footer-updated { font-size: 10px; color: var(--text-4); margin-top: 0.3rem; opacity: 0.6; }
+    .footer-links { display: flex; gap: 1.2rem; font-size: 11px; }
+    .footer-links a { color: var(--text-4); text-decoration: none; transition: color 150ms; }
     .footer-links a:hover { color: var(--green); }
 
     /* ── Animations ── */
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
-    }
-
-    .reveal.in {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    @keyframes fade-in { from{opacity:0} to{opacity:1} }
+    .reveal { opacity: 0; transform: translateY(6px); transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
 
     /* ── Responsive ── */
     @media (max-width: 580px) {
@@ -940,7 +416,6 @@
 
 <body>
 
-  <!-- Status bar -->
   <div id="status-bar">
     <div class="status-left">
       <span><span class="status-dot"></span><span class="status-lang">JAVA</span></span>
@@ -948,7 +423,7 @@
       <span class="status-breadcrumb">
         <span style="color:var(--text-4)">›</span>
         <span>building</span>
-        <span class="status-breadcrumb-project">VellumHub</span>
+        <span class="status-breadcrumb-project">Kairos</span>
       </span>
     </div>
     <div class="status-right">
@@ -961,23 +436,18 @@
 
     <!-- ── HERO ── -->
     <section id="hero">
-
-      <!-- [CHANGE 1] Anchor line above the name -->
       <div class="hero-anchor">
         <span class="hero-anchor-prefix">$</span>
         <span class="hero-anchor-text">event-driven microservices · JVM · distributed systems<span class="hero-anchor-cursor"></span></span>
       </div>
-
       <p class="hero-comment">
         <span style="color:var(--text-4)">/*</span>
         <span style="color:var(--text-3)"> backend developer, distributed systems, JVM native </span>
         <span style="color:var(--text-4)">*/</span>
       </p>
-
       <h1 class="hero-name">Lucas<br><em>Eckert</em></h1>
-
       <div class="hero-meta">
-        <span class="hero-meta-comment">//</span>
+        <span style="color:var(--text-4)">//</span>
         <span>Jaraguá do Sul, BR</span>
         <span class="hero-meta-sep">·</span>
         <span>Java</span>
@@ -988,7 +458,6 @@
         <span class="hero-meta-sep">·</span>
         <span>WEG S.A.</span>
       </div>
-
       <div class="hero-descriptor">
         <span class="descriptor-prefix">const bio =</span>
         <p class="descriptor-text">
@@ -998,28 +467,13 @@
           <span style="color:var(--text-4)">// implementing backprop from scratch on weekends</span>
         </p>
       </div>
-
-      <!-- [CHANGE 6] Now block — stronger visual hierarchy -->
       <div class="now-block">
         <div class="now-block-label">// now</div>
-        <div class="now-row">
-          <span class="now-key">working</span>
-          <span class="now-val">WEG S.A. — Industrial Learning Program</span>
-        </div>
-        <div class="now-row">
-          <span class="now-key">building</span>
-          <span class="now-val">VellumHub — embedding pipeline + reactive gateway</span>
-        </div>
-        <div class="now-row">
-          <span class="now-key">reading</span>
-          <span class="now-val">Designing Data-Intensive Applications · Kleppmann</span>
-        </div>
-        <div class="now-row">
-          <span class="now-key">exploring</span>
-          <span class="now-val">backpropagation — implementing from scratch, no autograd</span>
-        </div>
+        <div class="now-row"><span class="now-key">working</span><span class="now-val">WEG S.A. — Industrial Learning Program</span></div>
+        <div class="now-row"><span class="now-key">building</span><span class="now-val">Kairos — knowledge graph engine + HippoRAG 2</span></div>
+        <div class="now-row"><span class="now-key">reading</span><span class="now-val">Designing Data-Intensive Applications · Kleppmann</span></div>
+        <div class="now-row"><span class="now-key">exploring</span><span class="now-val">backpropagation — implementing from scratch, no autograd</span></div>
       </div>
-
       <nav class="hero-links">
         <a href="https://github.com/Luca5Eckert" target="_blank" rel="noopener">github</a>
         <span class="lsep">/</span>
@@ -1029,16 +483,15 @@
       </nav>
     </section>
 
-    <!-- ── [CHANGE 2] PROJECTS — moved up, first section after hero ── -->
+    <!-- ── PROJECTS ── -->
     <section class="section reveal">
       <div class="sec-head">
         <span class="sec-marker">##</span>
         <span class="sec-title">PROJECTS</span>
       </div>
-
       <div class="projects-stack">
 
-        <!-- VellumHub -->
+        <!-- ─── 01 VellumHub ─── -->
         <div class="proj-item open" id="proj-0">
           <div class="proj-trigger" onclick="toggleProj(0)">
             <div class="proj-trigger-left">
@@ -1053,11 +506,8 @@
               </div>
             </div>
             <span class="proj-tags-collapsed">Java 21 · Kafka · pgvector</span>
-            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 6l4 4 4-4"/>
-            </svg>
+            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
           </div>
-
           <div class="proj-body">
             <div class="proj-body-inner">
               <div class="proj-content">
@@ -1067,7 +517,6 @@
                   Reactive API gateway, event-driven read models via Kafka ECST,
                   and pgvector similarity search with LangChain4j 384-dim embeddings.
                 </p>
-
                 <div class="proj-metrics">
                   <div class="proj-metric">
                     <div class="proj-metric-label">LATENCY CUT</div>
@@ -1085,7 +534,6 @@
                     <div class="proj-metric-sub">zero cross-service<br>calls at query time</div>
                   </div>
                 </div>
-
                 <div class="proj-latency">
                   <div class="proj-lat-label">// latency evolution (recommendation path)</div>
                   <div class="proj-lat-row">
@@ -1104,20 +552,13 @@
                     <span class="proj-lat-ms g">current&nbsp;&nbsp;+ 384-dim embeddings</span>
                   </div>
                 </div>
-
                 <div class="proj-arch">
                   <div class="proj-arch-label">// system architecture</div>
                   <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
-                      <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--border3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
-                      <marker id="ahg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--green-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
-                      <marker id="aha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--amber-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
+                      <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--border3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="ahg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--green-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="aha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--amber-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
                     </defs>
                     <rect x="10" y="84" width="62" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.7"/>
                     <text x="41" y="101" text-anchor="middle" fill="var(--text-3)" font-size="9.5">client</text>
@@ -1153,14 +594,12 @@
                     <text x="310" y="195" fill="var(--text-4)" font-size="7.5" letter-spacing="0.03em">query path — zero cross-service calls at read time</text>
                   </svg>
                 </div>
-
                 <ul class="proj-bullets">
                   <li><strong>Event-driven read model</strong> — Recommendation Service consumes <code>created-book</code>, <code>updated-book</code>, <code>deleted-book</code>, <code>created-rating</code> via Kafka ECST; every query answered with zero synchronous calls to other services</li>
                   <li><strong>Embedding pipeline</strong> — replaced 13-dim genre vectors with LangChain4j AllMiniLmL6V2 384-dim embeddings + L2 normalization; ANN retrieval via HNSW index, re-ranked with 70/30 semantic/popularity blend</li>
                   <li><strong>Reactive gateway</strong> — WebFlux entry point centralizing JWT validation and Redis-backed rate limiting per route; built custom over Spring Cloud Gateway for direct pipeline control</li>
                   <li><strong>Architecture evolution</strong> — v1 (external Python ML, ~400ms) → v2 (in-JVM pgvector + ECST, ~100ms) → v3 (384-dim semantic embeddings, L2 normalization, API gateway layer)</li>
                 </ul>
-
                 <div class="proj-footer-tags">
                   <a class="proj-github-link" href="https://github.com/Luca5Eckert/VellumHub" target="_blank" rel="noopener">github ↗</a>
                   Java 21 · Spring Boot 3.4/4.0 · WebFlux · Kafka · pgvector · LangChain4j · Redis · Docker Compose
@@ -1170,11 +609,199 @@
           </div>
         </div>
 
-        <!-- [CHANGE 3] OpenIT — equalized depth -->
-        <div class="proj-item" id="proj-1">
+        <!-- ─── 02 Kairos ─── -->
+        <div class="proj-item" id="proj-1" data-accent="violet">
           <div class="proj-trigger" onclick="toggleProj(1)">
             <div class="proj-trigger-left">
               <span class="proj-num">02</span>
+              <div class="proj-title-wrap">
+                <div class="proj-name-line">
+                  <span class="proj-name">Kairos</span>
+                  <span class="proj-badge-violet">ACTIVE DEV</span>
+                </div>
+                <span class="proj-oneliner">Personal knowledge graph engine — HippoRAG 2 on the JVM</span>
+                <span class="proj-question">what changes when memory has structure you didn't build?</span>
+              </div>
+            </div>
+            <span class="proj-tags-collapsed">Neo4j · pgvector · ONNX</span>
+            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
+          </div>
+          <div class="proj-body">
+            <div class="proj-body-inner">
+              <div class="proj-content">
+                <p class="proj-tagline">
+                  You ingest notes, articles, highlights. Kairos reads them, extracts typed knowledge graph triples, and builds the conceptual structure behind your content — automatically. Retrieval is powered by <strong>HippoRAG 2</strong> (NeurIPS 2024): a neurobiologically inspired framework that treats Neo4j as an artificial hippocampal index, surfacing connections you never consciously made.
+                </p>
+
+                <div class="proj-metrics">
+                  <div class="proj-metric">
+                    <div class="proj-metric-label">RAG IMPROVEMENT</div>
+                    <div class="proj-metric-val v" id="k-rag">—</div>
+                    <div class="proj-metric-sub">multi-hop benchmarks<br>vs standard vector RAG</div>
+                  </div>
+                  <div class="proj-metric">
+                    <div class="proj-metric-label">COST VS ITERATIVE</div>
+                    <div class="proj-metric-val a" id="k-cost">—</div>
+                    <div class="proj-metric-sub">cheaper than iterative<br>multi-hop approaches</div>
+                  </div>
+                  <div class="proj-metric">
+                    <div class="proj-metric-label">PIPELINES</div>
+                    <div class="proj-metric-val g" id="k-pipes">—</div>
+                    <div class="proj-metric-sub">semantic + graph<br>parallel on ingest</div>
+                  </div>
+                </div>
+
+                <!-- Dual pipeline visualization -->
+                <div class="proj-pipeline">
+                  <div class="proj-pipeline-label">// dual-pipeline ingest architecture</div>
+                  <div style="margin-bottom:0.35rem; font-size:9px; color:var(--violet); letter-spacing:0.04em;">SEMANTIC PIPELINE</div>
+                  <div class="pipeline-track">
+                    <div class="pipeline-step violet">
+                      <span class="pipeline-step-name">chunker</span>
+                      sliding window<br>200 tok · 40 overlap
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step violet">
+                      <span class="pipeline-step-name">ONNX embed</span>
+                      all-MiniLM-L6-v2<br>in-JVM · no sidecar
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step violet">
+                      <span class="pipeline-step-name">pgvector</span>
+                      chunk vectors +<br>concept node vecs
+                    </div>
+                  </div>
+                  <div style="margin-top:0.7rem; margin-bottom:0.35rem; font-size:9px; color:var(--cyan); letter-spacing:0.04em;">GRAPH PIPELINE</div>
+                  <div class="pipeline-track">
+                    <div class="pipeline-step cyan">
+                      <span class="pipeline-step-name">LLM OpenIE</span>
+                      Gemini Flash<br>typed triple extraction
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step cyan">
+                      <span class="pipeline-step-name">Neo4j write</span>
+                      phrase nodes +<br>passage nodes
+                    </div>
+                    <div class="pipeline-arrow">→</div>
+                    <div class="pipeline-step cyan">
+                      <span class="pipeline-step-name">synonymy edges</span>
+                      cosine sim threshold<br>backprop↔backpropagation
+                    </div>
+                  </div>
+                </div>
+
+                <!-- HippoRAG retrieval comparison -->
+                <div class="retrieval-compare">
+                  <div class="retrieval-compare-label">// multi-hop retrieval benchmark — HippoRAG 2 vs alternatives</div>
+                  <div class="retrieval-row">
+                    <span class="retrieval-name">standard RAG</span>
+                    <div class="retrieval-bar-track"><div class="retrieval-bar-fill dim" id="rb-rag"></div></div>
+                    <span class="retrieval-pct">baseline</span>
+                  </div>
+                  <div class="retrieval-row">
+                    <span class="retrieval-name">iterative RAG</span>
+                    <div class="retrieval-bar-track"><div class="retrieval-bar-fill mid" id="rb-iter"></div></div>
+                    <span class="retrieval-pct">+12%&nbsp;expensive</span>
+                  </div>
+                  <div class="retrieval-row">
+                    <span class="retrieval-name">HippoRAG 2</span>
+                    <div class="retrieval-bar-track"><div class="retrieval-bar-fill top" id="rb-hippo"></div></div>
+                    <span class="retrieval-pct top">+20%&nbsp;10-30x cheaper</span>
+                  </div>
+                </div>
+
+                <!-- Architecture SVG -->
+                <div class="proj-arch">
+                  <div class="proj-arch-label">// query flow — HippoRAG 2 retrieval</div>
+                  <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
+                    <defs>
+                      <marker id="ahv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--violet-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="ahc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2A6668" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="ahg3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--green-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="aha3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--amber-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                    </defs>
+
+                    <!-- query input -->
+                    <rect x="8" y="82" width="68" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.7"/>
+                    <text x="42" y="97" text-anchor="middle" fill="var(--text-3)" font-size="9">query</text>
+                    <text x="42" y="107" text-anchor="middle" fill="var(--text-4)" font-size="7.5">natural language</text>
+                    <line x1="76" y1="97" x2="102" y2="97" stroke="var(--border2)" stroke-width="0.8" marker-end="url(#ahv)"/>
+
+                    <!-- embed -->
+                    <rect x="104" y="76" width="80" height="42" rx="2" fill="var(--surface)" stroke="var(--violet-dim)" stroke-width="0.7"/>
+                    <text x="144" y="93" text-anchor="middle" fill="var(--violet)" font-size="9.5" font-weight="500">ONNX embed</text>
+                    <text x="144" y="105" text-anchor="middle" fill="var(--text-4)" font-size="7.5">all-MiniLM-L6-v2</text>
+                    <text x="144" y="114" text-anchor="middle" fill="var(--text-4)" font-size="7.5">384-dim vector</text>
+
+                    <!-- two arrows out of embed -->
+                    <line x1="184" y1="90" x2="218" y2="68" stroke="var(--violet-dim)" stroke-width="0.7" marker-end="url(#ahv)"/>
+                    <line x1="184" y1="104" x2="218" y2="118" stroke="#2A6668" stroke-width="0.7" marker-end="url(#ahc)"/>
+
+                    <!-- pgvector anchor lookup -->
+                    <rect x="220" y="50" width="106" height="36" rx="2" fill="var(--bg2)" stroke="var(--violet-dim)" stroke-width="0.6"/>
+                    <text x="273" y="65" text-anchor="middle" fill="var(--violet)" font-size="9" font-weight="500">pgvector</text>
+                    <text x="273" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5">anchor lookup → seed nodes</text>
+                    <text x="273" y="86" text-anchor="middle" fill="var(--text-4)" font-size="7">+ dense candidate set B</text>
+
+                    <!-- neo4j PPR -->
+                    <rect x="220" y="104" width="106" height="44" rx="2" fill="var(--bg2)" stroke="#2A6668" stroke-width="0.7"/>
+                    <text x="273" y="120" text-anchor="middle" fill="var(--cyan)" font-size="9" font-weight="500">Neo4j</text>
+                    <text x="273" y="132" text-anchor="middle" fill="var(--text-4)" font-size="7.5">Personalized PageRank</text>
+                    <text x="273" y="141" text-anchor="middle" fill="var(--text-4)" font-size="7.5">seeded by anchor nodes</text>
+                    <text x="273" y="150" text-anchor="middle" fill="var(--text-4)" font-size="7">candidate set A</text>
+
+                    <!-- both to RRF -->
+                    <line x1="326" y1="68" x2="372" y2="92" stroke="var(--violet-dim)" stroke-width="0.7" marker-end="url(#ahv)"/>
+                    <line x1="326" y1="126" x2="372" y2="108" stroke="#2A6668" stroke-width="0.7" marker-end="url(#ahc)"/>
+
+                    <!-- RRF fusion -->
+                    <rect x="374" y="78" width="84" height="40" rx="2" fill="var(--surface)" stroke="var(--green-dim)" stroke-width="0.7"/>
+                    <text x="416" y="95" text-anchor="middle" fill="var(--green)" font-size="9.5" font-weight="500">RRF fusion</text>
+                    <text x="416" y="108" text-anchor="middle" fill="var(--text-4)" font-size="7.5">set A + set B → top-k</text>
+
+                    <!-- to summary -->
+                    <line x1="458" y1="98" x2="500" y2="98" stroke="var(--green-dim)" stroke-width="0.8" marker-end="url(#ahg3)"/>
+
+                    <!-- AI summary -->
+                    <rect x="502" y="68" width="110" height="60" rx="2" fill="var(--green-bg)" stroke="var(--green)" stroke-width="0.7"/>
+                    <text x="557" y="87" text-anchor="middle" fill="var(--green)" font-size="9.5" font-weight="500">AI summary</text>
+                    <text x="557" y="100" text-anchor="middle" fill="var(--green-dim)" font-size="7.5">Gemini Flash</text>
+                    <text x="557" y="112" text-anchor="middle" fill="var(--text-4)" font-size="7">grounded in your</text>
+                    <text x="557" y="121" text-anchor="middle" fill="var(--text-4)" font-size="7">content only</text>
+
+                    <!-- output -->
+                    <line x1="612" y1="98" x2="644" y2="98" stroke="var(--green-dim)" stroke-width="0.7" marker-end="url(#ahg3)"/>
+                    <rect x="646" y="84" width="46" height="28" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.6"/>
+                    <text x="669" y="101" text-anchor="middle" fill="var(--text-3)" font-size="8.5">result</text>
+
+                    <!-- PPR label -->
+                    <text x="260" y="168" fill="var(--text-4)" font-size="7.5" letter-spacing="0.03em">graph traversal propagates relevance across entire knowledge base in one step</text>
+                  </svg>
+                </div>
+
+                <ul class="proj-bullets">
+                  <li><strong>HippoRAG 2 retrieval</strong> — neurobiologically inspired: pgvector finds anchor nodes (like sensory cortex), Neo4j runs Personalized PageRank from those seeds (like hippocampal indexing), RRF fuses both candidate sets. Surfaces multi-hop connections — a query about "weight updates" reaches "backpropagation" via "gradient descent" even if the query vector isn't close to any single source</li>
+                  <li><strong>Dual ingest pipelines running in parallel</strong> — semantic: chunker (200 tok, 40 overlap) → ONNX all-MiniLM-L6-v2 in-JVM → pgvector; graph: Gemini Flash OpenIE → Neo4j typed triples (phrase nodes, passage nodes, context edges) + automatic synonymy edges where cosine similarity exceeds threshold</li>
+                  <li><strong>No Python sidecar</strong> — ONNX Runtime + DJL HuggingFace Tokenizers run <code>all-MiniLM-L6-v2</code> directly on the JVM. The model is a file, not a service. Eliminates cross-process overhead and keeps the architecture honest: one runtime, no hidden coupling</li>
+                  <li><strong>Hexagonal architecture</strong> — every external dependency (pgvector, Neo4j, Gemini Flash, ONNX) is accessed through a port interface. Migrating concept extraction from Gemini Flash to a local Ollama model requires changing one adapter, not the application layer</li>
+                  <li><strong>Graph View with D3.js</strong> — interactive force-directed visualization of the concept graph; node size by degree centrality; clicking a concept shows all sources referencing it and an AI-generated synthesis grounded exclusively in ingested content, never in model world knowledge</li>
+                  <li><strong>Synonymy edges</strong> — concept nodes whose embedding vectors exceed a cosine similarity threshold are automatically linked, so <code>backprop</code> and <code>backpropagation</code> are connected without manual normalization. The graph normalizes itself as it grows</li>
+                </ul>
+
+                <div class="proj-footer-tags">
+                  <a class="proj-github-link" href="https://github.com/Luca5Eckert" target="_blank" rel="noopener">github ↗</a>
+                  Java 21 · Spring WebFlux · ONNX Runtime · all-MiniLM-L6-v2 · PostgreSQL + pgvector · Neo4j · Gemini Flash · React 19 · D3.js · Docker Compose
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── 03 OpenIT ─── -->
+        <div class="proj-item" id="proj-2">
+          <div class="proj-trigger" onclick="toggleProj(2)">
+            <div class="proj-trigger-left">
+              <span class="proj-num">03</span>
               <div class="proj-title-wrap">
                 <div class="proj-name-line">
                   <span class="proj-name">OpenIT</span>
@@ -1184,19 +811,14 @@
               </div>
             </div>
             <span class="proj-tags-collapsed">WebFlux · MQTT · ESP32</span>
-            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 6l4 4 4-4"/>
-            </svg>
+            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg>
           </div>
-
           <div class="proj-body">
             <div class="proj-body-inner">
               <div class="proj-content">
                 <p class="proj-tagline">
                   Automated parking management system — ESP32 detects vehicle entry, Node-RED bridges MQTT to the backend, Spring WebFlux handles the reactive pipeline, Mercado Pago Checkout Pro processes payment, and the gate opens only after the webhook confirms. <strong>Six phases, zero human intervention.</strong>
                 </p>
-
-                <!-- Metrics -->
                 <div class="proj-metrics">
                   <div class="proj-metric">
                     <div class="proj-metric-label">FLOW PHASES</div>
@@ -1214,121 +836,75 @@
                     <div class="proj-metric-sub">WebFlux stream<br>payment status · no polling</div>
                   </div>
                 </div>
-
-                <!-- Architecture SVG — full 6-component flow including Node-RED -->
                 <div class="proj-arch">
                   <div class="proj-arch-label">// full system flow — entry to gate release</div>
                   <svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
-                      <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--border3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
-                      <marker id="ahc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#2A6668" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
-                      <marker id="aha2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--amber-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
-                      <marker id="ahg2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--green-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
+                      <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--border3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="ahc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2A6668" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="aha2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--amber-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                      <marker id="ahg2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="var(--green-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
                     </defs>
-
-                    <!-- Phase labels row -->
                     <text x="30" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">ENTRY</text>
                     <text x="148" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">ORCHESTRATION</text>
                     <text x="308" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">BACKEND</text>
                     <text x="508" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">PAYMENT</text>
                     <text x="618" y="14" fill="var(--text-4)" font-size="7" letter-spacing="0.06em">FRONTEND</text>
-
-                    <!-- ESP32 -->
                     <rect x="8" y="80" width="76" height="50" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.7"/>
                     <text x="46" y="101" text-anchor="middle" fill="var(--text-3)" font-size="9" font-weight="500">ESP32</text>
                     <text x="46" y="113" text-anchor="middle" fill="var(--text-4)" font-size="7.5">sensor detects</text>
                     <text x="46" y="123" text-anchor="middle" fill="var(--text-4)" font-size="7.5">unique code</text>
-
-                    <!-- MQTT broker -->
                     <rect x="104" y="88" width="68" height="34" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.6" stroke-dasharray="3 2"/>
                     <text x="138" y="107" text-anchor="middle" fill="var(--text-3)" font-size="8.5">MQTT broker</text>
                     <text x="138" y="117" text-anchor="middle" fill="var(--text-4)" font-size="7">public</text>
-
-                    <!-- Node-RED -->
                     <rect x="104" y="140" width="68" height="40" rx="2" fill="var(--surface)" stroke="var(--amber)" stroke-width="0.7"/>
                     <text x="138" y="157" text-anchor="middle" fill="var(--amber)" font-size="9" font-weight="500">Node-RED</text>
                     <text x="138" y="169" text-anchor="middle" fill="var(--amber-dim)" font-size="7.5">IoT orchestrator</text>
                     <text x="138" y="178" text-anchor="middle" fill="var(--text-4)" font-size="7">MQTT → HTTP</text>
-
-                    <!-- ESP32 → MQTT -->
                     <line x1="84" y1="100" x2="102" y2="100" stroke="var(--border2)" stroke-width="0.8" marker-end="url(#ah2)"/>
                     <text x="93" y="94" text-anchor="middle" fill="var(--text-4)" font-size="7">pub</text>
-
-                    <!-- MQTT → Node-RED -->
                     <line x1="138" y1="122" x2="138" y2="138" stroke="var(--border2)" stroke-width="0.7" marker-end="url(#ah2)"/>
-
-                    <!-- Backend box (two bounded contexts) -->
                     <rect x="192" y="60" width="150" height="140" rx="2" fill="var(--surface)" stroke="var(--border2)" stroke-width="0.6" stroke-dasharray="3 2"/>
                     <text x="267" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5" letter-spacing="0.05em">Spring Boot · WebFlux</text>
-
-                    <!-- access context -->
                     <rect x="202" y="84" width="130" height="42" rx="2" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="0.6"/>
                     <text x="267" y="100" text-anchor="middle" fill="var(--cyan)" font-size="8.5" font-weight="500">access context</text>
                     <text x="267" y="112" text-anchor="middle" fill="var(--text-4)" font-size="7">entry log · gate command · exit</text>
                     <text x="267" y="121" text-anchor="middle" fill="var(--text-4)" font-size="7">presentation · app · domain · infra</text>
-
-                    <!-- payment context -->
                     <rect x="202" y="136" width="130" height="42" rx="2" fill="var(--bg2)" stroke="var(--amber)" stroke-width="0.6"/>
                     <text x="267" y="152" text-anchor="middle" fill="var(--amber)" font-size="8.5" font-weight="500">payment context</text>
                     <text x="267" y="164" text-anchor="middle" fill="var(--text-4)" font-size="7">preference · webhook · SSE stream</text>
                     <text x="267" y="173" text-anchor="middle" fill="var(--text-4)" font-size="7">presentation · app · domain · infra</text>
-
-                    <!-- Node-RED → access context (entry) -->
                     <line x1="172" y1="160" x2="190" y2="115" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
                     <text x="175" y="133" fill="var(--text-4)" font-size="7">HTTP</text>
-
-                    <!-- Mercado Pago -->
                     <rect x="466" y="88" width="110" height="50" rx="2" fill="var(--bg2)" stroke="var(--amber)" stroke-width="0.7"/>
                     <text x="521" y="107" text-anchor="middle" fill="var(--amber)" font-size="9" font-weight="500">Mercado Pago</text>
                     <text x="521" y="119" text-anchor="middle" fill="var(--amber-dim)" font-size="7.5">Checkout Pro</text>
                     <text x="521" y="129" text-anchor="middle" fill="var(--text-4)" font-size="7">PIX · card · boleto</text>
-
-                    <!-- payment context → Mercado Pago (create preference) -->
                     <line x1="332" y1="152" x2="464" y2="112" stroke="var(--amber-dim)" stroke-width="0.7" marker-end="url(#aha2)"/>
                     <text x="392" y="122" text-anchor="middle" fill="var(--text-4)" font-size="7">preference</text>
-
-                    <!-- Mercado Pago → payment context (webhook) -->
                     <line x1="466" y1="128" x2="334" y2="162" stroke="var(--amber-dim)" stroke-width="0.7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
                     <text x="392" y="155" text-anchor="middle" fill="var(--text-4)" font-size="7">webhook</text>
-
-                    <!-- React frontend -->
                     <rect x="604" y="70" width="106" height="80" rx="2" fill="var(--bg2)" stroke="var(--cyan)" stroke-width="0.7"/>
                     <text x="657" y="92" text-anchor="middle" fill="var(--cyan)" font-size="9" font-weight="500">React / TS</text>
                     <text x="657" y="105" text-anchor="middle" fill="var(--text-3)" font-size="7.5">payment terminal</text>
                     <text x="657" y="117" text-anchor="middle" fill="var(--text-4)" font-size="7">SSE: poll payment</text>
                     <text x="657" y="127" text-anchor="middle" fill="var(--text-4)" font-size="7">status in real-time</text>
                     <text x="657" y="139" text-anchor="middle" fill="var(--text-4)" font-size="7">request gate open</text>
-
-                    <!-- payment context SSE → frontend -->
                     <line x1="332" y1="145" x2="602" y2="108" stroke="#2A6668" stroke-width="0.8" marker-end="url(#ahc2)"/>
                     <text x="468" y="118" text-anchor="middle" fill="var(--text-4)" font-size="7">SSE stream</text>
-
-                    <!-- frontend → access context (gate release) -->
                     <path d="M657 150 Q 657 210 267 205 Q 210 205 210 182" fill="none" stroke="var(--green-dim)" stroke-width="0.7" stroke-dasharray="2 2.5" marker-end="url(#ahg2)"/>
                     <text x="440" y="218" text-anchor="middle" fill="var(--text-4)" font-size="7">gate release — validated payment → Node-RED → MQTT → ESP32</text>
-
-                    <!-- MySQL -->
                     <rect x="266" y="28" width="80" height="24" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.6"/>
                     <text x="306" y="43" text-anchor="middle" fill="var(--text-3)" font-size="8">MySQL</text>
                     <line x1="267" y1="84" x2="295" y2="52" stroke="var(--border2)" stroke-width="0.5" stroke-dasharray="2 2"/>
                   </svg>
                 </div>
-
                 <ul class="proj-bullets">
-                  <li><strong>Node-RED as IoT orchestrator</strong> — bridges the MQTT broker to the Spring backend; on entry, subscribes to device events and calls <code>POST /access/entry</code> to persist the record; on gate release, receives <code>POST /open-gate</code> from the backend and publishes the open command back to the ESP32 via MQTT</li>
-                  <li><strong>Two DDD bounded contexts with Clean Architecture</strong> — <code>access</code> (entry/exit lifecycle, gate coordination) and <code>payment</code> (Mercado Pago Checkout Pro preference creation, webhook confirmation, SSE stream); each context structured across presentation → application → domain → infrastructure layers</li>
-                  <li><strong>WebFlux SSE for payment polling</strong> — instead of the frontend polling REST every N seconds, the backend holds a reactive SSE connection per payment ID and pushes <code>paid: true</code> the moment the Mercado Pago webhook lands — chosen over WebSocket because the stream is unidirectional and stateless from the server side</li>
-                  <li><strong>End-to-end in a team of 3</strong> — full software responsibility: ESP32 firmware, MQTT topology, Node-RED flows, reactive backend, payment integration, and React/TypeScript terminal</li>
+                  <li><strong>Node-RED as IoT orchestrator</strong> — bridges MQTT broker to Spring backend; on entry subscribes to device events and calls <code>POST /access/entry</code>; on gate release receives <code>POST /open-gate</code> and publishes back to ESP32 via MQTT</li>
+                  <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (entry/exit lifecycle, gate coordination) and <code>payment</code> (Mercado Pago Checkout Pro, webhook confirmation, SSE stream); each with 4-layer clean architecture</li>
+                  <li><strong>WebFlux SSE for payment status</strong> — backend holds a reactive SSE connection per payment ID and pushes <code>paid: true</code> the moment the Mercado Pago webhook lands; no polling, unidirectional, stateless from server side</li>
+                  <li><strong>End-to-end in a team of 3</strong> — ESP32 firmware, MQTT topology, Node-RED flows, reactive backend, payment integration, and React/TypeScript terminal</li>
                 </ul>
-
                 <div class="proj-footer-tags">
                   <a class="proj-github-link" href="https://github.com/Luca5Eckert/OpenIt" target="_blank" rel="noopener">github ↗</a>
                   Java 21 · Spring Boot 3.5 · WebFlux · Node-RED · MQTT · SSE · Mercado Pago SDK · React 19 · TypeScript · MySQL · ESP32 · Docker Compose
@@ -1338,127 +914,15 @@
           </div>
         </div>
 
-        <!-- [CHANGE 3] Vinculo — equalized depth -->
-        <div class="proj-item" id="proj-2">
-          <div class="proj-trigger" onclick="toggleProj(2)">
-            <div class="proj-trigger-left">
-              <span class="proj-num">03</span>
-              <div class="proj-title-wrap">
-                <div class="proj-name-line">
-                  <span class="proj-name">Vinculo</span>
-                </div>
-                <span class="proj-oneliner">Graph-native social network — Neo4j as primary data model</span>
-                <span class="proj-question">what changes when you stop pretending a social graph is relational data?</span>
-              </div>
-            </div>
-            <span class="proj-tags-collapsed">Java 21 · Neo4j</span>
-            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 6l4 4 4-4"/>
-            </svg>
-          </div>
-
-          <div class="proj-body">
-            <div class="proj-body-inner">
-              <div class="proj-content">
-                <p class="proj-tagline">
-                  Social network where the graph is the domain model, not a performance optimization. The design question: <strong>what does the data layer look like when relationships are first-class citizens?</strong>
-                </p>
-
-                <!-- Metrics -->
-                <div class="proj-metrics">
-                  <div class="proj-metric">
-                    <div class="proj-metric-label">CONNECTION TYPES</div>
-                    <div class="proj-metric-val g">9</div>
-                    <div class="proj-metric-sub">weighted · graph-native<br>no join tables</div>
-                  </div>
-                  <div class="proj-metric">
-                    <div class="proj-metric-label">HEX MODULES</div>
-                    <div class="proj-metric-val a">6</div>
-                    <div class="proj-metric-sub">domain · application<br>infrastructure isolated</div>
-                  </div>
-                  <div class="proj-metric">
-                    <div class="proj-metric-label">STATE MACHINE</div>
-                    <div class="proj-metric-val b">3</div>
-                    <div class="proj-metric-sub">PENDING → ACCEPTED<br>or REJECTED</div>
-                  </div>
-                </div>
-
-                <!-- Architecture SVG -->
-                <div class="proj-arch">
-                  <div class="proj-arch-label">// hexagonal architecture + graph model</div>
-                  <svg viewBox="0 0 620 170" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
-                    <defs>
-                      <marker id="ah3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--border3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
-                      <marker id="ahb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                      </marker>
-                    </defs>
-
-                    <!-- REST in -->
-                    <rect x="10" y="65" width="70" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width="0.7"/>
-                    <text x="45" y="83" text-anchor="middle" fill="var(--text-3)" font-size="9">REST API</text>
-                    <line x1="80" y1="80" x2="116" y2="80" stroke="var(--border2)" stroke-width="0.8" marker-end="url(#ah3)"/>
-
-                    <!-- Hexagonal layers -->
-                    <!-- infrastructure layer (outermost) -->
-                    <rect x="118" y="20" width="360" height="130" rx="3" fill="transparent" stroke="var(--border2)" stroke-width="0.6" stroke-dasharray="4 3"/>
-                    <text x="138" y="38" fill="var(--text-4)" font-size="7.5" letter-spacing="0.05em">infrastructure</text>
-
-                    <!-- application layer -->
-                    <rect x="138" y="44" width="320" height="96" rx="2" fill="var(--surface)" stroke="var(--border2)" stroke-width="0.6" stroke-dasharray="3 2"/>
-                    <text x="158" y="60" fill="var(--text-4)" font-size="7.5" letter-spacing="0.05em">application</text>
-
-                    <!-- domain layer (core) -->
-                    <rect x="220" y="64" width="170" height="62" rx="2" fill="var(--bg2)" stroke="var(--blue)" stroke-width="0.8"/>
-                    <text x="305" y="82" text-anchor="middle" fill="var(--blue)" font-size="9.5" font-weight="500">domain</text>
-                    <text x="305" y="96" text-anchor="middle" fill="var(--text-3)" font-size="8">connection state machine</text>
-                    <text x="305" y="108" text-anchor="middle" fill="var(--text-4)" font-size="7.5">Strategy · 9 connection types</text>
-                    <text x="305" y="119" text-anchor="middle" fill="var(--text-4)" font-size="7.5">virtual threads (Java 21)</text>
-
-                    <!-- Arrow from application to domain -->
-                    <line x1="220" y1="95" x2="200" y2="95" stroke="var(--blue)" stroke-width="0.7" opacity="0.4"/>
-
-                    <!-- Neo4j -->
-                    <rect x="500" y="55" width="100" height="50" rx="2" fill="var(--bg2)" stroke="var(--blue)" stroke-width="0.7"/>
-                    <text x="550" y="76" text-anchor="middle" fill="var(--blue)" font-size="9.5" font-weight="500">Neo4j 5</text>
-                    <text x="550" y="89" text-anchor="middle" fill="var(--text-3)" font-size="8">graph DB</text>
-                    <text x="550" y="100" text-anchor="middle" fill="var(--text-4)" font-size="7.5">Testcontainers</text>
-                    <line x1="478" y1="80" x2="498" y2="80" stroke="var(--blue)" stroke-width="0.8" stroke-dasharray="2 2" marker-end="url(#ahb)"/>
-
-                    <!-- Labels -->
-                    <text x="160" y="120" fill="var(--text-4)" font-size="7.5">use cases · ports</text>
-                    <text x="134" y="155" fill="var(--text-4)" font-size="7.5">adapters · repositories · Spring Security · JWT</text>
-                  </svg>
-                </div>
-
-                <ul class="proj-bullets">
-                  <li>Chose Neo4j over relational to natively represent <strong>9 weighted connection types</strong> — in a relational DB this would require join tables and recursive CTEs; in Neo4j it's a first-class traversal</li>
-                  <li>Connection requests modeled as a state machine (PENDING → ACCEPTED/REJECTED) via the <strong>Strategy pattern</strong> for polymorphic handling per connection type — no if-chains</li>
-                  <li>Structured across 6 hexagonal architecture modules — <code>domain</code>, <code>application</code>, <code>infrastructure</code> cleanly separated; Java 21 virtual threads for high-concurrency I/O</li>
-                  <li>Domain logic validated against real Neo4j instances via <strong>Testcontainers</strong> — no mocks on the persistence boundary</li>
-                </ul>
-
-                <div class="proj-footer-tags">
-                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/Vinculo" target="_blank" rel="noopener">github ↗</a>
-                  Java 21 · Neo4j 5 · Spring Boot 4 · Hexagonal Architecture · JUnit 5 · Testcontainers
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- ── [CHANGE 2] INTERESTS — moved after projects ── -->
+    <!-- ── INTERESTS ── -->
     <section class="section reveal">
       <div class="sec-head">
         <span class="sec-marker">##</span>
         <span class="sec-title">INTERESTS</span>
       </div>
-
       <div class="interests-grid">
         <div class="interest-tile" data-color="green">
           <span class="interest-icon">→</span>
@@ -1473,34 +937,21 @@
         <div class="interest-tile" data-color="cyan">
           <span class="interest-icon">∩</span>
           <div class="interest-title">ML/backend intersection</div>
-          <div class="interest-sub">vector search, embeddings, recommendations on the JVM</div>
+          <div class="interest-sub">vector search, knowledge graphs, retrieval systems on the JVM</div>
         </div>
         <div class="interest-tile" data-color="muted">
           <span class="interest-icon">Σ</span>
           <div class="interest-title">Algorithms & data structures</div>
-          <div class="interest-sub">HNSW indexing, graph traversal, ANN retrieval</div>
+          <div class="interest-sub">HNSW indexing, PageRank, graph traversal, ANN retrieval</div>
         </div>
       </div>
-
       <div class="stack-section">
         <p class="stack-label">// stack</p>
         <table class="stack-table">
-          <tr>
-            <td>languages</td>
-            <td><span class="tag">Java</span> · TypeScript · C · Python · SQL</td>
-          </tr>
-          <tr>
-            <td>backend</td>
-            <td>Spring Boot · WebFlux · Kafka · Node.js</td>
-          </tr>
-          <tr>
-            <td>data</td>
-            <td>PostgreSQL · pgvector · Neo4j · Redis</td>
-          </tr>
-          <tr>
-            <td>infra</td>
-            <td>Docker · GitHub Actions</td>
-          </tr>
+          <tr><td>languages</td><td><span class="tag">Java</span> · TypeScript · C · Python · SQL</td></tr>
+          <tr><td>backend</td><td>Spring Boot · WebFlux · Kafka · Node.js</td></tr>
+          <tr><td>data</td><td>PostgreSQL · pgvector · Neo4j · Redis</td></tr>
+          <tr><td>infra</td><td>Docker · GitHub Actions</td></tr>
         </table>
       </div>
     </section>
@@ -1511,7 +962,6 @@
         <span class="sec-marker">##</span>
         <span class="sec-title">EXPERIENCE</span>
       </div>
-
       <div class="exp-row">
         <div>
           <p class="exp-company">WEG S.A.</p>
@@ -1520,7 +970,6 @@
         </div>
         <div class="exp-date">Aug 2024 – Jul 2026<br>Jaraguá do Sul, BR</div>
       </div>
-
       <ul class="exp-list">
         <li>Architected backend of InfoWEG (class-wide Scrum project) — REST API structure, domain model, and module boundaries in Java + Spring Boot + MySQL</li>
         <li>Engineered full software layer of OpenIT (team of 3) — reactive backend, React/TypeScript frontend, ESP32 hardware integration over MQTT, real-time SSE</li>
@@ -1528,7 +977,7 @@
       </ul>
     </section>
 
-    <!-- ── [CHANGE 4] CONTACT — visible section before footer ── -->
+    <!-- ── CONTACT ── -->
     <section class="section reveal">
       <div class="sec-head">
         <span class="sec-marker">##</span>
@@ -1583,11 +1032,10 @@
           timeZone: 'America/Sao_Paulo'
         }) + ' BRT';
       }
-      tick();
-      setInterval(tick, 1000);
+      tick(); setInterval(tick, 1000);
     })();
 
-    /* ── Footer last updated ── */
+    /* ── Footer ── */
     (function () {
       const el = document.getElementById('footer-updated');
       if (el) {
@@ -1600,10 +1048,7 @@
     (function () {
       const obs = new IntersectionObserver((entries) => {
         entries.forEach((e, i) => {
-          if (e.isIntersecting) {
-            setTimeout(() => e.target.classList.add('in'), i * 60);
-            obs.unobserve(e.target);
-          }
+          if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 60); obs.unobserve(e.target); }
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
       document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
@@ -1611,7 +1056,8 @@
 
     /* ── Project accordion ── */
     let activeProj = 0;
-    let metricsAnimated = false;
+    let vellumAnimated = false;
+    let kairosAnimated = false;
 
     function toggleProj(idx) {
       const items = document.querySelectorAll('.proj-item');
@@ -1623,23 +1069,16 @@
         window.scrollTo({ top: scrollY, behavior: 'instant' });
         return;
       }
-
       if (activeProj >= 0) items[activeProj].classList.remove('open');
-
       items[idx].classList.add('open');
       activeProj = idx;
+      requestAnimationFrame(() => { window.scrollTo({ top: scrollY, behavior: 'instant' }); });
 
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: scrollY, behavior: 'instant' });
-      });
-
-      if (idx === 0 && !metricsAnimated) {
-        setTimeout(() => animateVellum(), 200);
-        metricsAnimated = true;
-      }
+      if (idx === 0 && !vellumAnimated) { setTimeout(() => animateVellum(), 200); vellumAnimated = true; }
+      if (idx === 1 && !kairosAnimated) { setTimeout(() => animateKairos(), 200); kairosAnimated = true; }
     }
 
-    /* ── Animate VellumHub metrics ── */
+    /* ── VellumHub metrics ── */
     function animateCount(id, target, suffix, duration) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -1657,7 +1096,6 @@
       animateCount('m-latency', 75, '%↓', 1100);
       animateCount('m-dims', 384, '', 1300);
       animateCount('m-svcs', 4, '', 800);
-
       setTimeout(() => {
         const v1 = document.getElementById('lf-v1');
         const v2 = document.getElementById('lf-v2');
@@ -1668,13 +1106,43 @@
       }, 100);
     }
 
-    /* ── Trigger metrics on load if VellumHub already open ── */
+    /* ── Kairos metrics ── */
+    function animateKairos() {
+      animateCount('k-rag', 20, '%↑', 1100);
+
+      /* cost counter — "10-30x" */
+      const costEl = document.getElementById('k-cost');
+      if (costEl) {
+        let frame = 0;
+        const frames = ['10x', '14x', '18x', '22x', '26x', '30x', '10-30x'];
+        const iv = setInterval(() => {
+          costEl.textContent = frames[frame % frames.length];
+          frame++;
+          if (frame >= frames.length) clearInterval(iv);
+        }, 140);
+      }
+
+      animateCount('k-pipes', 2, '', 700);
+
+      /* retrieval bars */
+      setTimeout(() => {
+        const rb = document.getElementById('rb-rag');
+        const ri = document.getElementById('rb-iter');
+        const rh = document.getElementById('rb-hippo');
+        if (rb) rb.style.width = '55%';
+        if (ri) ri.style.width = '72%';
+        if (rh) rh.style.width = '95%';
+      }, 150);
+    }
+
+    /* ── Trigger metrics on load if proj already open ── */
     window.addEventListener('load', () => {
-      const vellum = document.getElementById('proj-0');
-      if (vellum && vellum.classList.contains('open') && !metricsAnimated) {
-        setTimeout(() => { animateVellum(); metricsAnimated = true; }, 800);
+      const p0 = document.getElementById('proj-0');
+      if (p0 && p0.classList.contains('open') && !vellumAnimated) {
+        setTimeout(() => { animateVellum(); vellumAnimated = true; }, 800);
       }
     });
   </script>
+
 </body>
 </html>

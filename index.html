@@ -976,12 +976,12 @@
                   <div class="lat-row">
                     <span class="lat-v">v1</span>
                     <div class="lat-track"><div class="lat-fill r" id="lf-v1"></div></div>
-                    <span class="lat-ms">~400ms · external Python ML service</span>
+                    <span class="lat-ms">~300–500ms · external Python ML service</span>
                   </div>
                   <div class="lat-row">
                     <span class="lat-v">v2</span>
                     <div class="lat-track"><div class="lat-fill a" id="lf-v2"></div></div>
-                    <span class="lat-ms">~100ms · in-JVM pgvector + ECST</span>
+                    <span class="lat-ms">~80–120ms · in-JVM pgvector + ECST</span>
                   </div>
                   <div class="lat-row">
                     <span class="lat-v">v3</span>
@@ -1027,7 +1027,7 @@
                     <rect x="372" y="74" width="74" height="72" rx="2" fill="#111110" stroke="#111110" stroke-width=".7" stroke-dasharray="3 2"/>
                     <text x="409" y="102" text-anchor="middle" fill="#F4F4F0" font-size="10" font-weight="500">kafka</text>
                     <text x="409" y="116" text-anchor="middle" fill="#BCBCB4" font-size="8.5">ECST</text>
-                    <text x="409" y="130" text-anchor="middle" fill="#BCBCB4" font-size="8">4 topics</text>
+                    <text x="409" y="130" text-anchor="middle" fill="#BCBCB4" font-size="8">7 topics</text>
                     <line x1="340" y1="96" x2="370" y2="104" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
                     <line x1="340" y1="136" x2="370" y2="136" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
                     <line x1="446" y1="110" x2="486" y2="110" stroke="var(--border3)" stroke-width=".9" marker-end="url(#ahg)"/>
@@ -1043,10 +1043,10 @@
                 </div>
 
                 <ul class="bullet-list">
-                  <li><strong>ECST read model</strong> — Recommendation Service consumes <code>created-book</code>, <code>updated-book</code>, <code>deleted-book</code>, <code>created-rating</code> from Kafka. All query-time data is local. The constraint is a design invariant, not a performance optimization</li>
+                  <li><strong>ECST read model</strong> — Recommendation Service consumes Kafka events like <code>created-book</code>, <code>updated-book</code>, <code>deleted-book</code>, <code>created-rating</code>, <code>create_user_preference</code>, <code>updated-progress</code>, and <code>user-reaction-changed</code>. All query-time data is local. The constraint is a design invariant, not a performance optimization</li>
                   <li><strong>Embedding pipeline</strong> — replaced 13-dim genre vectors with LangChain4j <code>AllMiniLmL6V2</code> 384-dim embeddings, L2-normalized before storage. ANN retrieval via HNSW index, re-ranked with 70/30 semantic/popularity blend</li>
                   <li><strong>Reactive gateway</strong> — WebFlux entry point with centralized JWT validation and Redis-backed per-route rate limiting. Built from scratch rather than layering on Spring Cloud Gateway to retain direct pipeline control</li>
-                  <li><strong>Latency evolution</strong> — v1 used an external Python ML service (~400ms); v2 brought retrieval in-JVM with pgvector (~100ms). The gain came from eliminating the cross-process hop. v3 adds 384-dim semantic embeddings — final latency not yet published</li>
+                  <li><strong>Latency evolution</strong> — v1 used an external Python ML service (~300–500ms); v2 brought retrieval in-JVM with pgvector (~80–120ms). The gain came from eliminating the cross-process hop. v3 adds 384-dim semantic embeddings — final latency not yet published</li>
                   <li><strong>Role</strong> — independent project outside WEG work; solo architecture and implementation across event model, retrieval pipeline, gateway design, and infrastructure composition</li>
                 </ul>
 
@@ -1238,7 +1238,7 @@
 
                 <div class="proj-footer-tags">
                   <a class="proj-github-link" href="https://github.com/Luca5Eckert/Kairos" target="_blank" rel="noopener">repository ↗</a>
-                  Java 21 · Spring WebFlux · ONNX Runtime · all-MiniLM-L6-v2 · PostgreSQL / pgvector · Neo4j · Gemini Flash · React 19 · D3.js · Docker Compose
+                  Java 21 · Spring Boot 4.0.5 · Spring WebFlux · ONNX Runtime · all-MiniLM-L6-v2 · PostgreSQL / pgvector · Neo4j · Gemini Flash · React 19 · D3.js · Docker Compose
                 </div>
               </div>
             </div>

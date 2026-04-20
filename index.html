@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lucas Eckert — Backend Engineer</title>
+  <title>Lucas Eckert — Backend Developer</title>
   <meta name="description"
-    content="Backend Engineer — JVM, Event-Driven Systems, Retrieval Architecture. At WEG S.A. building microservices in Java 21, Kafka, and WebFlux." />
+    content="Backend Developer — JVM, Event-Driven Systems, Retrieval Architecture. Systems Analysis and Development apprentice at WEG S.A.; personal projects built outside work, except OpenIT (team of three)." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -874,7 +874,7 @@
 
       <h1 class="hero-name">Lucas<br><em>Eckert</em></h1>
 
-      <h2 class="hero-headline">Backend Engineer — JVM, Event-Driven Systems, Retrieval Architecture</h2>
+      <h2 class="hero-headline">Backend Developer — JVM, Event-Driven Systems, Retrieval Architecture</h2>
 
       <nav class="hero-links" aria-label="Primary links">
         <a href="#projects">projects</a>
@@ -887,14 +887,14 @@
       </nav>
 
       <p class="hero-sub">
-        At WEG S.A. building microservices in Java 21, Kafka, and WebFlux.
+        Systems Analysis and Development apprentice at WEG S.A., building microservices in Java 21, Kafka, and WebFlux.
         Focused on systems with explicit state flow, clear service boundaries,
         and retrieval architectures that hold up under real constraints.
       </p>
 
       <div class="hero-meta">
         <span style="color:var(--text-4)">//</span>
-        <span>WEG S.A.</span><span class="hero-meta-sep">·</span>
+        <span>WEG S.A. (Apprenticeship)</span><span class="hero-meta-sep">·</span>
         <span>Java 21</span><span class="hero-meta-sep">·</span>
         <span>Kafka</span><span class="hero-meta-sep">·</span>
         <span>WebFlux</span><span class="hero-meta-sep">·</span>
@@ -905,17 +905,17 @@
       <div class="bio-block">
         <div class="bio-prefix">const bio =</div>
         <p class="bio-text">
-          Backend developer at <strong>WEG S.A.</strong> focused on event-driven architecture,
+          Backend developer and Systems Analysis and Development apprentice at <strong>WEG S.A.</strong>, focused on event-driven architecture,
           distributed system design, and the gap between a correct-looking design and one that stays
           correct under load. I care about where state lives, how it moves, and what happens when it
-          doesn't arrive. Side projects explore where backend architecture and retrieval systems
+          doesn't arrive. Most projects here are built independently outside work; <strong>OpenIT</strong> was delivered in a team of three during training. Side projects explore where backend architecture and retrieval systems
           intersect — knowledge graphs, vector search, graph-native query execution, and running ML
           inference on the JVM <strong>without a Python sidecar</strong>.
         </p>
       </div>
 
       <p class="now-line">
-        ↳ WEG S.A. &nbsp;·&nbsp; building Kairos &nbsp;·&nbsp;
+        ↳ WEG S.A. apprenticeship &nbsp;·&nbsp; building projects outside work &nbsp;·&nbsp;
         reading <em>Designing Data-Intensive Applications</em>
       </p>
 
@@ -1047,7 +1047,7 @@
                   <li><strong>Embedding pipeline</strong> — replaced 13-dim genre vectors with LangChain4j <code>AllMiniLmL6V2</code> 384-dim embeddings, L2-normalized before storage. ANN retrieval via HNSW index, re-ranked with 70/30 semantic/popularity blend</li>
                   <li><strong>Reactive gateway</strong> — WebFlux entry point with centralized JWT validation and Redis-backed per-route rate limiting. Built from scratch rather than layering on Spring Cloud Gateway to retain direct pipeline control</li>
                   <li><strong>Latency evolution</strong> — v1 used an external Python ML service (~400ms); v2 brought retrieval in-JVM with pgvector (~100ms). The gain came from eliminating the cross-process hop. v3 adds 384-dim semantic embeddings — final latency not yet published</li>
-                  <li><strong>Role</strong> — solo architecture and implementation across event model, retrieval pipeline, gateway design, and infrastructure composition</li>
+                  <li><strong>Role</strong> — independent project outside WEG work; solo architecture and implementation across event model, retrieval pipeline, gateway design, and infrastructure composition</li>
                 </ul>
 
                 <div class="proj-footer-tags">
@@ -1233,7 +1233,7 @@
                   <li><strong>No Python sidecar</strong> — ONNX Runtime + DJL HuggingFace Tokenizers run <code>all-MiniLM-L6-v2</code> directly on the JVM. The model is a file, not a service. One runtime, no cross-process overhead, no hidden coupling</li>
                   <li><strong>Synonymy edges</strong> — concept nodes whose embedding vectors exceed a cosine similarity threshold are automatically linked during ingest. <code>backprop</code> and <code>backpropagation</code> are connected without manual normalization; the graph normalizes itself as it grows</li>
                   <li><strong>Hexagonal architecture</strong> — pgvector, Neo4j, Gemini Flash, and ONNX each sit behind a port interface. Swapping concept extraction from Gemini Flash to a local Ollama model is an adapter change, not an application-layer change</li>
-                  <li><strong>Role</strong> — solo system design across ingestion pipelines, graph modeling, retrieval architecture, and D3.js visualization direction</li>
+                  <li><strong>Role</strong> — independent project outside WEG work; solo system design across ingestion pipelines, graph modeling, retrieval architecture, and D3.js visualization direction</li>
                 </ul>
 
                 <div class="proj-footer-tags">
@@ -1367,7 +1367,7 @@
                   <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (entry detection, gate coordination, exit logging) and <code>payment</code> (Mercado Pago Checkout Pro preference creation, webhook receipt, SSE delivery); each with four-layer clean architecture. Context boundaries defined before any code was written</li>
                   <li><strong>Node-RED as IoT orchestrator</strong> — subscribes to MQTT device events, calls <code>POST /access/entry</code> on entry, and publishes gate-open commands back to ESP32 via MQTT after <code>POST /open-gate</code> is received from the backend. The backend does not talk to hardware directly</li>
                   <li><strong>SSE for payment status</strong> — backend holds a reactive SSE connection per payment ID and pushes confirmation the moment the Mercado Pago webhook lands. No polling, no client retry loop — gate release happens on confirmed event receipt</li>
-                  <li><strong>Role</strong> — team project; hands-on work across reactive backend, MQTT / Node-RED integration flow, and real-time status delivery</li>
+                  <li><strong>Role</strong> — team project (3 people) in the training program; hands-on work across reactive backend, MQTT / Node-RED integration flow, and real-time status delivery</li>
                 </ul>
 
                 <div class="proj-footer-tags">
@@ -1391,8 +1391,8 @@
       <div class="exp-layout">
         <div class="exp-left">
           <div class="exp-company">WEG S.A.</div>
-          <div class="exp-role">Backend Developer</div>
-          <div class="exp-context">Industrial Learning Program<br>CentroWEG / SENAI</div>
+          <div class="exp-role">Backend Developer Apprentice</div>
+          <div class="exp-context">Systems Analysis and Development Apprenticeship<br>Industrial Learning Program · CentroWEG / SENAI</div>
           <div class="exp-date">Aug 2024 — Jul 2026<br>Jaraguá do Sul, BR</div>
         </div>
         <div class="exp-right">
@@ -1403,7 +1403,7 @@
           <ul class="exp-points">
             <li>Defined backend boundaries for <strong>InfoWEG</strong>, including REST API structure, domain modeling, and module organization in Java, Spring Boot, and MySQL for a class-wide Scrum project</li>
             <li>Built backend systems with emphasis on <strong>clear service responsibilities, explicit state flow, and maintainable module design</strong> — treating architecture as a first-class deliverable, not an afterthought</li>
-            <li>Delivered <strong>OpenIT</strong> in a team of three — reactive Spring backend, React / TypeScript frontend, MQTT-based ESP32 integration, real-time payment confirmation via SSE, across two DDD bounded contexts</li>
+            <li>Delivered <strong>OpenIT</strong> in a training-program team of three — reactive Spring backend, React / TypeScript frontend, MQTT-based ESP32 integration, real-time payment confirmation via SSE, across two DDD bounded contexts</li>
             <li>Worked on software crossing multiple system boundaries — <strong>device events, backend coordination, payment confirmation, and UI feedback</strong> — with attention to how those parts behave as one coherent system</li>
             <li>Contributed to engineering quality through <strong>code reviews, CI/CD workflows in GitHub Actions, and development practices shaped by Scrum and Kanban</strong></li>
           </ul>
@@ -1454,7 +1454,7 @@
 
       <div class="contact-statement">
         <p class="contact-prose">
-          Open to backend engineering roles, distributed systems work, and teams
+          Open to backend development roles, distributed systems work, and teams
           that care about architecture, judgment, and implementation depth.
         </p>
         <div class="contact-ctas">
@@ -1477,7 +1477,7 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-name">Lucas Eckert · Backend Engineer · Jaraguá do Sul, Brazil</div>
+        <div class="footer-name">Lucas Eckert · Backend Developer · Jaraguá do Sul, Brazil</div>
         <div class="footer-updated">// updated April 2026</div>
       </div>
       <div class="footer-links">

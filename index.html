@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,14 +44,12 @@
       --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
       --font-disp: 'Cormorant Garamond', Georgia, serif;
 
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     /* === RESET === */
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -64,18 +61,9 @@
       scrollbar-color: var(--border3) var(--bg2);
     }
 
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg2);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--border3);
-      border-radius: 2px;
-    }
+    ::-webkit-scrollbar       { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--border3); border-radius: 2px; }
 
     /* === BASE === */
     body {
@@ -102,113 +90,93 @@
     main {
       max-width: 800px;
       margin: 0 auto;
-      padding: 5rem 2rem 4rem;
+      padding: 5.5rem 2rem 4rem;
+    }
+
+    /* bullet-list utility (shared by projects and experience) */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+      padding: 0;
+    }
+
+    .bullet-list li {
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.75;
+      padding-left: 1.3rem;
+      position: relative;
+    }
+
+    .bullet-list li::before {
+      content: '//';
+      position: absolute;
+      left: 0;
+      color: var(--text-4);
+      font-size: 9.5px;
+      top: 4px;
+    }
+
+    .bullet-list li strong { color: var(--text); font-weight: 500; }
+
+    .bullet-list code {
+      color: var(--text-2);
+      font-size: 0.88em;
+      background: var(--surface);
+      padding: 1px 4px;
     }
 
     /* === COMPONENTS === */
 
-    /* -- statusbar -- */
-    #status-bar {
+    /* -- site-nav -- */
+    #site-nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(250, 250, 248, 0.94);
+      background: rgba(250, 250, 248, 0.95);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 2rem;
-      height: 30px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .nav-name {
+      font-family: var(--font-disp);
+      font-size: 15px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
       font-size: 10px;
       color: var(--text-3);
-      letter-spacing: 0.05em;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 150ms;
     }
 
-    .sb-left {
-      display: flex;
-      align-items: center;
-      gap: 1.4rem;
-    }
-
-    .sb-right {
-      display: flex;
-      align-items: center;
-      gap: 1.4rem;
-    }
-
-    .sb-dot {
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--text-3);
-      margin-right: 5px;
-      animation: pulse-dot 2.8s ease-in-out infinite;
-    }
-
-    .sb-lang {
-      color: var(--text-2);
-    }
-
-    .sb-file {
-      color: var(--text-2);
-    }
-
-    .sb-project {
-      color: var(--text-3);
-    }
-
-    .sb-sep {
-      color: var(--text-4);
-    }
+    .nav-links a:hover { color: var(--text); }
 
     /* -- hero -- */
     #hero {
       padding-bottom: 4rem;
-    }
-
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1.6rem;
-      opacity: 0;
-      animation: fade-up 600ms var(--ease-out) forwards 0ms;
-    }
-
-    .eyebrow-prefix {
-      font-size: 10px;
-      color: var(--text-4);
-    }
-
-    .eyebrow-text {
-      font-size: 10px;
-      color: var(--text-3);
-      letter-spacing: 0.04em;
-    }
-
-    .eyebrow-cursor {
-      display: inline-block;
-      width: 6px;
-      height: 12px;
-      background: var(--text-3);
-      opacity: .7;
-      margin-left: 2px;
-      animation: blink 1.1s step-end infinite;
-      vertical-align: middle;
-    }
-
-    .hero-kicker {
-      font-size: 11px;
-      color: var(--text-3);
-      letter-spacing: 0.03em;
-      margin-bottom: 1.4rem;
-      opacity: 0;
-      animation: fade-up 600ms var(--ease-out) forwards 80ms;
+      margin-top: 2.5rem;
     }
 
     .hero-name {
@@ -219,7 +187,7 @@
       color: var(--text);
       letter-spacing: -0.03em;
       line-height: 0.88;
-      margin-bottom: 1.8rem;
+      margin-bottom: 2.4rem;
       opacity: 0;
       animation: fade-up 800ms var(--ease-out) forwards 160ms;
     }
@@ -235,11 +203,44 @@
       font-weight: 500;
       color: var(--text);
       line-height: 1.4;
-      margin-bottom: 0.7rem;
+      margin-bottom: 1.6rem;
       max-width: 680px;
       opacity: 0;
       animation: fade-up 700ms var(--ease-out) forwards 240ms;
     }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0;
+      font-size: 11.5px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fade-up 600ms var(--ease-out) forwards 320ms;
+    }
+
+    .hero-links a {
+      color: var(--text-3);
+      text-decoration: none;
+      position: relative;
+      transition: color 150ms;
+    }
+
+    .hero-links a:hover { color: var(--text); }
+
+    .hero-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 0; height: 1px;
+      background: var(--text);
+      transition: width 160ms;
+    }
+
+    .hero-links a:hover::after { width: 100%; }
+
+    .lsep { color: var(--text-4); margin: 0 0.9rem; }
 
     .hero-sub {
       font-size: 12.5px;
@@ -248,7 +249,7 @@
       max-width: 680px;
       margin-bottom: 1.8rem;
       opacity: 0;
-      animation: fade-up 700ms var(--ease-out) forwards 320ms;
+      animation: fade-up 700ms var(--ease-out) forwards 400ms;
     }
 
     .hero-meta {
@@ -261,17 +262,15 @@
       letter-spacing: 0.04em;
       margin-bottom: 2rem;
       opacity: 0;
-      animation: fade-up 600ms var(--ease-out) forwards 400ms;
+      animation: fade-up 600ms var(--ease-out) forwards 480ms;
     }
 
-    .hero-meta-sep {
-      color: var(--text-4);
-    }
+    .hero-meta-sep { color: var(--text-4); }
 
     .bio-block {
-      margin-bottom: 2.2rem;
+      margin-bottom: 1.8rem;
       opacity: 0;
-      animation: fade-up 600ms var(--ease-out) forwards 480ms;
+      animation: fade-up 600ms var(--ease-out) forwards 540ms;
     }
 
     .bio-prefix {
@@ -289,113 +288,19 @@
       padding-left: 1rem;
     }
 
-    .bio-text strong {
-      color: var(--text);
-      font-weight: 500;
-    }
+    .bio-text strong { color: var(--text); font-weight: 500; }
 
-    /* -- now-block -- */
-    .now-block {
-      border: 1px solid var(--border2);
-      border-left: 3px solid var(--border3);
-      background: var(--bg2);
-      padding: 1rem 1.3rem;
-      margin-bottom: 2.4rem;
-      opacity: 0;
-      animation: fade-up 600ms var(--ease-out) forwards 560ms;
-    }
-
-    .now-label {
-      font-size: 9px;
-      color: var(--text-3);
-      letter-spacing: 0.12em;
-      margin-bottom: 0.7rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .now-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border2);
-    }
-
-    .now-row {
-      display: flex;
-      gap: 1rem;
-      font-size: 11.5px;
-      color: var(--text-3);
-      margin-bottom: 0.3rem;
-    }
-
-    .now-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .now-key {
-      color: var(--text-3);
-      min-width: 58px;
-      flex-shrink: 0;
+    /* -- now-line -- */
+    .now-line {
+      font-family: var(--font-mono);
       font-size: 10.5px;
-    }
-
-    .now-val {
-      color: var(--text-2);
-    }
-
-    .now-val a {
-      color: var(--text-2);
-      text-decoration: none;
-      transition: color 150ms;
-    }
-
-    .now-val a:hover {
-      color: var(--text);
-    }
-
-    /* -- hero links -- */
-    .hero-links {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0;
-      font-size: 11.5px;
-      opacity: 0;
-      animation: fade-up 600ms var(--ease-out) forwards 640ms;
-    }
-
-    .hero-links a {
       color: var(--text-3);
-      text-decoration: none;
-      position: relative;
-      transition: color 150ms;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fade-up 600ms var(--ease-out) forwards 600ms;
     }
 
-    .hero-links a:hover {
-      color: var(--text);
-    }
-
-    .hero-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--text);
-      transition: width 160ms;
-    }
-
-    .hero-links a:hover::after {
-      width: 100%;
-    }
-
-    .lsep {
-      color: var(--text-4);
-      margin: 0 0.9rem;
-    }
+    .now-line em { font-style: italic; color: var(--text-2); }
 
     /* -- sections -- */
     .section {
@@ -406,21 +311,17 @@
     .sec-head {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0;
       margin-bottom: 1.8rem;
     }
 
-    .sec-marker {
-      font-size: 10px;
-      color: var(--text-4);
-      letter-spacing: 0.06em;
-    }
-
     .sec-title {
-      font-size: 10px;
+      font-family: var(--font-disp);
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
       color: var(--text);
-      letter-spacing: 0.12em;
-      font-weight: 500;
+      letter-spacing: 0;
     }
 
     /* -- projects -- */
@@ -434,10 +335,30 @@
       overflow: hidden;
     }
 
-    .proj-item:first-child {
-      border-top: none;
+    .proj-item:first-child { border-top: none; }
+
+    /* featured project: always expanded */
+    .proj-item--featured { border-top: none; padding-top: 0; }
+
+    .proj-item--featured .proj-trigger {
+      padding: 0 0 1.4rem 0;
+      border-left: none !important;
+      pointer-events: none;
     }
 
+    .proj-item--featured .proj-name {
+      font-family: var(--font-disp);
+      font-size: 22px;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: -0.02em;
+    }
+
+    .proj-item--featured .proj-badge { font-size: 8px; letter-spacing: 0.1em; }
+
+    .proj-item--featured .proj-body { grid-template-rows: 1fr !important; }
+
+    /* -- accordion -- */
     .proj-trigger {
       display: flex;
       align-items: center;
@@ -451,15 +372,9 @@
       transition: border-color 220ms, padding-left 220ms;
     }
 
-    .proj-trigger:hover {
-      border-color: var(--border3);
-      padding-left: 0.8rem;
-    }
+    .proj-trigger:hover { border-color: var(--border3); padding-left: 0.8rem; }
 
-    .proj-item.open .proj-trigger {
-      border-color: var(--text-3);
-      padding-left: 0.8rem;
-    }
+    .proj-item.open .proj-trigger { border-color: var(--text-3); padding-left: 0.8rem; }
 
     .proj-trigger-left {
       display: flex;
@@ -498,12 +413,9 @@
       transition: color 180ms;
     }
 
-    .proj-item.open .proj-name {
-      color: var(--text);
-      font-weight: 600;
-    }
+    .proj-item.open .proj-name { color: var(--text); font-weight: 600; }
 
-    /* -- badges (base + modifiers) -- */
+    /* badge base + modifiers */
     .proj-badge {
       font-size: 8.5px;
       border: 1px solid var(--border2);
@@ -514,23 +426,9 @@
       color: var(--text-2);
     }
 
-    .proj-badge--green {
-      color: var(--text-2);
-      border-color: var(--border2);
-      background: var(--bg2);
-    }
-
-    .proj-badge--violet {
-      color: var(--text-2);
-      border-color: var(--border2);
-      background: var(--bg2);
-    }
-
-    .proj-badge--amber {
-      color: var(--text-2);
-      border-color: var(--border2);
-      background: var(--bg2);
-    }
+    .proj-badge--green  { color: var(--text-2); border-color: var(--border2); background: var(--bg2); }
+    .proj-badge--violet { color: var(--text-2); border-color: var(--border2); background: var(--bg2); }
+    .proj-badge--amber  { color: var(--text-2); border-color: var(--border2); background: var(--bg2); }
 
     .proj-oneliner {
       font-size: 11px;
@@ -541,9 +439,7 @@
       transition: opacity 100ms;
     }
 
-    .proj-item.open .proj-oneliner {
-      opacity: 0;
-    }
+    .proj-item.open .proj-oneliner { opacity: 0; }
 
     .proj-question {
       font-size: 10.5px;
@@ -557,10 +453,7 @@
       transition: max-height 250ms var(--ease-out), opacity 180ms;
     }
 
-    .proj-item.open .proj-question {
-      max-height: 0;
-      opacity: 0;
-    }
+    .proj-item.open .proj-question { max-height: 0; opacity: 0; }
 
     .proj-tags-collapsed {
       font-size: 9.5px;
@@ -570,22 +463,16 @@
       transition: opacity 200ms;
     }
 
-    .proj-item.open .proj-tags-collapsed {
-      opacity: 0;
-    }
+    .proj-item.open .proj-tags-collapsed { opacity: 0; }
 
     .proj-chevron {
       flex-shrink: 0;
-      width: 15px;
-      height: 15px;
+      width: 15px; height: 15px;
       color: var(--text-4);
       transition: transform 380ms var(--ease-out), color 200ms;
     }
 
-    .proj-item.open .proj-chevron {
-      transform: rotate(180deg);
-      color: var(--text-3);
-    }
+    .proj-item.open .proj-chevron { transform: rotate(180deg); color: var(--text-3); }
 
     .proj-body {
       display: grid;
@@ -593,30 +480,28 @@
       transition: grid-template-rows 440ms var(--ease-out);
     }
 
-    .proj-item.open .proj-body {
-      grid-template-rows: 1fr;
-    }
+    .proj-item.open .proj-body { grid-template-rows: 1fr; }
 
-    .proj-body-inner {
-      overflow: hidden;
-    }
+    .proj-body-inner { overflow: hidden; }
 
-    .proj-content {
-      padding: 0.2rem 0 2.2rem 1.9rem;
-    }
+    .proj-content { padding: 0.2rem 0 2.2rem 1.9rem; }
 
     .proj-tagline {
-      font-size: 12.5px;
+      font-family: var(--font-disp);
+      font-size: 16px;
+      font-weight: 300;
+      font-style: italic;
       color: var(--text-2);
-      line-height: 1.75;
+      line-height: 1.65;
       margin-bottom: 1.6rem;
       padding-bottom: 1.3rem;
       border-bottom: 1px solid var(--border);
     }
 
     .proj-tagline strong {
+      font-weight: 600;
+      font-style: normal;
       color: var(--text);
-      font-weight: 500;
     }
 
     /* -- metrics -- */
@@ -629,10 +514,7 @@
       margin-bottom: 1.8rem;
     }
 
-    .proj-metric {
-      background: var(--bg2);
-      padding: 0.85rem 1rem;
-    }
+    .proj-metric { background: var(--bg2); padding: 0.85rem 1rem; }
 
     .proj-metric-label {
       font-size: 9px;
@@ -642,29 +524,26 @@
     }
 
     .proj-metric-val {
-      font-size: 18px;
-      font-weight: 700;
+      font-family: var(--font-disp);
+      font-size: 28px;
+      font-weight: 600;
+      font-style: italic;
       line-height: 1;
       color: var(--text);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
     }
 
-    .proj-metric-val.g { color: var(--text); }
-    .proj-metric-val.a { color: var(--text); }
-    .proj-metric-val.b { color: var(--text); }
-    .proj-metric-val.c { color: var(--text); }
+    .proj-metric-val.g,
+    .proj-metric-val.a,
+    .proj-metric-val.b,
+    .proj-metric-val.c,
     .proj-metric-val.v { color: var(--text); }
 
-    .proj-metric-sub {
-      font-size: 9px;
-      color: var(--text-3);
-      line-height: 1.5;
-    }
+    .proj-metric-sub { font-size: 9px; color: var(--text-3); line-height: 1.5; }
 
     /* -- latency viz -- */
-    .proj-latency {
-      margin-bottom: 1.8rem;
-    }
+    .proj-latency { margin-bottom: 1.8rem; }
 
     .viz-label {
       font-size: 9px;
@@ -673,62 +552,25 @@
       margin-bottom: 0.8rem;
     }
 
-    .lat-row {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 0.45rem;
-    }
+    .lat-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.45rem; }
 
-    .lat-v {
-      font-size: 9px;
-      color: var(--text-3);
-      width: 16px;
-      flex-shrink: 0;
-    }
+    .lat-v { font-size: 9px; color: var(--text-3); width: 16px; flex-shrink: 0; }
 
-    .lat-track {
-      flex: 1;
-      height: 12px;
-      background: var(--surface);
-      position: relative;
-      overflow: hidden;
-    }
+    .lat-track { flex: 1; height: 12px; background: var(--surface); position: relative; overflow: hidden; }
 
-    .lat-fill {
-      height: 100%;
-      width: 0;
-      transition: width 950ms var(--ease-out);
-    }
+    .lat-fill { height: 100%; width: 0; transition: width 950ms var(--ease-out); }
 
     .lat-fill.r { background: var(--text-3); opacity: .75; }
     .lat-fill.a { background: var(--text-2); opacity: .75; }
     .lat-fill.g { background: var(--text);   opacity: .85; }
 
-    .lat-ms {
-      font-size: 9px;
-      color: var(--text-3);
-      width: 200px;
-      flex-shrink: 0;
-      text-align: right;
-    }
-
+    .lat-ms { font-size: 9px; color: var(--text-3); width: 200px; flex-shrink: 0; text-align: right; }
     .lat-ms.g { color: var(--text-2); }
 
     /* -- pipeline viz -- */
-    .proj-pipeline {
-      margin-bottom: 1.8rem;
-    }
+    .proj-pipeline { margin-bottom: 1.8rem; }
 
-    .pipeline-sublabel {
-      font-size: 8.5px;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.35rem;
-      color: var(--text-2);
-    }
-
-    .pipeline-sublabel.v { color: var(--text-2); }
-    .pipeline-sublabel.c { color: var(--text-2); }
+    .pipeline-sublabel { font-size: 8.5px; letter-spacing: 0.06em; margin-bottom: 0.35rem; color: var(--text-2); }
 
     .pipeline-track {
       display: flex;
@@ -750,13 +592,8 @@
       transition: background 180ms;
     }
 
-    .pipeline-step:last-child {
-      border-right: none;
-    }
-
-    .pipeline-step:hover {
-      background: var(--surface);
-    }
+    .pipeline-step:last-child { border-right: none; }
+    .pipeline-step:hover { background: var(--surface); }
 
     .pipeline-step-name {
       display: block;
@@ -765,9 +602,6 @@
       margin-bottom: 0.2rem;
       color: var(--text);
     }
-
-    .pipeline-step.v .pipeline-step-name { color: var(--text); }
-    .pipeline-step.c .pipeline-step-name { color: var(--text); }
 
     .pipeline-arrow {
       display: flex;
@@ -781,9 +615,7 @@
     }
 
     /* -- retrieval compare -- */
-    .retrieval-compare {
-      margin-bottom: 1.8rem;
-    }
+    .retrieval-compare { margin-bottom: 1.8rem; }
 
     .ret-row {
       display: grid;
@@ -793,32 +625,17 @@
       margin-bottom: 0.5rem;
     }
 
-    .ret-name {
-      font-size: 9px;
-      color: var(--text-3);
-    }
+    .ret-name { font-size: 9px; color: var(--text-3); }
 
-    .ret-track {
-      height: 11px;
-      background: var(--surface);
-    }
+    .ret-track { height: 11px; background: var(--surface); }
 
-    .ret-fill {
-      height: 100%;
-      width: 0;
-      transition: width 1100ms var(--ease-out);
-    }
+    .ret-fill { height: 100%; width: 0; transition: width 1100ms var(--ease-out); }
 
     .ret-fill.dim { background: var(--border3); }
     .ret-fill.mid { background: var(--text-3); }
     .ret-fill.top { background: var(--text); opacity: .85; }
 
-    .ret-note {
-      font-size: 9px;
-      color: var(--text-3);
-      text-align: right;
-    }
-
+    .ret-note { font-size: 9px; color: var(--text-3); text-align: right; }
     .ret-note.top { color: var(--text-2); }
 
     /* -- arch diagram -- */
@@ -829,11 +646,7 @@
       margin-bottom: 1.8rem;
     }
 
-    .proj-arch svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .proj-arch svg { width: 100%; height: auto; display: block; }
 
     /* -- attribution note -- */
     .attr-note {
@@ -845,58 +658,7 @@
       line-height: 1.6;
     }
 
-    .attr-note strong {
-      color: var(--text-3);
-      font-weight: 400;
-    }
-
-    /* -- bullet-list (merged proj-bullets + exp-list) -- */
-    .bullet-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .bullet-list li {
-      font-size: 12px;
-      color: var(--text-2);
-      line-height: 1.75;
-      padding-left: 1.3rem;
-      position: relative;
-    }
-
-    .bullet-list li::before {
-      content: '//';
-      position: absolute;
-      left: 0;
-      color: var(--text-4);
-      font-size: 9.5px;
-      top: 4px;
-    }
-
-    .bullet-list li strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .bullet-list code {
-      color: var(--text-2);
-      font-size: 0.88em;
-      background: var(--surface);
-      padding: 1px 4px;
-    }
-
-    /* exp-list variant: slightly tighter gap */
-    .bullet-list.exp-list {
-      gap: 0.5rem;
-      margin-top: 0.9rem;
-    }
-
-    .bullet-list.exp-list li {
-      line-height: 1.7;
-    }
+    .attr-note strong { color: var(--text-3); font-weight: 400; }
 
     .proj-footer-tags {
       font-size: 9.5px;
@@ -913,71 +675,53 @@
       transition: color 150ms;
     }
 
-    .proj-github-link:hover {
-      color: var(--text);
-    }
+    .proj-github-link:hover { color: var(--text); }
 
     /* -- experience -- */
-    .exp-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 0.8rem;
+    .exp-layout {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2.4rem;
+      align-items: start;
     }
+
+    .exp-left { padding-top: 0.15rem; }
 
     .exp-company {
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .exp-role {
-      font-size: 11px;
-      color: var(--text-3);
-      margin-top: 0.2rem;
-    }
-
-    .exp-context {
-      font-size: 10px;
-      color: var(--text-4);
-      margin-top: 0.1rem;
+      font-family: var(--font-disp);
+      font-size: 20px;
+      font-weight: 600;
       font-style: italic;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
     }
 
-    .exp-date {
-      font-size: 10px;
-      color: var(--text-4);
-      white-space: nowrap;
-      flex-shrink: 0;
-      text-align: right;
-    }
+    .exp-role { font-size: 10.5px; color: var(--text-2); margin-bottom: 0.2rem; line-height: 1.5; }
+
+    .exp-context { font-size: 9.5px; color: var(--text-3); line-height: 1.5; margin-bottom: 0.6rem; }
+
+    .exp-date { font-size: 9px; color: var(--text-4); line-height: 1.6; }
+
+    .exp-note { font-size: 10.5px; color: var(--text-4); margin-bottom: 1rem; font-style: italic; line-height: 1.6; }
+
+    .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; padding: 0; margin: 0; }
+
+    .exp-points li { font-size: 12px; color: var(--text-2); line-height: 1.75; padding-left: 0; }
+
+    .exp-points li strong { color: var(--text); font-weight: 500; }
 
     /* -- stack -- */
-    .stack-intro {
-      font-size: 11.5px;
-      color: var(--text-3);
-      margin-bottom: 1.4rem;
-    }
+    .stack-intro { font-size: 11.5px; color: var(--text-3); margin-bottom: 1.4rem; }
 
-    .stack-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11.5px;
-    }
+    .stack-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
 
-    .stack-table tr {
-      border-bottom: 1px solid var(--border);
-    }
+    .stack-table tr { border-bottom: 1px solid var(--border); }
 
-    .stack-table tr:last-child {
-      border-bottom: none;
-    }
+    .stack-table tr:last-child { border-bottom: none; }
 
-    .stack-table td {
-      padding: 0.7rem 0;
-      vertical-align: top;
-    }
+    .stack-table td { padding: 0.7rem 0; vertical-align: top; }
 
     .stack-table td:first-child {
       color: var(--text-3);
@@ -986,60 +730,54 @@
       white-space: nowrap;
     }
 
-    .stack-table td:last-child {
-      color: var(--text-2);
-    }
+    .stack-table td:last-child { color: var(--text-2); }
 
     /* -- contact -- */
-    .contact-grid {
+    .contact-statement {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.4rem;
+      align-items: start;
+    }
+
+    .contact-prose {
+      font-family: var(--font-disp);
+      font-size: 17px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .contact-ctas {
+      display: flex;
+      flex-direction: column;
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
     }
 
-    .contact-item {
+    .contact-cta {
       background: var(--bg2);
-      padding: 1rem 1.2rem;
+      padding: 0.9rem 1.1rem;
       text-decoration: none;
       display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      transition: background 160ms;
+      align-items: center;
+      gap: 0.8rem;
+      transition: background 150ms;
     }
 
-    .contact-item:hover {
-      background: var(--surface);
-    }
+    .contact-cta:hover { background: var(--surface); }
 
-    .ci-label {
-      font-size: 9px;
-      color: var(--text-4);
-      letter-spacing: 0.08em;
-    }
+    .cta-label { font-size: 8.5px; color: var(--text-4); letter-spacing: 0.1em; width: 46px; flex-shrink: 0; }
 
-    .ci-val {
-      font-size: 11.5px;
-      color: var(--text-2);
-      transition: color 160ms;
-    }
+    .cta-val { font-size: 11px; color: var(--text-2); flex: 1; transition: color 150ms; }
 
-    .contact-item:hover .ci-val {
-      color: var(--text);
-    }
+    .contact-cta:hover .cta-val { color: var(--text); }
 
-    .ci-arrow {
-      font-size: 9.5px;
-      color: var(--text-4);
-      margin-top: auto;
-      padding-top: 0.4rem;
-      transition: color 160ms;
-    }
+    .cta-arrow { font-size: 11px; color: var(--text-4); transition: color 150ms; }
 
-    .contact-item:hover .ci-arrow {
-      color: var(--text-2);
-    }
+    .contact-cta:hover .cta-arrow { color: var(--text-2); }
 
     /* -- footer -- */
     footer {
@@ -1057,33 +795,15 @@
       gap: 1rem;
     }
 
-    .footer-name {
-      font-size: 10.5px;
-      color: var(--text-4);
-    }
+    .footer-name { font-size: 10.5px; color: var(--text-4); }
 
-    .footer-updated {
-      font-size: 9.5px;
-      color: var(--text-4);
-      margin-top: 0.25rem;
-      opacity: .6;
-    }
+    .footer-updated { font-size: 9.5px; color: var(--text-4); margin-top: 0.25rem; opacity: .6; }
 
-    .footer-links {
-      display: flex;
-      gap: 1.2rem;
-      font-size: 10.5px;
-    }
+    .footer-links { display: flex; gap: 1.2rem; font-size: 10.5px; }
 
-    .footer-links a {
-      color: var(--text-3);
-      text-decoration: none;
-      transition: color 150ms;
-    }
+    .footer-links a { color: var(--text-3); text-decoration: none; transition: color 150ms; }
 
-    .footer-links a:hover {
-      color: var(--text);
-    }
+    .footer-links a:hover { color: var(--text); }
 
     /* === ANIMATIONS === */
     @keyframes fade-up {
@@ -1107,71 +827,28 @@
       transition: opacity 450ms var(--ease-out), transform 450ms var(--ease-out);
     }
 
-    .reveal.in {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
 
     /* === RESPONSIVE === */
     @media (max-width: 700px) {
-      .proj-metrics {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .proj-metrics .proj-metric:nth-child(3) {
-        grid-column: span 2;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .exp-row {
-        flex-direction: column;
-      }
-
-      .exp-date {
-        text-align: left;
-      }
+      .proj-metrics { grid-template-columns: 1fr 1fr; }
+      .proj-metrics .proj-metric:nth-child(3) { grid-column: span 2; }
+      .exp-layout { grid-template-columns: 1fr; gap: 1.2rem; }
+      .contact-statement { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 580px) {
-      #status-bar {
-        padding: 0 1rem;
-      }
-
-      .sb-branch,
-      .sb-breadcrumb {
-        display: none;
-      }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 9px; }
     }
 
     @media (max-width: 560px) {
-      main {
-        padding: 4.5rem 1.2rem 3rem;
-      }
-
-      .proj-metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .proj-metrics .proj-metric:nth-child(3) {
-        grid-column: span 1;
-      }
-
-      .proj-tags-collapsed {
-        display: none;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .lat-ms {
-        width: 120px;
-        font-size: 8px;
-      }
+      main { padding: 4.5rem 1.2rem 3rem; }
+      .proj-metrics { grid-template-columns: 1fr; }
+      .proj-metrics .proj-metric:nth-child(3) { grid-column: span 1; }
+      .proj-tags-collapsed { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .lat-ms { width: 120px; font-size: 8px; }
     }
 
   </style>
@@ -1179,43 +856,35 @@
 
 <body>
 
-  <!-- ── STATUS BAR ── -->
-  <div id="status-bar">
-    <div class="sb-left">
-      <span><span class="sb-dot"></span><span class="sb-lang">JAVA</span></span>
-      <span class="sb-file">~/lucas-eckert/README.md</span>
-      <span class="sb-breadcrumb" style="color:var(--text-4);display:flex;align-items:center;gap:.4rem">
-        <span class="sb-sep">›</span>
-        <span>building</span>
-        <span class="sb-project">Kairos</span>
-      </span>
-    </div>
-    <div class="sb-right">
-      <span id="sb-loc" style="color:var(--text-3)">Jaraguá do Sul, BR</span>
-      <span id="sb-time" style="color:var(--text-3)"></span>
-    </div>
-  </div>
+  <!-- site nav (replaces IDE status bar) -->
+  <header id="site-nav">
+    <span class="nav-name">Lucas Eckert</span>
+    <nav class="nav-links" aria-label="Site navigation">
+      <a href="#projects">work</a>
+      <a href="#experience">experience</a>
+      <a href="#stack">stack</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </header>
 
   <main>
 
-    <!-- ── HERO ── -->
+    <!-- HERO -->
     <section id="hero">
-
-      <div class="hero-eyebrow">
-        <span class="eyebrow-prefix">$</span>
-        <span class="eyebrow-text">event-driven systems · JVM · retrieval · distributed architecture<span
-            class="eyebrow-cursor"></span></span>
-      </div>
-
-      <p class="hero-kicker">
-        <span style="color:var(--text-4)">/*</span>
-        <span> backend engineer — JVM, event-driven systems, retrieval architecture </span>
-        <span style="color:var(--text-4)">*/</span>
-      </p>
 
       <h1 class="hero-name">Lucas<br><em>Eckert</em></h1>
 
       <h2 class="hero-headline">Backend Engineer — JVM, Event-Driven Systems, Retrieval Architecture</h2>
+
+      <nav class="hero-links" aria-label="Primary links">
+        <a href="#projects">projects</a>
+        <span class="lsep">/</span>
+        <a href="https://github.com/Luca5Eckert" target="_blank" rel="noopener">github</a>
+        <span class="lsep">/</span>
+        <a href="https://www.linkedin.com/in/lucas-ismael-eckert/" target="_blank" rel="noopener">linkedin</a>
+        <span class="lsep">/</span>
+        <a href="mailto:lucasismaeleckert@gmail.com">email</a>
+      </nav>
 
       <p class="hero-sub">
         At WEG S.A. building microservices in Java 21, Kafka, and WebFlux.
@@ -1245,47 +914,24 @@
         </p>
       </div>
 
-      <div class="now-block">
-        <div class="now-label">// current focus</div>
-        <div class="now-row">
-          <span class="now-key">working</span>
-          <span class="now-val">Backend development at WEG S.A. — architecture, services, integrations, engineering
-            workflow</span>
-        </div>
-        <div class="now-row">
-          <span class="now-key">building</span>
-          <span class="now-val">Kairos — personal knowledge graph engine inspired by HippoRAG 2</span>
-        </div>
-        <div class="now-row">
-          <span class="now-key">reading</span>
-          <span class="now-val">Designing Data-Intensive Applications · Martin Kleppmann</span>
-        </div>
-      </div>
-
-      <nav class="hero-links" aria-label="Primary links">
-        <a href="#projects">projects</a>
-        <span class="lsep">/</span>
-        <a href="https://github.com/Luca5Eckert" target="_blank" rel="noopener">github</a>
-        <span class="lsep">/</span>
-        <a href="https://www.linkedin.com/in/lucas-ismael-eckert/" target="_blank" rel="noopener">linkedin</a>
-        <span class="lsep">/</span>
-        <a href="mailto:lucasismaeleckert@gmail.com">email</a>
-      </nav>
+      <p class="now-line">
+        ↳ WEG S.A. &nbsp;·&nbsp; building Kairos &nbsp;·&nbsp;
+        reading <em>Designing Data-Intensive Applications</em>
+      </p>
 
     </section>
 
-    <!-- ── PROJECTS ── -->
+    <!-- PROJECTS -->
     <section class="section reveal" id="projects">
       <div class="sec-head">
-        <span class="sec-marker">##</span>
-        <span class="sec-title">SELECTED WORK</span>
+        <span class="sec-title">Selected Work</span>
       </div>
 
       <div class="projects-stack">
 
-        <!-- 01 VellumHub -->
-        <div class="proj-item open" id="proj-0">
-          <div class="proj-trigger" onclick="toggleProj(0)">
+        <!-- 01 VellumHub — featured, always expanded -->
+        <div class="proj-item proj-item--featured open" id="proj-0">
+          <div class="proj-trigger" style="cursor:default">
             <div class="proj-trigger-left">
               <span class="proj-num">01</span>
               <div class="proj-title-wrap">
@@ -1293,15 +939,9 @@
                   <span class="proj-name">VellumHub</span>
                   <span class="proj-badge proj-badge--green">FEATURED</span>
                 </div>
-                <span class="proj-oneliner">Event-driven recommendation platform — zero sync calls on the serving
-                  path</span>
-                <span class="proj-question">how do you serve recommendations without synchronous coupling?</span>
+                <span class="proj-oneliner">Event-driven recommendation platform — zero sync calls on the serving path</span>
               </div>
             </div>
-            <span class="proj-tags-collapsed">Java 21 · Kafka · pgvector</span>
-            <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 6l4 4 4-4" />
-            </svg>
           </div>
           <div class="proj-body">
             <div class="proj-body-inner">
@@ -1309,22 +949,20 @@
                 <p class="proj-tagline">
                   Recommendation backend built around one hard constraint:
                   the serving path must answer every query with <strong>zero synchronous calls</strong> to other
-                  services.
-                  That constraint drove everything — storage design, Kafka topic structure,
+                  services. That constraint drove everything — storage design, Kafka topic structure,
                   read model ownership, and retrieval pipeline.
                 </p>
 
                 <div class="proj-metrics">
                   <div class="proj-metric">
                     <div class="proj-metric-label">MEASURED EVOLUTION</div>
-                    <div class="proj-metric-val g" style="font-size:13px;" id="m-evo">—</div>
+                    <div class="proj-metric-val g" id="m-evo">—</div>
                     <div class="proj-metric-sub">v1 external Python ML hop<br>→ v2 in-JVM vector retrieval</div>
                   </div>
                   <div class="proj-metric">
                     <div class="proj-metric-label">ARCHITECTURAL INVARIANT</div>
                     <div class="proj-metric-val a" id="m-zero">—</div>
-                    <div class="proj-metric-sub">synchronous cross-service calls<br>on the recommendation query path
-                    </div>
+                    <div class="proj-metric-sub">synchronous cross-service calls<br>on the recommendation query path</div>
                   </div>
                   <div class="proj-metric">
                     <div class="proj-metric-label">CURRENT PIPELINE</div>
@@ -1337,126 +975,83 @@
                   <div class="viz-label">// latency evolution — recommendation serving path</div>
                   <div class="lat-row">
                     <span class="lat-v">v1</span>
-                    <div class="lat-track">
-                      <div class="lat-fill r" id="lf-v1"></div>
-                    </div>
+                    <div class="lat-track"><div class="lat-fill r" id="lf-v1"></div></div>
                     <span class="lat-ms">~400ms · external Python ML service</span>
                   </div>
                   <div class="lat-row">
                     <span class="lat-v">v2</span>
-                    <div class="lat-track">
-                      <div class="lat-fill a" id="lf-v2"></div>
-                    </div>
+                    <div class="lat-track"><div class="lat-fill a" id="lf-v2"></div></div>
                     <span class="lat-ms">~100ms · in-JVM pgvector + ECST</span>
                   </div>
                   <div class="lat-row">
                     <span class="lat-v">v3</span>
-                    <div class="lat-track">
-                      <div class="lat-fill g" id="lf-v3"></div>
-                    </div>
+                    <div class="lat-track"><div class="lat-fill g" id="lf-v3"></div></div>
                     <span class="lat-ms g">current · 384-dim embeddings · final latency TBD</span>
                   </div>
                 </div>
 
-                <!-- Architecture SVG -->
                 <div class="proj-arch">
                   <div class="viz-label">// system architecture — zero sync coupling at query time</div>
-                  <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg"
-                    style="font-family:'JetBrains Mono',monospace;">
+                  <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
-                      <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#DDDCD6" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#DDDCD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="ahg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ahg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="aha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#D0CFC8" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="aha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#D0CFC8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                     </defs>
-                    <rect x="10" y="84" width="62" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".7" />
+                    <!-- client -->
+                    <rect x="10" y="84" width="62" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
                     <text x="41" y="103" text-anchor="middle" fill="var(--text-3)" font-size="9.5">client</text>
-                    <line x1="72" y1="99" x2="100" y2="99" stroke="var(--border2)" stroke-width=".8"
-                      marker-end="url(#ah)" />
-                    <rect x="102" y="70" width="100" height="58" rx="2" fill="var(--surface)" stroke="var(--border2)"
-                      stroke-width=".8" />
-                    <text x="152" y="90" text-anchor="middle" fill="var(--text)" font-size="10"
-                      font-weight="500">api-gateway</text>
-                    <text x="152" y="104" text-anchor="middle" fill="var(--text-3)" font-size="8.5">WebFlux +
-                      Redis</text>
-                    <text x="152" y="118" text-anchor="middle" fill="var(--text-3)" font-size="8">JWT ·
-                      rate-limit</text>
-                    <line x1="202" y1="86" x2="252" y2="58" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ah)" />
-                    <line x1="202" y1="96" x2="252" y2="96" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ah)" />
-                    <line x1="202" y1="108" x2="252" y2="130" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ah)" />
-                    <rect x="254" y="42" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)"
-                      stroke-width=".6" />
+                    <line x1="72" y1="99" x2="100" y2="99" stroke="var(--border2)" stroke-width=".8" marker-end="url(#ah)"/>
+                    <!-- api-gateway (primary — dark) -->
+                    <rect x="102" y="70" width="100" height="58" rx="2" fill="#111110" stroke="#111110" stroke-width=".8"/>
+                    <text x="152" y="90" text-anchor="middle" fill="#F4F4F0" font-size="10" font-weight="500">api-gateway</text>
+                    <text x="152" y="104" text-anchor="middle" fill="#BCBCB4" font-size="8.5">WebFlux + Redis</text>
+                    <text x="152" y="118" text-anchor="middle" fill="#BCBCB4" font-size="8">JWT · rate-limit</text>
+                    <line x1="202" y1="86" x2="252" y2="58" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah)"/>
+                    <line x1="202" y1="96" x2="252" y2="96" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah)"/>
+                    <line x1="202" y1="108" x2="252" y2="130" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah)"/>
+                    <!-- secondary nodes -->
+                    <rect x="254" y="42" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width=".6"/>
                     <text x="297" y="59" text-anchor="middle" fill="var(--text-3)" font-size="9">user-service</text>
-                    <rect x="254" y="82" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)"
-                      stroke-width=".6" />
+                    <rect x="254" y="82" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width=".6"/>
                     <text x="297" y="99" text-anchor="middle" fill="var(--text-3)" font-size="9">catalog-service</text>
-                    <rect x="254" y="122" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)"
-                      stroke-width=".6" />
+                    <rect x="254" y="122" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width=".6"/>
                     <text x="297" y="139" text-anchor="middle" fill="var(--text-3)" font-size="9">engagement</text>
-                    <rect x="372" y="74" width="74" height="72" rx="2" fill="var(--surface)" stroke="var(--border2)"
-                      stroke-width=".7" stroke-dasharray="3 2" />
-                    <text x="409" y="102" text-anchor="middle" fill="var(--text)" font-size="10"
-                      font-weight="500">kafka</text>
-                    <text x="409" y="116" text-anchor="middle" fill="var(--text-3)" font-size="8.5">ECST</text>
-                    <text x="409" y="130" text-anchor="middle" fill="var(--text-3)" font-size="8">4 topics</text>
-                    <line x1="340" y1="96" x2="370" y2="104" stroke="var(--border3)" stroke-width=".7"
-                      stroke-dasharray="2 2" marker-end="url(#aha)" />
-                    <line x1="340" y1="136" x2="370" y2="136" stroke="var(--border3)" stroke-width=".7"
-                      stroke-dasharray="2 2" marker-end="url(#aha)" />
-                    <line x1="446" y1="110" x2="486" y2="110" stroke="var(--border3)" stroke-width=".9"
-                      marker-end="url(#ahg)" />
-                    <rect x="488" y="78" width="116" height="68" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".8" />
-                    <text x="546" y="97" text-anchor="middle" fill="var(--text)" font-size="9.5"
-                      font-weight="500">recommendation</text>
-                    <text x="546" y="110" text-anchor="middle" fill="var(--text-2)" font-size="8.5">pgvector
-                      HNSW</text>
-                    <text x="546" y="122" text-anchor="middle" fill="var(--text-2)" font-size="8.5">384-dim
-                      embeddings</text>
-                    <text x="546" y="134" text-anchor="middle" fill="var(--text-4)" font-size="8">L2-normalized
-                      cosine</text>
-                    <path d="M202 112 Q 340 185 484 128" fill="none" stroke="var(--border3)" stroke-width=".7"
-                      stroke-dasharray="2 2.5" marker-end="url(#ahg)" opacity=".5" />
-                    <text x="300" y="196" fill="var(--text-4)" font-size="7.5" letter-spacing=".03em">query path — zero
-                      cross-service calls at read time</text>
+                    <!-- kafka (primary — dark) -->
+                    <rect x="372" y="74" width="74" height="72" rx="2" fill="#111110" stroke="#111110" stroke-width=".7" stroke-dasharray="3 2"/>
+                    <text x="409" y="102" text-anchor="middle" fill="#F4F4F0" font-size="10" font-weight="500">kafka</text>
+                    <text x="409" y="116" text-anchor="middle" fill="#BCBCB4" font-size="8.5">ECST</text>
+                    <text x="409" y="130" text-anchor="middle" fill="#BCBCB4" font-size="8">4 topics</text>
+                    <line x1="340" y1="96" x2="370" y2="104" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
+                    <line x1="340" y1="136" x2="370" y2="136" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
+                    <line x1="446" y1="110" x2="486" y2="110" stroke="var(--border3)" stroke-width=".9" marker-end="url(#ahg)"/>
+                    <!-- recommendation (primary — dark) -->
+                    <rect x="488" y="78" width="116" height="68" rx="2" fill="#111110" stroke="#111110" stroke-width=".8"/>
+                    <text x="546" y="97" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">recommendation</text>
+                    <text x="546" y="110" text-anchor="middle" fill="#BCBCB4" font-size="8.5">pgvector HNSW</text>
+                    <text x="546" y="122" text-anchor="middle" fill="#BCBCB4" font-size="8.5">384-dim embeddings</text>
+                    <text x="546" y="134" text-anchor="middle" fill="#9E9E97" font-size="8">L2-normalized cosine</text>
+                    <path d="M202 112 Q 340 185 484 128" fill="none" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2.5" marker-end="url(#ahg)" opacity=".5"/>
+                    <text x="300" y="196" fill="var(--text-4)" font-size="7.5" letter-spacing=".03em">query path — zero cross-service calls at read time</text>
                   </svg>
                 </div>
 
                 <ul class="bullet-list">
-                  <li><strong>ECST read model</strong> — Recommendation Service consumes <code>created-book</code>,
-                    <code>updated-book</code>, <code>deleted-book</code>, <code>created-rating</code> from Kafka. All
-                    query-time data is local. The constraint is a design invariant, not a performance optimization</li>
-                  <li><strong>Embedding pipeline</strong> — replaced 13-dim genre vectors with LangChain4j
-                    <code>AllMiniLmL6V2</code> 384-dim embeddings, L2-normalized before storage. ANN retrieval via HNSW
-                    index, re-ranked with 70/30 semantic/popularity blend</li>
-                  <li><strong>Reactive gateway</strong> — WebFlux entry point with centralized JWT validation and
-                    Redis-backed per-route rate limiting. Built from scratch rather than layering on Spring Cloud
-                    Gateway to retain direct pipeline control</li>
-                  <li><strong>Latency evolution</strong> — v1 used an external Python ML service (~400ms); v2 brought
-                    retrieval in-JVM with pgvector (~100ms). The gain came from eliminating the cross-process hop. v3
-                    adds 384-dim semantic embeddings — final latency not yet published</li>
-                  <li><strong>Role</strong> — solo architecture and implementation across event model, retrieval
-                    pipeline, gateway design, and infrastructure composition</li>
+                  <li><strong>ECST read model</strong> — Recommendation Service consumes <code>created-book</code>, <code>updated-book</code>, <code>deleted-book</code>, <code>created-rating</code> from Kafka. All query-time data is local. The constraint is a design invariant, not a performance optimization</li>
+                  <li><strong>Embedding pipeline</strong> — replaced 13-dim genre vectors with LangChain4j <code>AllMiniLmL6V2</code> 384-dim embeddings, L2-normalized before storage. ANN retrieval via HNSW index, re-ranked with 70/30 semantic/popularity blend</li>
+                  <li><strong>Reactive gateway</strong> — WebFlux entry point with centralized JWT validation and Redis-backed per-route rate limiting. Built from scratch rather than layering on Spring Cloud Gateway to retain direct pipeline control</li>
+                  <li><strong>Latency evolution</strong> — v1 used an external Python ML service (~400ms); v2 brought retrieval in-JVM with pgvector (~100ms). The gain came from eliminating the cross-process hop. v3 adds 384-dim semantic embeddings — final latency not yet published</li>
+                  <li><strong>Role</strong> — solo architecture and implementation across event model, retrieval pipeline, gateway design, and infrastructure composition</li>
                 </ul>
 
                 <div class="proj-footer-tags">
-                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/VellumHub" target="_blank"
-                    rel="noopener">repository ↗</a>
+                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/VellumHub" target="_blank" rel="noopener">repository ↗</a>
                   Java 21 · Spring Boot · WebFlux · Kafka · PostgreSQL / pgvector · LangChain4j · Redis · Docker Compose
                 </div>
               </div>
@@ -1474,14 +1069,13 @@
                   <span class="proj-name">Kairos</span>
                   <span class="proj-badge proj-badge--violet">PROTOTYPE</span>
                 </div>
-                <span class="proj-oneliner">Knowledge graph engine — JVM-native embedding, dual-pipeline ingest,
-                  graph-guided retrieval</span>
+                <span class="proj-oneliner">Knowledge graph engine — JVM-native embedding, dual-pipeline ingest, graph-guided retrieval</span>
                 <span class="proj-question">what changes when memory has structure you didn't build?</span>
               </div>
             </div>
             <span class="proj-tags-collapsed">ONNX · Neo4j · pgvector</span>
             <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 6l4 4 4-4" />
+              <path d="M4 6l4 4 4-4"/>
             </svg>
           </div>
           <div class="proj-body">
@@ -1489,9 +1083,8 @@
               <div class="proj-content">
                 <p class="proj-tagline">
                   Dual-pipeline system that builds both a semantic index and a typed knowledge graph from the same
-                  ingested content.
-                  Retrieval is modeled on <strong>HippoRAG 2</strong> (NeurIPS 2024): vector search finds anchor nodes,
-                  Personalized PageRank propagates relevance through the graph from those seeds,
+                  ingested content. Retrieval is modeled on <strong>HippoRAG 2</strong> (NeurIPS 2024): vector search
+                  finds anchor nodes, Personalized PageRank propagates relevance through the graph from those seeds,
                   RRF fuses both candidate sets. Status: prototype — architecture defined, core pipelines implemented,
                   not production-ready.
                 </p>
@@ -1499,59 +1092,46 @@
                 <div class="proj-metrics">
                   <div class="proj-metric">
                     <div class="proj-metric-label">STATUS</div>
-                    <div class="proj-metric-val v" style="font-size:14px;">Prototype</div>
-                    <div class="proj-metric-sub">Architecture defined · core pipelines implemented · active development
-                    </div>
+                    <div class="proj-metric-val v">Prototype</div>
+                    <div class="proj-metric-sub">Architecture defined · core pipelines implemented · active development</div>
                   </div>
                   <div class="proj-metric">
                     <div class="proj-metric-label">ARCHITECTURAL PROPERTY</div>
-                    <div class="proj-metric-val c" style="font-size:14px;">JVM-native</div>
-                    <div class="proj-metric-sub">ONNX Runtime runs embeddings on the JVM — no Python sidecar, no
-                      cross-process hop</div>
+                    <div class="proj-metric-val c">JVM-native</div>
+                    <div class="proj-metric-sub">ONNX Runtime runs embeddings on the JVM — no Python sidecar, no cross-process hop</div>
                   </div>
                   <div class="proj-metric">
                     <div class="proj-metric-label">PAPER REFERENCE ¹</div>
                     <div class="proj-metric-val v" id="k-rag">—</div>
-                    <div class="proj-metric-sub">HippoRAG 2 multi-hop recall vs standard RAG — not a Kairos measurement
-                    </div>
+                    <div class="proj-metric-sub">HippoRAG 2 multi-hop recall vs standard RAG — not a Kairos measurement</div>
                   </div>
                 </div>
 
-                <!-- Attribution note -->
                 <div class="attr-note">
                   <strong>¹ Benchmark attribution</strong> — the "+20% multi-hop recall" and "10–30× cheaper than
                   iterative approaches" figures belong to the HippoRAG 2 paper (NeurIPS 2024). Kairos implements this
                   retrieval architecture; those numbers are the paper's claim, not this project's measurement.
                 </div>
 
-                <!-- Retrieval comparison -->
                 <div class="retrieval-compare">
-                  <div class="viz-label">// multi-hop retrieval — HippoRAG 2 paper benchmarks (not Kairos measurements)
-                  </div>
+                  <div class="viz-label">// multi-hop retrieval — HippoRAG 2 paper benchmarks (not Kairos measurements)</div>
                   <div class="ret-row">
                     <span class="ret-name">standard RAG</span>
-                    <div class="ret-track">
-                      <div class="ret-fill dim" id="rb-rag"></div>
-                    </div>
+                    <div class="ret-track"><div class="ret-fill dim" id="rb-rag"></div></div>
                     <span class="ret-note">paper baseline</span>
                   </div>
                   <div class="ret-row">
                     <span class="ret-name">iterative RAG</span>
-                    <div class="ret-track">
-                      <div class="ret-fill mid" id="rb-iter"></div>
-                    </div>
+                    <div class="ret-track"><div class="ret-fill mid" id="rb-iter"></div></div>
                     <span class="ret-note">+12% · expensive</span>
                   </div>
                   <div class="ret-row">
                     <span class="ret-name">HippoRAG 2</span>
-                    <div class="ret-track">
-                      <div class="ret-fill top" id="rb-hippo"></div>
-                    </div>
+                    <div class="ret-track"><div class="ret-fill top" id="rb-hippo"></div></div>
                     <span class="ret-note top">+20% · 10–30× cheaper</span>
                   </div>
                 </div>
 
-                <!-- Dual pipeline -->
                 <div class="proj-pipeline">
                   <div class="viz-label">// dual-pipeline ingest — parallel execution per document</div>
                   <div class="pipeline-sublabel v">SEMANTIC PIPELINE</div>
@@ -1590,119 +1170,75 @@
                   </div>
                 </div>
 
-                <!-- Query flow SVG -->
                 <div class="proj-arch">
                   <div class="viz-label">// query flow — HippoRAG 2 retrieval pattern</div>
-                  <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg"
-                    style="font-family:'JetBrains Mono',monospace;">
+                  <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
-                      <marker id="ahv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#D0CFC8" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ahv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#D0CFC8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="ahc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ahc2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="ahg3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ahg3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                     </defs>
-                    <rect x="8" y="82" width="68" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".7" />
+                    <!-- query -->
+                    <rect x="8" y="82" width="68" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
                     <text x="42" y="97" text-anchor="middle" fill="var(--text-3)" font-size="9">query</text>
-                    <text x="42" y="107" text-anchor="middle" fill="var(--text-4)" font-size="7.5">natural
-                      language</text>
-                    <line x1="76" y1="97" x2="102" y2="97" stroke="var(--border2)" stroke-width=".8"
-                      marker-end="url(#ahv)" />
-                    <rect x="104" y="76" width="80" height="42" rx="2" fill="var(--surface)" stroke="var(--border2)"
-                      stroke-width=".7" />
-                    <text x="144" y="93" text-anchor="middle" fill="var(--text)" font-size="9.5"
-                      font-weight="500">ONNX embed</text>
-                    <text x="144" y="105" text-anchor="middle" fill="var(--text-4)"
-                      font-size="7.5">all-MiniLM-L6-v2</text>
-                    <text x="144" y="114" text-anchor="middle" fill="var(--text-4)" font-size="7.5">384-dim
-                      vector</text>
-                    <line x1="184" y1="90" x2="218" y2="68" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ahv)" />
-                    <line x1="184" y1="104" x2="218" y2="118" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ahc2)" />
-                    <rect x="220" y="50" width="106" height="36" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".6" />
-                    <text x="273" y="65" text-anchor="middle" fill="var(--text)" font-size="9"
-                      font-weight="500">pgvector</text>
-                    <text x="273" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5">anchor lookup → seed
-                      nodes</text>
-                    <text x="273" y="86" text-anchor="middle" fill="var(--text-4)" font-size="7">+ dense candidate set
-                      B</text>
-                    <rect x="220" y="104" width="106" height="44" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".7" />
-                    <text x="273" y="120" text-anchor="middle" fill="var(--text)" font-size="9"
-                      font-weight="500">Neo4j</text>
-                    <text x="273" y="132" text-anchor="middle" fill="var(--text-4)" font-size="7.5">Personalized
-                      PageRank</text>
-                    <text x="273" y="141" text-anchor="middle" fill="var(--text-4)" font-size="7.5">seeded by anchor
-                      nodes</text>
+                    <text x="42" y="107" text-anchor="middle" fill="var(--text-4)" font-size="7.5">natural language</text>
+                    <line x1="76" y1="97" x2="102" y2="97" stroke="var(--border2)" stroke-width=".8" marker-end="url(#ahv)"/>
+                    <!-- ONNX embed (primary — dark) -->
+                    <rect x="104" y="76" width="80" height="42" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
+                    <text x="144" y="93" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">ONNX embed</text>
+                    <text x="144" y="105" text-anchor="middle" fill="#BCBCB4" font-size="7.5">all-MiniLM-L6-v2</text>
+                    <text x="144" y="114" text-anchor="middle" fill="#BCBCB4" font-size="7.5">384-dim vector</text>
+                    <line x1="184" y1="90" x2="218" y2="68" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahv)"/>
+                    <line x1="184" y1="104" x2="218" y2="118" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahc2)"/>
+                    <!-- pgvector -->
+                    <rect x="220" y="50" width="106" height="36" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".6"/>
+                    <text x="273" y="65" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="500">pgvector</text>
+                    <text x="273" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5">anchor lookup → seed nodes</text>
+                    <text x="273" y="86" text-anchor="middle" fill="var(--text-4)" font-size="7">+ dense candidate set B</text>
+                    <!-- Neo4j -->
+                    <rect x="220" y="104" width="106" height="44" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
+                    <text x="273" y="120" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="500">Neo4j</text>
+                    <text x="273" y="132" text-anchor="middle" fill="var(--text-4)" font-size="7.5">Personalized PageRank</text>
+                    <text x="273" y="141" text-anchor="middle" fill="var(--text-4)" font-size="7.5">seeded by anchor nodes</text>
                     <text x="273" y="150" text-anchor="middle" fill="var(--text-4)" font-size="7">candidate set A</text>
-                    <line x1="326" y1="68" x2="372" y2="92" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ahv)" />
-                    <line x1="326" y1="126" x2="372" y2="108" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ahc2)" />
-                    <rect x="374" y="78" width="84" height="40" rx="2" fill="var(--surface)" stroke="var(--border3)"
-                      stroke-width=".7" />
-                    <text x="416" y="95" text-anchor="middle" fill="var(--text)" font-size="9.5" font-weight="500">RRF
-                      fusion</text>
-                    <text x="416" y="108" text-anchor="middle" fill="var(--text-4)" font-size="7.5">set A + set B →
-                      top-k</text>
-                    <line x1="458" y1="98" x2="500" y2="98" stroke="var(--border3)" stroke-width=".8"
-                      marker-end="url(#ahg3)" />
-                    <rect x="502" y="68" width="110" height="60" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".7" />
-                    <text x="557" y="87" text-anchor="middle" fill="var(--text)" font-size="9.5" font-weight="500">AI
-                      synthesis</text>
-                    <text x="557" y="100" text-anchor="middle" fill="var(--text-2)" font-size="7.5">Gemini
-                      Flash</text>
-                    <text x="557" y="112" text-anchor="middle" fill="var(--text-4)" font-size="7">grounded in
-                      your</text>
-                    <text x="557" y="121" text-anchor="middle" fill="var(--text-4)" font-size="7">content only</text>
-                    <line x1="612" y1="98" x2="644" y2="98" stroke="var(--border3)" stroke-width=".7"
-                      marker-end="url(#ahg3)" />
-                    <rect x="646" y="84" width="46" height="28" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".6" />
+                    <line x1="326" y1="68" x2="372" y2="92" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahv)"/>
+                    <line x1="326" y1="126" x2="372" y2="108" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahc2)"/>
+                    <!-- RRF fusion (primary — dark) -->
+                    <rect x="374" y="78" width="84" height="40" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
+                    <text x="416" y="95" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">RRF fusion</text>
+                    <text x="416" y="108" text-anchor="middle" fill="#BCBCB4" font-size="7.5">set A + set B → top-k</text>
+                    <line x1="458" y1="98" x2="500" y2="98" stroke="var(--border3)" stroke-width=".8" marker-end="url(#ahg3)"/>
+                    <!-- AI synthesis (primary — dark) -->
+                    <rect x="502" y="68" width="110" height="60" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
+                    <text x="557" y="87" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">AI synthesis</text>
+                    <text x="557" y="100" text-anchor="middle" fill="#BCBCB4" font-size="7.5">Gemini Flash</text>
+                    <text x="557" y="112" text-anchor="middle" fill="#9E9E97" font-size="7">grounded in your</text>
+                    <text x="557" y="121" text-anchor="middle" fill="#9E9E97" font-size="7">content only</text>
+                    <line x1="612" y1="98" x2="644" y2="98" stroke="var(--border3)" stroke-width=".7" marker-end="url(#ahg3)"/>
+                    <!-- result -->
+                    <rect x="646" y="84" width="46" height="28" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".6"/>
                     <text x="669" y="101" text-anchor="middle" fill="var(--text-3)" font-size="8.5">result</text>
-                    <text x="310" y="182" fill="var(--text-4)" font-size="7.5" letter-spacing=".03em">graph traversal
-                      propagates relevance across entire knowledge base in one step</text>
+                    <text x="310" y="182" fill="var(--text-4)" font-size="7.5" letter-spacing=".03em">graph traversal propagates relevance across entire knowledge base in one step</text>
                   </svg>
                 </div>
 
                 <ul class="bullet-list">
-                  <li><strong>Graph-guided retrieval</strong> — pgvector finds anchor nodes (vector proximity); Neo4j
-                    runs Personalized PageRank from those seeds (graph propagation); RRF fuses both candidate sets. A
-                    query about "weight updates" reaches passages about "backpropagation" through "gradient descent"
-                    even when no single passage is vector-close to the query</li>
-                  <li><strong>No Python sidecar</strong> — ONNX Runtime + DJL HuggingFace Tokenizers run
-                    <code>all-MiniLM-L6-v2</code> directly on the JVM. The model is a file, not a service. One runtime,
-                    no cross-process overhead, no hidden coupling</li>
-                  <li><strong>Synonymy edges</strong> — concept nodes whose embedding vectors exceed a cosine similarity
-                    threshold are automatically linked during ingest. <code>backprop</code> and
-                    <code>backpropagation</code> are connected without manual normalization; the graph normalizes itself
-                    as it grows</li>
-                  <li><strong>Hexagonal architecture</strong> — pgvector, Neo4j, Gemini Flash, and ONNX each sit behind
-                    a port interface. Swapping concept extraction from Gemini Flash to a local Ollama model is an
-                    adapter change, not an application-layer change</li>
-                  <li><strong>Role</strong> — solo system design across ingestion pipelines, graph modeling, retrieval
-                    architecture, and D3.js visualization direction</li>
+                  <li><strong>Graph-guided retrieval</strong> — pgvector finds anchor nodes (vector proximity); Neo4j runs Personalized PageRank from those seeds (graph propagation); RRF fuses both candidate sets. A query about "weight updates" reaches passages about "backpropagation" through "gradient descent" even when no single passage is vector-close to the query</li>
+                  <li><strong>No Python sidecar</strong> — ONNX Runtime + DJL HuggingFace Tokenizers run <code>all-MiniLM-L6-v2</code> directly on the JVM. The model is a file, not a service. One runtime, no cross-process overhead, no hidden coupling</li>
+                  <li><strong>Synonymy edges</strong> — concept nodes whose embedding vectors exceed a cosine similarity threshold are automatically linked during ingest. <code>backprop</code> and <code>backpropagation</code> are connected without manual normalization; the graph normalizes itself as it grows</li>
+                  <li><strong>Hexagonal architecture</strong> — pgvector, Neo4j, Gemini Flash, and ONNX each sit behind a port interface. Swapping concept extraction from Gemini Flash to a local Ollama model is an adapter change, not an application-layer change</li>
+                  <li><strong>Role</strong> — solo system design across ingestion pipelines, graph modeling, retrieval architecture, and D3.js visualization direction</li>
                 </ul>
 
                 <div class="proj-footer-tags">
-                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/Kairos" target="_blank"
-                    rel="noopener">repository ↗</a>
-                  Java 21 · Spring WebFlux · ONNX Runtime · all-MiniLM-L6-v2 · PostgreSQL / pgvector · Neo4j · Gemini
-                  Flash · React 19 · D3.js · Docker Compose
+                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/Kairos" target="_blank" rel="noopener">repository ↗</a>
+                  Java 21 · Spring WebFlux · ONNX Runtime · all-MiniLM-L6-v2 · PostgreSQL / pgvector · Neo4j · Gemini Flash · React 19 · D3.js · Docker Compose
                 </div>
               </div>
             </div>
@@ -1719,15 +1255,13 @@
                   <span class="proj-name">OpenIT</span>
                   <span class="proj-badge proj-badge--amber">TEAM OF 3</span>
                 </div>
-                <span class="proj-oneliner">IoT access control and payment — hardware to interface, one coherent
-                  flow</span>
-                <span class="proj-question">how do hardware events, payment confirmation, and backend coordination
-                  become one coherent system?</span>
+                <span class="proj-oneliner">IoT access control and payment — hardware to interface, one coherent flow</span>
+                <span class="proj-question">how do hardware events, payment confirmation, and backend coordination become one coherent system?</span>
               </div>
             </div>
             <span class="proj-tags-collapsed">WebFlux · MQTT · ESP32</span>
             <svg class="proj-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 6l4 4 4-4" />
+              <path d="M4 6l4 4 4-4"/>
             </svg>
           </div>
           <div class="proj-body">
@@ -1743,48 +1277,35 @@
                   <div class="proj-metric">
                     <div class="proj-metric-label">TEAM</div>
                     <div class="proj-metric-val g">3</div>
-                    <div class="proj-metric-sub">Shared end-to-end delivery across firmware, backend, and interface
-                    </div>
+                    <div class="proj-metric-sub">Shared end-to-end delivery across firmware, backend, and interface</div>
                   </div>
                   <div class="proj-metric">
                     <div class="proj-metric-label">SYSTEM FLOW</div>
                     <div class="proj-metric-val a">6-step</div>
-                    <div class="proj-metric-sub">Entry detection → payment generation → webhook validation → gate
-                      release</div>
+                    <div class="proj-metric-sub">Entry detection → payment generation → webhook validation → gate release</div>
                   </div>
                   <div class="proj-metric">
                     <div class="proj-metric-label">ARCHITECTURE</div>
                     <div class="proj-metric-val b">2 contexts</div>
-                    <div class="proj-metric-sub">Access and payment with explicit boundaries — 4-layer clean arch each
-                    </div>
+                    <div class="proj-metric-sub">Access and payment with explicit boundaries — 4-layer clean arch each</div>
                   </div>
                 </div>
 
-                <!-- System flow SVG -->
                 <div class="proj-arch">
                   <div class="viz-label">// full system flow — entry to gate release</div>
-                  <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg"
-                    style="font-family:'JetBrains Mono',monospace;">
+                  <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
-                      <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#DDDCD6" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#DDDCD6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="ahc3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ahc3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="aha2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#D0CFC8" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="aha2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#D0CFC8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
-                      <marker id="ahg2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
-                        orient="auto-start-reverse">
-                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round"
-                          stroke-linejoin="round" />
+                      <marker id="ahg2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                     </defs>
                     <text x="30" y="14" fill="var(--text-4)" font-size="7" letter-spacing=".06em">ENTRY</text>
@@ -1792,102 +1313,66 @@
                     <text x="305" y="14" fill="var(--text-4)" font-size="7" letter-spacing=".06em">BACKEND</text>
                     <text x="508" y="14" fill="var(--text-4)" font-size="7" letter-spacing=".06em">PAYMENT</text>
                     <text x="618" y="14" fill="var(--text-4)" font-size="7" letter-spacing=".06em">FRONTEND</text>
-                    <rect x="8" y="80" width="76" height="50" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".7" />
-                    <text x="46" y="101" text-anchor="middle" fill="var(--text-3)" font-size="9"
-                      font-weight="500">ESP32</text>
+                    <!-- ESP32 -->
+                    <rect x="8" y="80" width="76" height="50" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
+                    <text x="46" y="101" text-anchor="middle" fill="var(--text-3)" font-size="9" font-weight="500">ESP32</text>
                     <text x="46" y="113" text-anchor="middle" fill="var(--text-4)" font-size="7.5">sensor detects</text>
                     <text x="46" y="123" text-anchor="middle" fill="var(--text-4)" font-size="7.5">unique code</text>
-                    <rect x="104" y="88" width="68" height="34" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".6" stroke-dasharray="3 2" />
+                    <!-- MQTT broker -->
+                    <rect x="104" y="88" width="68" height="34" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".6" stroke-dasharray="3 2"/>
                     <text x="138" y="107" text-anchor="middle" fill="var(--text-3)" font-size="8.5">MQTT broker</text>
-                    <rect x="104" y="140" width="68" height="40" rx="2" fill="var(--surface)" stroke="var(--border2)"
-                      stroke-width=".7" />
-                    <text x="138" y="157" text-anchor="middle" fill="var(--text)" font-size="9"
-                      font-weight="500">Node-RED</text>
-                    <text x="138" y="169" text-anchor="middle" fill="var(--text-3)" font-size="7.5">IoT
-                      orchestrator</text>
-                    <text x="138" y="178" text-anchor="middle" fill="var(--text-4)" font-size="7">MQTT → HTTP</text>
-                    <line x1="84" y1="100" x2="102" y2="100" stroke="var(--border2)" stroke-width=".8"
-                      marker-end="url(#ah2)" />
-                    <line x1="138" y1="122" x2="138" y2="138" stroke="var(--border2)" stroke-width=".7"
-                      marker-end="url(#ah2)" />
-                    <rect x="192" y="60" width="150" height="140" rx="2" fill="var(--surface)" stroke="var(--border2)"
-                      stroke-width=".6" stroke-dasharray="3 2" />
-                    <text x="267" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5"
-                      letter-spacing=".05em">Spring Boot · WebFlux</text>
-                    <rect x="202" y="84" width="130" height="42" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".6" />
-                    <text x="267" y="100" text-anchor="middle" fill="var(--text)" font-size="8.5"
-                      font-weight="500">access context</text>
-                    <text x="267" y="112" text-anchor="middle" fill="var(--text-4)" font-size="7">entry · gate ·
-                      exit</text>
-                    <text x="267" y="121" text-anchor="middle" fill="var(--text-4)" font-size="7">4-layer clean
-                      arch</text>
-                    <rect x="202" y="136" width="130" height="42" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".6" />
-                    <text x="267" y="152" text-anchor="middle" fill="var(--text)" font-size="8.5"
-                      font-weight="500">payment context</text>
-                    <text x="267" y="164" text-anchor="middle" fill="var(--text-4)" font-size="7">preference · webhook ·
-                      SSE</text>
-                    <text x="267" y="173" text-anchor="middle" fill="var(--text-4)" font-size="7">4-layer clean
-                      arch</text>
-                    <line x1="172" y1="160" x2="190" y2="115" stroke="var(--border3)" stroke-width=".7"
-                      stroke-dasharray="2 2" marker-end="url(#aha2)" />
-                    <rect x="466" y="88" width="110" height="50" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".7" />
-                    <text x="521" y="107" text-anchor="middle" fill="var(--text)" font-size="9"
-                      font-weight="500">Mercado Pago</text>
-                    <text x="521" y="119" text-anchor="middle" fill="var(--text-3)" font-size="7.5">Checkout
-                      Pro</text>
-                    <text x="521" y="129" text-anchor="middle" fill="var(--text-4)" font-size="7">PIX · card ·
-                      boleto</text>
-                    <line x1="332" y1="152" x2="464" y2="112" stroke="var(--border3)" stroke-width=".7"
-                      marker-end="url(#aha2)" />
-                    <line x1="466" y1="128" x2="334" y2="162" stroke="var(--border3)" stroke-width=".7"
-                      stroke-dasharray="2 2" marker-end="url(#aha2)" />
-                    <rect x="604" y="70" width="106" height="80" rx="2" fill="var(--bg2)" stroke="var(--border2)"
-                      stroke-width=".7" />
-                    <text x="657" y="92" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="500">React /
-                      TS</text>
-                    <text x="657" y="105" text-anchor="middle" fill="var(--text-3)" font-size="7.5">payment
-                      terminal</text>
-                    <text x="657" y="117" text-anchor="middle" fill="var(--text-4)" font-size="7">SSE: real-time
-                      status</text>
+                    <!-- Node-RED (primary — dark) -->
+                    <rect x="104" y="140" width="68" height="40" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
+                    <text x="138" y="157" text-anchor="middle" fill="#F4F4F0" font-size="9" font-weight="500">Node-RED</text>
+                    <text x="138" y="169" text-anchor="middle" fill="#BCBCB4" font-size="7.5">IoT orchestrator</text>
+                    <text x="138" y="178" text-anchor="middle" fill="#9E9E97" font-size="7">MQTT → HTTP</text>
+                    <line x1="84" y1="100" x2="102" y2="100" stroke="var(--border2)" stroke-width=".8" marker-end="url(#ah2)"/>
+                    <line x1="138" y1="122" x2="138" y2="138" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah2)"/>
+                    <!-- Spring Boot wrapper -->
+                    <rect x="192" y="60" width="150" height="140" rx="2" fill="var(--surface)" stroke="var(--border2)" stroke-width=".6" stroke-dasharray="3 2"/>
+                    <text x="267" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5" letter-spacing=".05em">Spring Boot · WebFlux</text>
+                    <!-- access context (primary — dark) -->
+                    <rect x="202" y="84" width="130" height="42" rx="2" fill="#111110" stroke="#111110" stroke-width=".6"/>
+                    <text x="267" y="100" text-anchor="middle" fill="#F4F4F0" font-size="8.5" font-weight="500">access context</text>
+                    <text x="267" y="112" text-anchor="middle" fill="#BCBCB4" font-size="7">entry · gate · exit</text>
+                    <text x="267" y="121" text-anchor="middle" fill="#BCBCB4" font-size="7">4-layer clean arch</text>
+                    <!-- payment context (primary — dark) -->
+                    <rect x="202" y="136" width="130" height="42" rx="2" fill="#111110" stroke="#111110" stroke-width=".6"/>
+                    <text x="267" y="152" text-anchor="middle" fill="#F4F4F0" font-size="8.5" font-weight="500">payment context</text>
+                    <text x="267" y="164" text-anchor="middle" fill="#BCBCB4" font-size="7">preference · webhook · SSE</text>
+                    <text x="267" y="173" text-anchor="middle" fill="#BCBCB4" font-size="7">4-layer clean arch</text>
+                    <line x1="172" y1="160" x2="190" y2="115" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
+                    <!-- Mercado Pago (primary — dark) -->
+                    <rect x="466" y="88" width="110" height="50" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
+                    <text x="521" y="107" text-anchor="middle" fill="#F4F4F0" font-size="9" font-weight="500">Mercado Pago</text>
+                    <text x="521" y="119" text-anchor="middle" fill="#BCBCB4" font-size="7.5">Checkout Pro</text>
+                    <text x="521" y="129" text-anchor="middle" fill="#9E9E97" font-size="7">PIX · card · boleto</text>
+                    <line x1="332" y1="152" x2="464" y2="112" stroke="var(--border3)" stroke-width=".7" marker-end="url(#aha2)"/>
+                    <line x1="466" y1="128" x2="334" y2="162" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
+                    <!-- React frontend -->
+                    <rect x="604" y="70" width="106" height="80" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
+                    <text x="657" y="92" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="500">React / TS</text>
+                    <text x="657" y="105" text-anchor="middle" fill="var(--text-3)" font-size="7.5">payment terminal</text>
+                    <text x="657" y="117" text-anchor="middle" fill="var(--text-4)" font-size="7">SSE: real-time status</text>
                     <text x="657" y="127" text-anchor="middle" fill="var(--text-4)" font-size="7">no polling</text>
-                    <text x="657" y="139" text-anchor="middle" fill="var(--text-4)" font-size="7">request gate
-                      open</text>
-                    <line x1="332" y1="145" x2="602" y2="108" stroke="var(--border2)" stroke-width=".8"
-                      marker-end="url(#ahc3)" />
+                    <text x="657" y="139" text-anchor="middle" fill="var(--text-4)" font-size="7">request gate open</text>
+                    <line x1="332" y1="145" x2="602" y2="108" stroke="var(--border2)" stroke-width=".8" marker-end="url(#ahc3)"/>
                     <text x="468" y="118" text-anchor="middle" fill="var(--text-4)" font-size="7">SSE stream</text>
-                    <path d="M657 150 Q 657 205 267 200 Q 210 200 210 182" fill="none" stroke="var(--border3)"
-                      stroke-width=".7" stroke-dasharray="2 2.5" marker-end="url(#ahg2)" />
-                    <text x="440" y="215" text-anchor="middle" fill="var(--text-4)" font-size="7">gate release —
-                      confirmed payment → Node-RED → MQTT → ESP32</text>
+                    <path d="M657 150 Q 657 205 267 200 Q 210 200 210 182" fill="none" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2.5" marker-end="url(#ahg2)"/>
+                    <text x="440" y="215" text-anchor="middle" fill="var(--text-4)" font-size="7">gate release — confirmed payment → Node-RED → MQTT → ESP32</text>
                   </svg>
                 </div>
 
                 <ul class="bullet-list">
-                  <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (entry detection, gate
-                    coordination, exit logging) and <code>payment</code> (Mercado Pago Checkout Pro preference creation,
-                    webhook receipt, SSE delivery); each with four-layer clean architecture. Context boundaries defined
-                    before any code was written</li>
-                  <li><strong>Node-RED as IoT orchestrator</strong> — subscribes to MQTT device events, calls
-                    <code>POST /access/entry</code> on entry, and publishes gate-open commands back to ESP32 via MQTT
-                    after <code>POST /open-gate</code> is received from the backend. The backend does not talk to
-                    hardware directly</li>
-                  <li><strong>SSE for payment status</strong> — backend holds a reactive SSE connection per payment ID
-                    and pushes confirmation the moment the Mercado Pago webhook lands. No polling, no client retry loop
-                    — gate release happens on confirmed event receipt</li>
-                  <li><strong>Role</strong> — team project; hands-on work across reactive backend, MQTT / Node-RED
-                    integration flow, and real-time status delivery</li>
+                  <li><strong>Two DDD bounded contexts</strong> — <code>access</code> (entry detection, gate coordination, exit logging) and <code>payment</code> (Mercado Pago Checkout Pro preference creation, webhook receipt, SSE delivery); each with four-layer clean architecture. Context boundaries defined before any code was written</li>
+                  <li><strong>Node-RED as IoT orchestrator</strong> — subscribes to MQTT device events, calls <code>POST /access/entry</code> on entry, and publishes gate-open commands back to ESP32 via MQTT after <code>POST /open-gate</code> is received from the backend. The backend does not talk to hardware directly</li>
+                  <li><strong>SSE for payment status</strong> — backend holds a reactive SSE connection per payment ID and pushes confirmation the moment the Mercado Pago webhook lands. No polling, no client retry loop — gate release happens on confirmed event receipt</li>
+                  <li><strong>Role</strong> — team project; hands-on work across reactive backend, MQTT / Node-RED integration flow, and real-time status delivery</li>
                 </ul>
 
                 <div class="proj-footer-tags">
-                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/OpenIt" target="_blank"
-                    rel="noopener">repository ↗</a>
-                  Java 21 · Spring Boot · WebFlux · Node-RED · MQTT · SSE · Mercado Pago SDK · React 19 · TypeScript ·
-                  MySQL · ESP32 · Docker Compose
+                  <a class="proj-github-link" href="https://github.com/Luca5Eckert/OpenIt" target="_blank" rel="noopener">repository ↗</a>
+                  Java 21 · Spring Boot · WebFlux · Node-RED · MQTT · SSE · Mercado Pago SDK · React 19 · TypeScript · MySQL · ESP32 · Docker Compose
                 </div>
               </div>
             </div>
@@ -1897,48 +1382,39 @@
       </div>
     </section>
 
-    <!-- ── EXPERIENCE ── -->
+    <!-- EXPERIENCE -->
     <section id="experience" class="section reveal">
       <div class="sec-head">
-        <span class="sec-marker">##</span>
-        <span class="sec-title">EXPERIENCE</span>
+        <span class="sec-title">Experience</span>
       </div>
 
-      <p style="font-size:11.5px;color:var(--text-3);margin-bottom:1.4rem;">
-        <span style="color:var(--text-4)">// </span>professional work shaped by backend architecture, collaboration, and
-        systems built close to the implementation details that matter
-      </p>
-
-      <div class="exp-row">
-        <div>
+      <div class="exp-layout">
+        <div class="exp-left">
           <div class="exp-company">WEG S.A.</div>
-          <div class="exp-role">Backend Developer — Industrial Learning Program · CentroWEG / SENAI</div>
-          <div class="exp-context">microservices · backend architecture · integrations · engineering workflow</div>
+          <div class="exp-role">Backend Developer</div>
+          <div class="exp-context">Industrial Learning Program<br>CentroWEG / SENAI</div>
+          <div class="exp-date">Aug 2024 — Jul 2026<br>Jaraguá do Sul, BR</div>
         </div>
-        <div class="exp-date">Aug 2024 — Jul 2026<br>Jaraguá do Sul, BR</div>
+        <div class="exp-right">
+          <p class="exp-note">
+            Professional work shaped by backend architecture, collaboration,
+            and systems built close to the implementation details that matter.
+          </p>
+          <ul class="exp-points">
+            <li>Defined backend boundaries for <strong>InfoWEG</strong>, including REST API structure, domain modeling, and module organization in Java, Spring Boot, and MySQL for a class-wide Scrum project</li>
+            <li>Built backend systems with emphasis on <strong>clear service responsibilities, explicit state flow, and maintainable module design</strong> — treating architecture as a first-class deliverable, not an afterthought</li>
+            <li>Delivered <strong>OpenIT</strong> in a team of three — reactive Spring backend, React / TypeScript frontend, MQTT-based ESP32 integration, real-time payment confirmation via SSE, across two DDD bounded contexts</li>
+            <li>Worked on software crossing multiple system boundaries — <strong>device events, backend coordination, payment confirmation, and UI feedback</strong> — with attention to how those parts behave as one coherent system</li>
+            <li>Contributed to engineering quality through <strong>code reviews, CI/CD workflows in GitHub Actions, and development practices shaped by Scrum and Kanban</strong></li>
+          </ul>
+        </div>
       </div>
-
-      <ul class="bullet-list exp-list">
-        <li>Defined backend boundaries for <strong>InfoWEG</strong>, including REST API structure, domain modeling, and
-          module organization in Java, Spring Boot, and MySQL for a class-wide Scrum project</li>
-        <li>Built backend systems with emphasis on <strong>clear service responsibilities, explicit state flow, and
-            maintainable module design</strong> — treating architecture as a first-class deliverable, not an
-          afterthought</li>
-        <li>Delivered <strong>OpenIT</strong> in a team of three — reactive Spring backend, React / TypeScript frontend,
-          MQTT-based ESP32 integration, real-time payment confirmation via SSE, across two DDD bounded contexts</li>
-        <li>Worked on software crossing multiple system boundaries — <strong>device events, backend coordination,
-            payment confirmation, and UI feedback</strong> — with attention to how those parts behave as one coherent
-          system</li>
-        <li>Contributed to engineering quality through <strong>code reviews, CI/CD workflows in GitHub Actions, and
-            development practices shaped by Scrum and Kanban</strong></li>
-      </ul>
     </section>
 
-    <!-- ── TECHNICAL FOCUS ── -->
+    <!-- TECHNICAL FOCUS -->
     <section id="stack" class="section reveal">
       <div class="sec-head">
-        <span class="sec-marker">##</span>
-        <span class="sec-title">TECHNICAL FOCUS</span>
+        <span class="sec-title">Technical Focus</span>
       </div>
 
       <p class="stack-intro">
@@ -1949,8 +1425,7 @@
       <table class="stack-table">
         <tr>
           <td>engineering focus</td>
-          <td>distributed systems · event-driven architecture · read model design · consistency tradeoffs · graph
-            retrieval · vector search</td>
+          <td>distributed systems · event-driven architecture · read model design · consistency tradeoffs · graph retrieval · vector search</td>
         </tr>
         <tr>
           <td>backend / runtime</td>
@@ -1971,34 +1446,29 @@
       </table>
     </section>
 
-    <!-- ── CONTACT ── -->
+    <!-- CONTACT -->
     <section id="contact" class="section reveal">
       <div class="sec-head">
-        <span class="sec-marker">##</span>
-        <span class="sec-title">GET IN TOUCH</span>
+        <span class="sec-title">Get in Touch</span>
       </div>
 
-      <p style="font-size:11.5px;color:var(--text-3);margin-bottom:1.4rem;">
-        <span style="color:var(--text-4)">// </span>open to backend engineering roles, distributed systems work, and
-        teams that care about architecture, judgment, and implementation depth
-      </p>
-
-      <div class="contact-grid">
-        <a class="contact-item" href="mailto:lucasismaeleckert@gmail.com">
-          <span class="ci-label">EMAIL</span>
-          <span class="ci-val">lucasismaeleckert@gmail.com</span>
-          <span class="ci-arrow">→ start a conversation</span>
-        </a>
-        <a class="contact-item" href="https://github.com/Luca5Eckert" target="_blank" rel="noopener">
-          <span class="ci-label">GITHUB</span>
-          <span class="ci-val">github.com/Luca5Eckert</span>
-          <span class="ci-arrow">→ see the code</span>
-        </a>
-        <a class="contact-item" href="https://www.linkedin.com/in/lucas-ismael-eckert/" target="_blank" rel="noopener">
-          <span class="ci-label">LINKEDIN</span>
-          <span class="ci-val">lucas-ismael-eckert</span>
-          <span class="ci-arrow">→ connect</span>
-        </a>
+      <div class="contact-statement">
+        <p class="contact-prose">
+          Open to backend engineering roles, distributed systems work, and teams
+          that care about architecture, judgment, and implementation depth.
+        </p>
+        <div class="contact-ctas">
+          <a class="contact-cta" href="mailto:lucasismaeleckert@gmail.com">
+            <span class="cta-label">EMAIL</span>
+            <span class="cta-val">lucasismaeleckert@gmail.com</span>
+            <span class="cta-arrow">→</span>
+          </a>
+          <a class="contact-cta" href="https://github.com/Luca5Eckert" target="_blank" rel="noopener">
+            <span class="cta-label">GITHUB</span>
+            <span class="cta-val">github.com/Luca5Eckert</span>
+            <span class="cta-arrow">→</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -2019,18 +1489,6 @@
   </footer>
 
   <script>
-    /* -- clock -- */
-    (function () {
-      const el = document.getElementById('sb-time');
-      function tick() {
-        if (!el) return;
-        el.textContent = new Date().toLocaleTimeString('en-US', {
-          hour: '2-digit', minute: '2-digit', second: '2-digit',
-          hour12: false, timeZone: 'America/Sao_Paulo'
-        }) + ' BRT';
-      }
-      tick(); setInterval(tick, 1000);
-    })();
 
     /* -- scroll reveal -- */
     (function () {
@@ -2044,17 +1502,20 @@
 
     /* -- accordion -- */
     const animated = new Set();
-
-    const animators = [animateVellum, animateKairos];
+    const animators = [null, animateKairos, null]; // proj-0 is featured (no trigger), proj-1 = Kairos, proj-2 = OpenIT
 
     function toggleProj(idx) {
+      if (idx === 0) return; // featured: always open
       const items = document.querySelectorAll('.proj-item');
       const target = items[idx];
       if (!target) return;
       const wasOpen = target.classList.contains('open');
       const scrollY = window.scrollY;
 
-      items.forEach(item => item.classList.remove('open'));
+      // close all non-featured items
+      items.forEach((item, i) => {
+        if (i !== 0) item.classList.remove('open');
+      });
 
       if (!wasOpen) {
         target.classList.add('open');
@@ -2075,11 +1536,10 @@
 
       const zeroEl = document.getElementById('m-zero');
       if (zeroEl) {
-        let f = 0;
+        let tick = 0;
         const iv = setInterval(() => {
-          zeroEl.textContent = f % 2 === 0 ? '—' : '0';
-          f++;
-          if (f > 8) { zeroEl.textContent = '0'; clearInterval(iv); }
+          zeroEl.textContent = tick % 2 === 0 ? '—' : '0';
+          if (++tick > 8) { zeroEl.textContent = '0'; clearInterval(iv); }
         }, 120);
       }
 
@@ -2125,14 +1585,14 @@
 
     /* -- init -- */
     window.addEventListener('load', () => {
-      const p0 = document.getElementById('proj-0');
-      if (p0 && p0.classList.contains('open') && !animated.has(0)) {
+      // VellumHub is always open — fire its animation on load
+      if (!animated.has(0)) {
         setTimeout(animateVellum, 900);
         animated.add(0);
       }
     });
+
   </script>
 
 </body>
-
 </html>

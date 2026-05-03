@@ -18,6 +18,8 @@
     :root {
       --bg:         #FAFAF8;
       --bg2:        #F4F4F0;
+      --bg-dark:    #111110;
+      --bg-ink:     #1A1A18;
       --surface:    #EEEDE8;
       --surface2:   #E8E7E1;
       --border:     #DDDCD6;
@@ -29,17 +31,25 @@
       --text-3:     #9E9E97;
       --text-4:     #BCBCB4;
 
-      --green:      #2E2E2A;
-      --green-dim:  #6B6B65;
-      --green-bg:   #F4F4F0;
-      --amber:      #4A4A45;
-      --amber-dim:  #9E9E97;
-      --red:        #3A3A36;
-      --blue:       #4A4A45;
-      --cyan:       #3A3A36;
-      --violet:     #2E2E2A;
-      --violet-dim: #9E9E97;
-      --violet-bg:  #F4F4F0;
+      /* === NEW ACCENT PALETTE (inspired by Clube de Filosofia) === */
+      --accent:         #8B7355;   /* warm bronze/sienna — editorial accent */
+      --accent-dim:     #B09A7A;   /* lighter variant for borders */
+      --accent-bg:      #F0EBE3;   /* warm tinted surface */
+      --accent-dark:    #5C4A2F;   /* deep bronze for hover/emphasis */
+
+      --rust:           #9B4D2E;   /* terracotta — strong CTA accent */
+      --rust-dim:       #C4785A;
+      --rust-bg:        #F5EDE8;
+
+      --sage:           #4A6741;   /* muted olive-green */
+      --sage-dim:       #7A9975;
+      --sage-bg:        #EDF0EB;
+
+      --ink:            #1A1A18;   /* near-black for dark section bg */
+      --ink-text:       #F0EFEC;   /* warm off-white on dark bg */
+      --ink-text-2:     #B5B3AC;
+      --ink-text-3:     #7A7870;
+      --ink-border:     #2E2D2A;
 
       --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
       --font-disp: 'Cormorant Garamond', Georgia, serif;
@@ -63,7 +73,7 @@
 
     ::-webkit-scrollbar       { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: var(--border3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
 
     /* === BASE === */
     body {
@@ -81,7 +91,7 @@
       position: fixed;
       inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.035;
+      opacity: 0.03;
       pointer-events: none;
       z-index: 9999;
     }
@@ -93,7 +103,7 @@
       padding: 5.5rem 2rem 4rem;
     }
 
-    /* bullet-list utility (shared by projects and experience) */
+    /* bullet-list utility */
     .bullet-list {
       list-style: none;
       display: flex;
@@ -115,7 +125,7 @@
       content: '//';
       position: absolute;
       left: 0;
-      color: var(--text-4);
+      color: var(--accent-dim);
       font-size: 9.5px;
       top: 4px;
     }
@@ -140,11 +150,12 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
+      padding: 0 1.2rem;
       height: 44px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.8rem;
     }
 
     .nav-name {
@@ -154,12 +165,16 @@
       font-style: italic;
       color: var(--text);
       letter-spacing: -0.01em;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.4rem;
+      flex-wrap: nowrap;
+      overflow: hidden;
     }
 
     .nav-links a {
@@ -167,8 +182,10 @@
       font-size: 10px;
       color: var(--text-3);
       text-decoration: none;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
       transition: color 150ms;
+      white-space: nowrap;
     }
 
     .nav-links a:hover { color: var(--text); }
@@ -194,12 +211,12 @@
 
     .hero-name em {
       font-style: normal;
-      color: var(--text);
+      color: var(--accent);
     }
 
     .hero-headline {
       font-family: var(--font-mono);
-      font-size: clamp(15px, 2.4vw, 20px);
+      font-size: clamp(17px, 2.8vw, 24px);
       font-weight: 500;
       color: var(--text);
       line-height: 1.4;
@@ -207,6 +224,16 @@
       max-width: 680px;
       opacity: 0;
       animation: fade-up 700ms var(--ease-out) forwards 240ms;
+    }
+
+    /* accent bar under headline */
+    .hero-headline-bar {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fade-up 600ms var(--ease-out) forwards 290ms;
     }
 
     .hero-links {
@@ -234,7 +261,7 @@
       position: absolute;
       bottom: -1px; left: 0;
       width: 0; height: 1px;
-      background: var(--text);
+      background: var(--accent);
       transition: width 160ms;
     }
 
@@ -259,7 +286,7 @@
       gap: 0.5rem;
       font-size: 10.5px;
       color: var(--text-3);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       margin-bottom: 2rem;
       opacity: 0;
       animation: fade-up 600ms var(--ease-out) forwards 480ms;
@@ -284,7 +311,7 @@
       color: var(--text-2);
       line-height: 1.8;
       max-width: 680px;
-      border-left: 2px solid var(--border2);
+      border-left: 2px solid var(--accent-dim);
       padding-left: 1rem;
     }
 
@@ -302,26 +329,53 @@
 
     .now-line em { font-style: italic; color: var(--text-2); }
 
-    /* -- sections -- */
+    /* -- sections (light) -- */
     .section {
       padding: 3.2rem 0;
       border-top: 1px solid var(--border);
     }
 
+    /* -- DARK SECTION — the contact block gets ink treatment -- */
+    .section--dark {
+      background: var(--ink);
+      border-top: none;
+      padding: 3.5rem 2rem;
+    }
+
+    /* Stripe accent band between sections */
+    .section-stripe {
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--rust) 50%, var(--accent) 100%);
+      opacity: 0.7;
+    }
+
     .sec-head {
       display: flex;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 1.8rem;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .sec-label {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 4px;
     }
 
     .sec-title {
       font-family: var(--font-disp);
-      font-size: 22px;
+      font-size: clamp(26px, 4vw, 38px);
       font-weight: 300;
       font-style: italic;
       color: var(--text);
-      letter-spacing: 0;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .sec-title--dark {
+      color: var(--ink-text);
     }
 
     /* -- projects -- */
@@ -348,13 +402,13 @@
 
     .proj-item--featured .proj-name {
       font-family: var(--font-disp);
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 600;
       font-style: italic;
       letter-spacing: -0.02em;
     }
 
-    .proj-item--featured .proj-badge { font-size: 8px; letter-spacing: 0.1em; }
+    .proj-item--featured .proj-badge { font-size: 8px; letter-spacing: 0.15em; }
 
     .proj-item--featured .proj-body { grid-template-rows: 1fr !important; }
 
@@ -372,9 +426,9 @@
       transition: border-color 220ms, padding-left 220ms;
     }
 
-    .proj-trigger:hover { border-color: var(--border3); padding-left: 0.8rem; }
+    .proj-trigger:hover { border-color: var(--accent-dim); padding-left: 0.8rem; }
 
-    .proj-item.open .proj-trigger { border-color: var(--text-3); padding-left: 0.8rem; }
+    .proj-item.open .proj-trigger { border-color: var(--accent); padding-left: 0.8rem; }
 
     .proj-trigger-left {
       display: flex;
@@ -386,7 +440,7 @@
 
     .proj-num {
       font-size: 9.5px;
-      color: var(--text-4);
+      color: var(--accent-dim);
       width: 18px;
       flex-shrink: 0;
       padding-top: 3px;
@@ -419,16 +473,29 @@
     .proj-badge {
       font-size: 8.5px;
       border: 1px solid var(--border2);
-      padding: 1px 5px;
-      letter-spacing: 0.07em;
+      padding: 2px 6px;
+      letter-spacing: 0.15em;
       background: var(--bg2);
       flex-shrink: 0;
-      color: var(--text-2);
+      color: var(--text-3);
+      text-transform: uppercase;
     }
 
-    .proj-badge--green  { color: var(--text-2); border-color: var(--border2); background: var(--bg2); }
-    .proj-badge--violet { color: var(--text-2); border-color: var(--border2); background: var(--bg2); }
-    .proj-badge--amber  { color: var(--text-2); border-color: var(--border2); background: var(--bg2); }
+    .proj-badge--green  {
+      color: var(--sage);
+      border-color: var(--sage-dim);
+      background: var(--sage-bg);
+    }
+    .proj-badge--violet {
+      color: var(--accent-dark);
+      border-color: var(--accent-dim);
+      background: var(--accent-bg);
+    }
+    .proj-badge--amber  {
+      color: var(--rust);
+      border-color: var(--rust-dim);
+      background: var(--rust-bg);
+    }
 
     .proj-oneliner {
       font-size: 11px;
@@ -472,7 +539,7 @@
       transition: transform 380ms var(--ease-out), color 200ms;
     }
 
-    .proj-item.open .proj-chevron { transform: rotate(180deg); color: var(--text-3); }
+    .proj-item.open .proj-chevron { transform: rotate(180deg); color: var(--accent); }
 
     .proj-body {
       display: grid;
@@ -488,7 +555,7 @@
 
     .proj-tagline {
       font-family: var(--font-disp);
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 300;
       font-style: italic;
       color: var(--text-2);
@@ -518,8 +585,9 @@
 
     .proj-metric-label {
       font-size: 9px;
-      color: var(--text-4);
-      letter-spacing: 0.08em;
+      color: var(--accent-dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       margin-bottom: 0.4rem;
     }
 
@@ -534,11 +602,11 @@
       letter-spacing: -0.02em;
     }
 
-    .proj-metric-val.g,
-    .proj-metric-val.a,
-    .proj-metric-val.b,
-    .proj-metric-val.c,
-    .proj-metric-val.v { color: var(--text); }
+    .proj-metric-val.g { color: var(--sage); }
+    .proj-metric-val.a { color: var(--accent); }
+    .proj-metric-val.b { color: var(--text); }
+    .proj-metric-val.c { color: var(--accent-dark); }
+    .proj-metric-val.v { color: var(--accent); }
 
     .proj-metric-sub { font-size: 9px; color: var(--text-3); line-height: 1.5; }
 
@@ -547,8 +615,9 @@
 
     .viz-label {
       font-size: 9px;
-      color: var(--text-4);
-      letter-spacing: 0.08em;
+      color: var(--accent-dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       margin-bottom: 0.8rem;
     }
 
@@ -560,17 +629,26 @@
 
     .lat-fill { height: 100%; width: 0; transition: width 950ms var(--ease-out); }
 
-    .lat-fill.r { background: var(--text-3); opacity: .75; }
-    .lat-fill.a { background: var(--text-2); opacity: .75; }
-    .lat-fill.g { background: var(--text);   opacity: .85; }
+    .lat-fill.r { background: var(--rust-dim); opacity: .8; }
+    .lat-fill.a { background: var(--accent); opacity: .75; }
+    .lat-fill.g { background: var(--sage); opacity: .85; }
 
     .lat-ms { font-size: 9px; color: var(--text-3); width: 200px; flex-shrink: 0; text-align: right; }
-    .lat-ms.g { color: var(--text-2); }
+    .lat-ms.g { color: var(--sage); }
 
     /* -- pipeline viz -- */
     .proj-pipeline { margin-bottom: 1.8rem; }
 
-    .pipeline-sublabel { font-size: 8.5px; letter-spacing: 0.06em; margin-bottom: 0.35rem; color: var(--text-2); }
+    .pipeline-sublabel {
+      font-size: 8.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      color: var(--text-2);
+    }
+
+    .pipeline-sublabel.v { color: var(--sage); }
+    .pipeline-sublabel.c { color: var(--accent); }
 
     .pipeline-track {
       display: flex;
@@ -593,7 +671,7 @@
     }
 
     .pipeline-step:last-child { border-right: none; }
-    .pipeline-step:hover { background: var(--surface); }
+    .pipeline-step:hover { background: var(--accent-bg); }
 
     .pipeline-step-name {
       display: block;
@@ -608,7 +686,7 @@
       align-items: center;
       padding: 0 5px;
       font-size: 8.5px;
-      color: var(--text-4);
+      color: var(--accent-dim);
       flex-shrink: 0;
       background: var(--bg2);
       border-right: 1px solid var(--border);
@@ -632,11 +710,11 @@
     .ret-fill { height: 100%; width: 0; transition: width 1100ms var(--ease-out); }
 
     .ret-fill.dim { background: var(--border3); }
-    .ret-fill.mid { background: var(--text-3); }
-    .ret-fill.top { background: var(--text); opacity: .85; }
+    .ret-fill.mid { background: var(--accent-dim); }
+    .ret-fill.top { background: var(--accent); opacity: .9; }
 
     .ret-note { font-size: 9px; color: var(--text-3); text-align: right; }
-    .ret-note.top { color: var(--text-2); }
+    .ret-note.top { color: var(--accent); }
 
     /* -- arch diagram -- */
     .proj-arch {
@@ -652,7 +730,7 @@
     .attr-note {
       font-size: 10px;
       color: var(--text-4);
-      border-left: 2px solid var(--border2);
+      border-left: 2px solid var(--accent-dim);
       padding-left: 0.7rem;
       margin-bottom: 1.4rem;
       line-height: 1.6;
@@ -669,13 +747,30 @@
 
     .proj-github-link {
       float: right;
-      color: var(--text-3);
+      color: var(--accent);
       font-size: 9.5px;
       text-decoration: none;
       transition: color 150ms;
     }
 
-    .proj-github-link:hover { color: var(--text); }
+    .proj-github-link:hover { color: var(--accent-dark); }
+
+    /* -- TINTED ALTERNATE SECTIONS -- */
+    .section--tinted {
+      background: var(--bg2);
+      padding: 3.2rem 2rem;
+      border-top: none;
+    }
+
+    /* thin accent rule at top of tinted sections */
+    .section--tinted::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 3.2rem;
+    }
 
     /* -- experience -- */
     .exp-layout {
@@ -689,7 +784,7 @@
 
     .exp-company {
       font-family: var(--font-disp);
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 600;
       font-style: italic;
       color: var(--text);
@@ -698,7 +793,15 @@
       margin-bottom: 0.4rem;
     }
 
-    .exp-role { font-size: 10.5px; color: var(--text-2); margin-bottom: 0.2rem; line-height: 1.5; }
+    .exp-role {
+      font-size: 10.5px;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+      line-height: 1.5;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
 
     .exp-context { font-size: 9.5px; color: var(--text-3); line-height: 1.5; margin-bottom: 0.6rem; }
 
@@ -708,7 +811,22 @@
 
     .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; padding: 0; margin: 0; }
 
-    .exp-points li { font-size: 12px; color: var(--text-2); line-height: 1.75; padding-left: 0; }
+    .exp-points li {
+      font-size: 12px;
+      color: var(--text-2);
+      line-height: 1.75;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .exp-points li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent-dim);
+      font-size: 9px;
+      top: 5px;
+    }
 
     .exp-points li strong { color: var(--text); font-weight: 500; }
 
@@ -721,18 +839,45 @@
 
     .stack-table tr:last-child { border-bottom: none; }
 
-    .stack-table td { padding: 0.7rem 0; vertical-align: top; }
+    .stack-table td { padding: 0.8rem 0; vertical-align: top; }
 
     .stack-table td:first-child {
-      color: var(--text-3);
+      color: var(--accent);
       width: 170px;
       padding-right: 1.5rem;
       white-space: nowrap;
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
     }
 
     .stack-table td:last-child { color: var(--text-2); }
 
-    /* -- contact -- */
+    /* -- DARK CONTACT -- */
+    .contact-section-wrap {
+      background: var(--ink);
+      padding: 3.5rem 2rem 4rem;
+    }
+
+    .contact-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-title {
+      font-family: var(--font-disp);
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink-text);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
     .contact-statement {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -745,7 +890,7 @@
       font-size: 17px;
       font-weight: 300;
       font-style: italic;
-      color: var(--text-2);
+      color: var(--ink-text-2);
       line-height: 1.6;
     }
 
@@ -753,12 +898,12 @@
       display: flex;
       flex-direction: column;
       gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      background: var(--ink-border);
+      border: 1px solid var(--ink-border);
     }
 
     .contact-cta {
-      background: var(--bg2);
+      background: var(--ink);
       padding: 0.9rem 1.1rem;
       text-decoration: none;
       display: flex;
@@ -767,22 +912,30 @@
       transition: background 150ms;
     }
 
-    .contact-cta:hover { background: var(--surface); }
+    .contact-cta:hover { background: var(--ink-border); }
 
-    .cta-label { font-size: 8.5px; color: var(--text-4); letter-spacing: 0.1em; width: 46px; flex-shrink: 0; }
+    .cta-label {
+      font-size: 8.5px;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      width: 46px;
+      flex-shrink: 0;
+    }
 
-    .cta-val { font-size: 11px; color: var(--text-2); flex: 1; transition: color 150ms; }
+    .cta-val { font-size: 11px; color: var(--ink-text-2); flex: 1; transition: color 150ms; }
 
-    .contact-cta:hover .cta-val { color: var(--text); }
+    .contact-cta:hover .cta-val { color: var(--ink-text); }
 
-    .cta-arrow { font-size: 11px; color: var(--text-4); transition: color 150ms; }
+    .cta-arrow { font-size: 11px; color: var(--accent); transition: color 150ms; }
 
-    .contact-cta:hover .cta-arrow { color: var(--text-2); }
+    .contact-cta:hover .cta-arrow { color: var(--accent-dim); }
 
     /* -- footer -- */
     footer {
-      padding: 2.5rem 0 5rem;
-      border-top: 1px solid var(--border);
+      background: var(--ink);
+      border-top: 1px solid var(--ink-border);
+      padding: 2rem 0 5rem;
     }
 
     .footer-inner {
@@ -795,15 +948,15 @@
       gap: 1rem;
     }
 
-    .footer-name { font-size: 10.5px; color: var(--text-4); }
+    .footer-name { font-size: 10.5px; color: var(--ink-text-3); }
 
-    .footer-updated { font-size: 9.5px; color: var(--text-4); margin-top: 0.25rem; opacity: .6; }
+    .footer-updated { font-size: 9.5px; color: var(--ink-text-3); margin-top: 0.25rem; opacity: .5; }
 
     .footer-links { display: flex; gap: 1.2rem; font-size: 10.5px; }
 
-    .footer-links a { color: var(--text-3); text-decoration: none; transition: color 150ms; }
+    .footer-links a { color: var(--ink-text-3); text-decoration: none; transition: color 150ms; }
 
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover { color: var(--accent-dim); }
 
     /* === ANIMATIONS === */
     @keyframes fade-up {
@@ -838,12 +991,16 @@
     }
 
     @media (max-width: 580px) {
-      .nav-links { gap: 1.2rem; }
-      .nav-links a { font-size: 9px; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 9px; letter-spacing: 0.06em; }
+      /* Hide "experience" label on very narrow — keep 3 links */
+      .nav-links a[href="#experience"] { display: none; }
     }
 
     @media (max-width: 560px) {
       main { padding: 4.5rem 1.2rem 3rem; }
+      .section--tinted { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .contact-section-wrap { padding-left: 1.2rem; padding-right: 1.2rem; }
       .proj-metrics { grid-template-columns: 1fr; }
       .proj-metrics .proj-metric:nth-child(3) { grid-column: span 1; }
       .proj-tags-collapsed { display: none; }
@@ -856,7 +1013,7 @@
 
 <body>
 
-  <!-- site nav (replaces IDE status bar) -->
+  <!-- site nav -->
   <header id="site-nav">
     <span class="nav-name">Lucas Eckert</span>
     <nav class="nav-links" aria-label="Site navigation">
@@ -876,6 +1033,8 @@
 
       <h2 class="hero-headline">Backend Developer — JVM, Event-Driven Systems, Retrieval Architecture</h2>
 
+      <div class="hero-headline-bar"></div>
+
       <nav class="hero-links" aria-label="Primary links">
         <a href="#projects">projects</a>
         <span class="lsep">/</span>
@@ -893,7 +1052,7 @@
       </p>
 
       <div class="hero-meta">
-        <span style="color:var(--text-4)">//</span>
+        <span style="color:var(--accent-dim)">//</span>
         <span>WEG S.A.</span><span class="hero-meta-sep">·</span>
         <span>Java 21</span><span class="hero-meta-sep">·</span>
         <span>Kafka</span><span class="hero-meta-sep">·</span>
@@ -924,6 +1083,7 @@
     <!-- PROJECTS -->
     <section class="section reveal" id="projects">
       <div class="sec-head">
+        <span class="sec-label">01 —</span>
         <span class="sec-title">Selected Work</span>
       </div>
 
@@ -972,7 +1132,7 @@
                 </div>
 
                 <div class="proj-latency">
-                  <div class="viz-label">// latency evolution — recommendation serving path</div>
+                  <div class="viz-label">latency evolution — recommendation serving path</div>
                   <div class="lat-row">
                     <span class="lat-v">v1</span>
                     <div class="lat-track"><div class="lat-fill r" id="lf-v1"></div></div>
@@ -991,7 +1151,7 @@
                 </div>
 
                 <div class="proj-arch">
-                  <div class="viz-label">// system architecture — zero sync coupling at query time</div>
+                  <div class="viz-label">system architecture — zero sync coupling at query time</div>
                   <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
                       <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
@@ -1004,11 +1164,9 @@
                         <path d="M2 1L8 5L2 9" fill="none" stroke="#D0CFC8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                     </defs>
-                    <!-- client -->
                     <rect x="10" y="84" width="62" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
                     <text x="41" y="103" text-anchor="middle" fill="var(--text-3)" font-size="9.5">client</text>
                     <line x1="72" y1="99" x2="100" y2="99" stroke="var(--border2)" stroke-width=".8" marker-end="url(#ah)"/>
-                    <!-- api-gateway (primary — dark) -->
                     <rect x="102" y="70" width="100" height="58" rx="2" fill="#111110" stroke="#111110" stroke-width=".8"/>
                     <text x="152" y="90" text-anchor="middle" fill="#F4F4F0" font-size="10" font-weight="500">api-gateway</text>
                     <text x="152" y="104" text-anchor="middle" fill="#BCBCB4" font-size="8.5">WebFlux + Redis</text>
@@ -1016,14 +1174,12 @@
                     <line x1="202" y1="86" x2="252" y2="58" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah)"/>
                     <line x1="202" y1="96" x2="252" y2="96" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah)"/>
                     <line x1="202" y1="108" x2="252" y2="130" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah)"/>
-                    <!-- secondary nodes -->
                     <rect x="254" y="42" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width=".6"/>
                     <text x="297" y="59" text-anchor="middle" fill="var(--text-3)" font-size="9">user-service</text>
                     <rect x="254" y="82" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width=".6"/>
                     <text x="297" y="99" text-anchor="middle" fill="var(--text-3)" font-size="9">catalog-service</text>
                     <rect x="254" y="122" width="86" height="28" rx="2" fill="var(--bg2)" stroke="var(--border)" stroke-width=".6"/>
                     <text x="297" y="139" text-anchor="middle" fill="var(--text-3)" font-size="9">engagement</text>
-                    <!-- kafka (primary — dark) -->
                     <rect x="372" y="74" width="74" height="72" rx="2" fill="#111110" stroke="#111110" stroke-width=".7" stroke-dasharray="3 2"/>
                     <text x="409" y="102" text-anchor="middle" fill="#F4F4F0" font-size="10" font-weight="500">kafka</text>
                     <text x="409" y="116" text-anchor="middle" fill="#BCBCB4" font-size="8.5">ECST</text>
@@ -1031,7 +1187,6 @@
                     <line x1="340" y1="96" x2="370" y2="104" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
                     <line x1="340" y1="136" x2="370" y2="136" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha)"/>
                     <line x1="446" y1="110" x2="486" y2="110" stroke="var(--border3)" stroke-width=".9" marker-end="url(#ahg)"/>
-                    <!-- recommendation (primary — dark) -->
                     <rect x="488" y="78" width="116" height="68" rx="2" fill="#111110" stroke="#111110" stroke-width=".8"/>
                     <text x="546" y="97" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">recommendation</text>
                     <text x="546" y="110" text-anchor="middle" fill="#BCBCB4" font-size="8.5">pgvector HNSW</text>
@@ -1114,7 +1269,7 @@
                 </div>
 
                 <div class="retrieval-compare">
-                  <div class="viz-label">// multi-hop retrieval — HippoRAG 2 paper benchmarks (not Kairos measurements)</div>
+                  <div class="viz-label">multi-hop retrieval — HippoRAG 2 paper benchmarks (not Kairos measurements)</div>
                   <div class="ret-row">
                     <span class="ret-name">standard RAG</span>
                     <div class="ret-track"><div class="ret-fill dim" id="rb-rag"></div></div>
@@ -1133,7 +1288,7 @@
                 </div>
 
                 <div class="proj-pipeline">
-                  <div class="viz-label">// dual-pipeline ingest — parallel execution per document</div>
+                  <div class="viz-label">dual-pipeline ingest — parallel execution per document</div>
                   <div class="pipeline-sublabel v">SEMANTIC PIPELINE</div>
                   <div class="pipeline-track">
                     <div class="pipeline-step v">
@@ -1171,7 +1326,7 @@
                 </div>
 
                 <div class="proj-arch">
-                  <div class="viz-label">// query flow — HippoRAG 2 retrieval pattern</div>
+                  <div class="viz-label">query flow — HippoRAG 2 retrieval pattern</div>
                   <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
                       <marker id="ahv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
@@ -1184,24 +1339,20 @@
                         <path d="M2 1L8 5L2 9" fill="none" stroke="#BDBCB4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                       </marker>
                     </defs>
-                    <!-- query -->
                     <rect x="8" y="82" width="68" height="30" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
                     <text x="42" y="97" text-anchor="middle" fill="var(--text-3)" font-size="9">query</text>
                     <text x="42" y="107" text-anchor="middle" fill="var(--text-4)" font-size="7.5">natural language</text>
                     <line x1="76" y1="97" x2="102" y2="97" stroke="var(--border2)" stroke-width=".8" marker-end="url(#ahv)"/>
-                    <!-- ONNX embed (primary — dark) -->
                     <rect x="104" y="76" width="80" height="42" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
                     <text x="144" y="93" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">ONNX embed</text>
                     <text x="144" y="105" text-anchor="middle" fill="#BCBCB4" font-size="7.5">all-MiniLM-L6-v2</text>
                     <text x="144" y="114" text-anchor="middle" fill="#BCBCB4" font-size="7.5">384-dim vector</text>
                     <line x1="184" y1="90" x2="218" y2="68" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahv)"/>
                     <line x1="184" y1="104" x2="218" y2="118" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahc2)"/>
-                    <!-- pgvector -->
                     <rect x="220" y="50" width="106" height="36" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".6"/>
                     <text x="273" y="65" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="500">pgvector</text>
                     <text x="273" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5">anchor lookup → seed nodes</text>
                     <text x="273" y="86" text-anchor="middle" fill="var(--text-4)" font-size="7">+ dense candidate set B</text>
-                    <!-- Neo4j -->
                     <rect x="220" y="104" width="106" height="44" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
                     <text x="273" y="120" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="500">Neo4j</text>
                     <text x="273" y="132" text-anchor="middle" fill="var(--text-4)" font-size="7.5">Personalized PageRank</text>
@@ -1209,19 +1360,16 @@
                     <text x="273" y="150" text-anchor="middle" fill="var(--text-4)" font-size="7">candidate set A</text>
                     <line x1="326" y1="68" x2="372" y2="92" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahv)"/>
                     <line x1="326" y1="126" x2="372" y2="108" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ahc2)"/>
-                    <!-- RRF fusion (primary — dark) -->
                     <rect x="374" y="78" width="84" height="40" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
                     <text x="416" y="95" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">RRF fusion</text>
                     <text x="416" y="108" text-anchor="middle" fill="#BCBCB4" font-size="7.5">set A + set B → top-k</text>
                     <line x1="458" y1="98" x2="500" y2="98" stroke="var(--border3)" stroke-width=".8" marker-end="url(#ahg3)"/>
-                    <!-- AI synthesis (primary — dark) -->
                     <rect x="502" y="68" width="110" height="60" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
                     <text x="557" y="87" text-anchor="middle" fill="#F4F4F0" font-size="9.5" font-weight="500">AI synthesis</text>
                     <text x="557" y="100" text-anchor="middle" fill="#BCBCB4" font-size="7.5">Gemini Flash</text>
                     <text x="557" y="112" text-anchor="middle" fill="#9E9E97" font-size="7">grounded in your</text>
                     <text x="557" y="121" text-anchor="middle" fill="#9E9E97" font-size="7">content only</text>
                     <line x1="612" y1="98" x2="644" y2="98" stroke="var(--border3)" stroke-width=".7" marker-end="url(#ahg3)"/>
-                    <!-- result -->
                     <rect x="646" y="84" width="46" height="28" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".6"/>
                     <text x="669" y="101" text-anchor="middle" fill="var(--text-3)" font-size="8.5">result</text>
                     <text x="310" y="182" fill="var(--text-4)" font-size="7.5" letter-spacing=".03em">graph traversal propagates relevance across entire knowledge base in one step</text>
@@ -1292,7 +1440,7 @@
                 </div>
 
                 <div class="proj-arch">
-                  <div class="viz-label">// full system flow — entry to gate release</div>
+                  <div class="viz-label">full system flow — entry to gate release</div>
                   <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" style="font-family:'JetBrains Mono',monospace;">
                     <defs>
                       <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
@@ -1313,43 +1461,35 @@
                     <text x="305" y="14" fill="var(--text-4)" font-size="7" letter-spacing=".06em">BACKEND</text>
                     <text x="508" y="14" fill="var(--text-4)" font-size="7" letter-spacing=".06em">PAYMENT</text>
                     <text x="618" y="14" fill="var(--text-4)" font-size="7" letter-spacing=".06em">FRONTEND</text>
-                    <!-- ESP32 -->
                     <rect x="8" y="80" width="76" height="50" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
                     <text x="46" y="101" text-anchor="middle" fill="var(--text-3)" font-size="9" font-weight="500">ESP32</text>
                     <text x="46" y="113" text-anchor="middle" fill="var(--text-4)" font-size="7.5">sensor detects</text>
                     <text x="46" y="123" text-anchor="middle" fill="var(--text-4)" font-size="7.5">unique code</text>
-                    <!-- MQTT broker -->
                     <rect x="104" y="88" width="68" height="34" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".6" stroke-dasharray="3 2"/>
                     <text x="138" y="107" text-anchor="middle" fill="var(--text-3)" font-size="8.5">MQTT broker</text>
-                    <!-- Node-RED (primary — dark) -->
                     <rect x="104" y="140" width="68" height="40" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
                     <text x="138" y="157" text-anchor="middle" fill="#F4F4F0" font-size="9" font-weight="500">Node-RED</text>
                     <text x="138" y="169" text-anchor="middle" fill="#BCBCB4" font-size="7.5">IoT orchestrator</text>
                     <text x="138" y="178" text-anchor="middle" fill="#9E9E97" font-size="7">MQTT → HTTP</text>
                     <line x1="84" y1="100" x2="102" y2="100" stroke="var(--border2)" stroke-width=".8" marker-end="url(#ah2)"/>
                     <line x1="138" y1="122" x2="138" y2="138" stroke="var(--border2)" stroke-width=".7" marker-end="url(#ah2)"/>
-                    <!-- Spring Boot wrapper -->
                     <rect x="192" y="60" width="150" height="140" rx="2" fill="var(--surface)" stroke="var(--border2)" stroke-width=".6" stroke-dasharray="3 2"/>
                     <text x="267" y="77" text-anchor="middle" fill="var(--text-4)" font-size="7.5" letter-spacing=".05em">Spring Boot · WebFlux</text>
-                    <!-- access context (primary — dark) -->
                     <rect x="202" y="84" width="130" height="42" rx="2" fill="#111110" stroke="#111110" stroke-width=".6"/>
                     <text x="267" y="100" text-anchor="middle" fill="#F4F4F0" font-size="8.5" font-weight="500">access context</text>
                     <text x="267" y="112" text-anchor="middle" fill="#BCBCB4" font-size="7">entry · gate · exit</text>
                     <text x="267" y="121" text-anchor="middle" fill="#BCBCB4" font-size="7">4-layer clean arch</text>
-                    <!-- payment context (primary — dark) -->
                     <rect x="202" y="136" width="130" height="42" rx="2" fill="#111110" stroke="#111110" stroke-width=".6"/>
                     <text x="267" y="152" text-anchor="middle" fill="#F4F4F0" font-size="8.5" font-weight="500">payment context</text>
                     <text x="267" y="164" text-anchor="middle" fill="#BCBCB4" font-size="7">preference · webhook · SSE</text>
                     <text x="267" y="173" text-anchor="middle" fill="#BCBCB4" font-size="7">4-layer clean arch</text>
                     <line x1="172" y1="160" x2="190" y2="115" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
-                    <!-- Mercado Pago (primary — dark) -->
                     <rect x="466" y="88" width="110" height="50" rx="2" fill="#111110" stroke="#111110" stroke-width=".7"/>
                     <text x="521" y="107" text-anchor="middle" fill="#F4F4F0" font-size="9" font-weight="500">Mercado Pago</text>
                     <text x="521" y="119" text-anchor="middle" fill="#BCBCB4" font-size="7.5">Checkout Pro</text>
                     <text x="521" y="129" text-anchor="middle" fill="#9E9E97" font-size="7">PIX · card · boleto</text>
                     <line x1="332" y1="152" x2="464" y2="112" stroke="var(--border3)" stroke-width=".7" marker-end="url(#aha2)"/>
                     <line x1="466" y1="128" x2="334" y2="162" stroke="var(--border3)" stroke-width=".7" stroke-dasharray="2 2" marker-end="url(#aha2)"/>
-                    <!-- React frontend -->
                     <rect x="604" y="70" width="106" height="80" rx="2" fill="var(--bg2)" stroke="var(--border2)" stroke-width=".7"/>
                     <text x="657" y="92" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="500">React / TS</text>
                     <text x="657" y="105" text-anchor="middle" fill="var(--text-3)" font-size="7.5">payment terminal</text>
@@ -1382,9 +1522,13 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section reveal">
+    <!-- thin accent stripe between sections -->
+    <div class="section-stripe"></div>
+
+    <!-- EXPERIENCE — tinted bg -->
+    <section id="experience" class="section--tinted reveal">
       <div class="sec-head">
+        <span class="sec-label">02 —</span>
         <span class="sec-title">Experience</span>
       </div>
 
@@ -1405,26 +1549,27 @@
             <li>Built backend systems with emphasis on <strong>clear service responsibilities, explicit state flow, and maintainable module design</strong> — treating architecture as a first-class deliverable, not an afterthought</li>
             <li>Delivered <strong>OpenIT</strong> in a team of three — reactive Spring backend, React / TypeScript frontend, MQTT-based ESP32 integration, real-time payment confirmation via SSE, across two DDD bounded contexts</li>
             <li>Worked on software crossing multiple system boundaries — <strong>device events, backend coordination, payment confirmation, and UI feedback</strong> — with attention to how those parts behave as one coherent system</li>
-            <li>Contributed to Developering quality through <strong>code reviews, CI/CD workflows in GitHub Actions, and development practices shaped by Scrum and Kanban</strong></li>
+            <li>Contributed to development quality through <strong>code reviews, CI/CD workflows in GitHub Actions, and development practices shaped by Scrum and Kanban</strong></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- TECHNICAL FOCUS -->
+    <!-- TECHNICAL FOCUS — light bg -->
     <section id="stack" class="section reveal">
       <div class="sec-head">
+        <span class="sec-label">03 —</span>
         <span class="sec-title">Technical Focus</span>
       </div>
 
       <p class="stack-intro">
-        <span style="color:var(--text-4)">// </span>the problems I keep returning to sit where backend architecture,
+        <span style="color:var(--accent-dim)">// </span>the problems I keep returning to sit where backend architecture,
         data flow, and retrieval systems intersect
       </p>
 
       <table class="stack-table">
         <tr>
-          <td>Developering focus</td>
+          <td>Engineering focus</td>
           <td>distributed systems · event-driven architecture · read model design · consistency tradeoffs · graph retrieval · vector search</td>
         </tr>
         <tr>
@@ -1446,15 +1591,16 @@
       </table>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section reveal">
-      <div class="sec-head">
-        <span class="sec-title">Get in Touch</span>
-      </div>
+  </main>
 
+  <!-- CONTACT — full-width dark section, outside main -->
+  <div class="contact-section-wrap reveal" id="contact">
+    <div style="max-width:800px;margin:0 auto;">
+      <div class="contact-eyebrow">04 — Get in touch</div>
+      <div class="contact-title">Open to the right work.</div>
       <div class="contact-statement">
         <p class="contact-prose">
-          Open to backend Developering roles, distributed systems work, and teams
+          Open to backend engineering roles, distributed systems work, and teams
           that care about architecture, judgment, and implementation depth.
         </p>
         <div class="contact-ctas">
@@ -1468,11 +1614,15 @@
             <span class="cta-val">github.com/Luca5Eckert</span>
             <span class="cta-arrow">→</span>
           </a>
+          <a class="contact-cta" href="https://www.linkedin.com/in/lucas-ismael-eckert/" target="_blank" rel="noopener">
+            <span class="cta-label">LINKEDIN</span>
+            <span class="cta-val">lucas-ismael-eckert</span>
+            <span class="cta-arrow">→</span>
+          </a>
         </div>
       </div>
-    </section>
-
-  </main>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-inner">
@@ -1502,17 +1652,16 @@
 
     /* -- accordion -- */
     const animated = new Set();
-    const animators = [null, animateKairos, null]; // proj-0 is featured (no trigger), proj-1 = Kairos, proj-2 = OpenIT
+    const animators = [null, animateKairos, null];
 
     function toggleProj(idx) {
-      if (idx === 0) return; // featured: always open
+      if (idx === 0) return;
       const items = document.querySelectorAll('.proj-item');
       const target = items[idx];
       if (!target) return;
       const wasOpen = target.classList.contains('open');
       const scrollY = window.scrollY;
 
-      // close all non-featured items
       items.forEach((item, i) => {
         if (i !== 0) item.classList.remove('open');
       });
@@ -1585,7 +1734,6 @@
 
     /* -- init -- */
     window.addEventListener('load', () => {
-      // VellumHub is always open — fire its animation on load
       if (!animated.has(0)) {
         setTimeout(animateVellum, 900);
         animated.add(0);
